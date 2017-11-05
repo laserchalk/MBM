@@ -32,6 +32,7 @@ namespace MBM.BL
         public DateTime Date { get; set; }
         public Price[] Prices { get; set; }
 
+        //test 2
 
 
     }
