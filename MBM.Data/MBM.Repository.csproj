@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{725B9D5D-C5A0-4F72-8371-2CD3616BBD27}</ProjectGuid>
+    <ProjectGuid>{450EAB9F-3407-413D-B802-7BAF6AEB6575}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MBM.BL</RootNamespace>
-    <AssemblyName>MBM.BL</AssemblyName>
+    <RootNamespace>MBM.Data</RootNamespace>
+    <AssemblyName>MBM.Data</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,9 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Price.cs" />
-    <Compile Include="StockEntry.cs" />
+    <Compile Include="IStockRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MBM.BL\MBM.BL.csproj">
+      <Project>{725B9D5D-C5A0-4F72-8371-2CD3616BBD27}</Project>
+      <Name>MBM.BL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

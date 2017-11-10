@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F157B782
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBM.BLTest", "MBM.BLTest\MBM.BLTest.csproj", "{6662AB67-172B-407E-8909-C32D96348AFC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBM.Repository", "MBM.Data\MBM.Repository.csproj", "{450EAB9F-3407-413D-B802-7BAF6AEB6575}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{6662AB67-172B-407E-8909-C32D96348AFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6662AB67-172B-407E-8909-C32D96348AFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6662AB67-172B-407E-8909-C32D96348AFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{450EAB9F-3407-413D-B802-7BAF6AEB6575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{450EAB9F-3407-413D-B802-7BAF6AEB6575}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{450EAB9F-3407-413D-B802-7BAF6AEB6575}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{450EAB9F-3407-413D-B802-7BAF6AEB6575}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace MBM.BL
 {
-    public class Stock
+    public class StockEntry
     {
-        public Stock()
+        public StockEntry()
         {
 
         }
 
-        public Stock(string exchange, string symbol, uint volume, DateTime date, decimal priceHigh, decimal priceLow, decimal priceOpen, decimal priceClose, decimal priceCloseAdjusted)
+        public StockEntry(string exchange, string symbol, uint volume, DateTime date, decimal priceHigh, decimal priceLow, decimal priceOpen, decimal priceClose, decimal priceCloseAdjusted)
         {
             this.Exchange = exchange;
             this.Symbol = symbol;

@@ -12,7 +12,7 @@ namespace MBM.BLTest
         public void PriceHighOutOfRangeTest()
         {
             //-- Arrange
-            Stock stock = new Stock();
+            StockEntry stock = new StockEntry();
             decimal input = -1.00m;
 
             //-- Act
@@ -32,7 +32,7 @@ namespace MBM.BLTest
         public void PriceLowOutOfRangeTest()
         {
             //-- Arrange
-            Stock stock = new Stock();
+            StockEntry stock = new StockEntry();
             decimal input = -1.00m;
 
             //-- Act
@@ -52,7 +52,7 @@ namespace MBM.BLTest
         public void PriceOpenOutOfRangeTest()
         {
             //-- Arrange
-            Stock stock = new Stock();
+            StockEntry stock = new StockEntry();
             decimal input = -1.00m;
 
             //-- Act
@@ -72,7 +72,7 @@ namespace MBM.BLTest
         public void PriceCloseOutOfRangeTest()
         {
             //-- Arrange
-            Stock stock = new Stock();
+            StockEntry stock = new StockEntry();
             decimal input = -1.00m;
 
             //-- Act
@@ -92,7 +92,7 @@ namespace MBM.BLTest
         public void PriceCloseAdjustedOutOfRangeTest()
         {
             //-- Arrange
-            Stock stock = new Stock();
+            StockEntry stock = new StockEntry();
             decimal input = -1.00m;
 
             //-- Act
@@ -112,7 +112,7 @@ namespace MBM.BLTest
         public void ExchangeTooLongTest()
         {
             //-- Arrange
-            Stock stock = new Stock();
+            StockEntry stock = new StockEntry();
             string input = "ABCDE";
 
             //-- Act
@@ -132,7 +132,7 @@ namespace MBM.BLTest
         public void SymbolTooLongTest()
         {
             //-- Arrange
-            Stock stock = new Stock();
+            StockEntry stock = new StockEntry();
             string input = "ABCD";
 
             //-- Act
