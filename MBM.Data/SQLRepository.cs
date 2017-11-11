@@ -19,7 +19,7 @@ namespace MBM.Data
             throw new NotImplementedException();
         }
 
-        public IEnumerable<StockEntry> GetStockEntries()
+        public IEnumerable<StockEntry> GetStockEntries(Filter filter)
         {
             throw new NotImplementedException();
         }

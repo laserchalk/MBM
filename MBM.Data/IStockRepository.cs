@@ -11,7 +11,7 @@ namespace MBM.Data
     {
         void AddStockEntry(StockEntry stock);
         StockEntry GetStockEntry(uint id);
-        IEnumerable<StockEntry> GetStockEntries();
+        IEnumerable<StockEntry> GetStockEntries(Filter filter);
         void UpdateStockEntry(StockEntry stock);
         void UpdateStockEntries(IEnumerable<StockEntry> stockEntries);
         void DeleteStock(uint id);
