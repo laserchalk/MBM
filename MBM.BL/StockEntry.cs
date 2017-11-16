@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,17 +14,18 @@ namespace MBM.BL
 
         }
 
-        public StockEntry(string exchange, string symbol, uint volume, DateTime date, decimal priceHigh, decimal priceLow, decimal priceOpen, decimal priceClose, decimal priceCloseAdjusted)
+        public StockEntry(SqlDataReader reader)
         {
-            this.Exchange = exchange;
-            this.Symbol = symbol;
-            this.Volume = volume;
-            this.Date = date;
-            this.PriceHigh = priceHigh;
-            this.PriceLow = priceLow;
-            this.PriceOpen = priceOpen;
-            this.PriceClose = priceClose;
-            this.PriceCloseAdjusted = priceCloseAdjusted;
+                this.ID = uint.Parse(reader["stock_id"].ToString());
+                this.Exchange = reader["exchange"].ToString();
+                this.Symbol = reader["stock_symbol"].ToString();
+                this.Date = DateTime.Parse(reader["date"].ToString());
+                this.Volume = uint.Parse(reader["stock_volume"].ToString());
+                this.PriceHigh = decimal.Parse(reader["stock_price_high"].ToString());
+                this.PriceLow = decimal.Parse(reader["stock_price_low"].ToString());
+                this.PriceOpen = decimal.Parse(reader["stock_price_open"].ToString());
+                this.PriceClose = decimal.Parse(reader["stock_price_close"].ToString());
+                this.PriceCloseAdjusted = decimal.Parse(reader["stock_price_adj_close"].ToString());
         }
 
         public uint ID { get; set; }

@@ -147,19 +147,5 @@ namespace MBM.BLTest
             }
         }
 
-        [TestMethod]
-        public void IDTest()
-        {
-            //-- Arrange
-            StockEntry stock = new StockEntry();
-            uint expected = 1;
-
-            //-- Act
-            stock.ID = expected;
-            var actual = stock.ID;
-
-            //-- Assert
-            Assert.AreEqual(expected, actual);
-        }
     }
 }

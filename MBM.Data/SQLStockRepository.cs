@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MBM.BL;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace MBM.DL
 {
@@ -23,16 +24,9 @@ namespace MBM.DL
 
         public IEnumerable<StockEntry> GetStockEntries(Filter filter)
         {
-            throw new NotImplementedException();
-        }
-
-        public StockEntry GetStockEntry(uint id)
-        {
-            StockEntry stockEntry = new StockEntry();
-
+            List<StockEntry> stockEntries = new List<StockEntry>();
 
             string connStr = ConfigurationManager.ConnectionStrings["MBMconnection"].ToString();
-
             SqlConnection conn = new SqlConnection(connStr);
             conn.Open();
 
@@ -40,24 +34,66 @@ namespace MBM.DL
             {
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "DECLARE @id int = {0}; EXEC NyseGetByID @id;";
-                    cmd.CommandText = string.Format(cmd.CommandText, id);
+
+                    cmd.CommandText = @"GetStockEntriesFilter";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("DateStart", filter.DateStart);
+                    cmd.Parameters.AddWithValue("DateEnd", filter.DateEnd);
+                    cmd.Parameters.AddWithValue("Symbol", filter.Symbol);
+                    cmd.Parameters.AddWithValue("VolumeStart", int.Parse(filter.VolumeStart.ToString()));
+                    cmd.Parameters.AddWithValue("VolumeEnd", int.Parse(filter.VolumeEnd.ToString()));
+                    cmd.Parameters.AddWithValue("OpenStart", filter.OpenStart);
+                    cmd.Parameters.AddWithValue("OpenEnd", filter.OpenEnd);
+                    cmd.Parameters.AddWithValue("CloseStart", filter.CloseStart);
+                    cmd.Parameters.AddWithValue("CloseEnd", filter.CloseEnd);
+                    cmd.Parameters.AddWithValue("CloseAdjustedStart", filter.CloseAdjustedStart);
+                    cmd.Parameters.AddWithValue("CloseAdjustedEnd", filter.CloseAdjustedEnd);
+                    cmd.Parameters.AddWithValue("HighStart", filter.HighStart);
+                    cmd.Parameters.AddWithValue("HighEnd", filter.HighEnd);
+                    cmd.Parameters.AddWithValue("LowStart", filter.LowStart);
+                    cmd.Parameters.AddWithValue("LowEnd", filter.LowEnd);
+
+                    
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    
+
+                    while (reader.Read())
+                    {
+                        StockEntry stockEntry = new StockEntry(reader);
+                        stockEntries.Add(stockEntry);
+                    }
+                }
+            }
+
+            return stockEntries;
+        }
+
+        public StockEntry GetStockEntry(uint id)
+        {
+            StockEntry stockEntry = new StockEntry();
+
+            string connStr = ConfigurationManager.ConnectionStrings["MBMconnection"].ToString();
+            SqlConnection conn = new SqlConnection(connStr);
+            conn.Open();
+
+            using (conn)
+            {
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "NyseGetByID";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlParameter stock_id = new SqlParameter("id", SqlDbType.BigInt);
+                    stock_id.Value = id;
+                    cmd.Parameters.Add(stock_id);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     if (reader.Read())
                     {
-                        stockEntry.ID = uint.Parse(reader["stock_id"].ToString());
-                        stockEntry.Exchange = reader["exchange"].ToString();
-                        stockEntry.Symbol = reader["stock_symbol"].ToString();
-                        stockEntry.Date = DateTime.Parse(reader["date"].ToString());
-                        stockEntry.Volume = uint.Parse(reader["stock_volume"].ToString());
-                        stockEntry.PriceHigh = decimal.Parse(reader["stock_price_high"].ToString());
-                        stockEntry.PriceLow = decimal.Parse(reader["stock_price_low"].ToString());
-                        stockEntry.PriceOpen = decimal.Parse(reader["stock_price_open"].ToString());
-                        stockEntry.PriceClose = decimal.Parse(reader["stock_price_close"].ToString());
-                        stockEntry.PriceCloseAdjusted = decimal.Parse(reader["stock_price_adj_close"].ToString());
+                        stockEntry = new StockEntry(reader);
                     }
+                    
                 }
             }
 

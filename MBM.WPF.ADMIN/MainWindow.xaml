@@ -1,12 +1,74 @@
-﻿<Window x:Class="MBM.WPF.ADMIN.MainWindow"
+﻿<Window x:Name="MainWindow1" x:Class="MBM.WPF.ADMIN.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MBM.WPF.ADMIN"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Money-B-Mine" Height="614.202" Width="1381.795" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <StackPanel Margin="10,10,0,10" HorizontalAlignment="Left" Width="367">
+            <StackPanel.Effect>
+                <DropShadowEffect Direction="230" BlurRadius="10" ShadowDepth="4" Opacity="0.2"/>
+            </StackPanel.Effect>
+            <WrapPanel Height="45">
+                <Label Content="Date range:" Width="78"/>
+                <DatePicker Width="120"/>
+                <Label Content="to" Width="37"/>
+                <DatePicker Width="120"/>
+            </WrapPanel>
+            <WrapPanel Height="45">
+                <Label Content="Symbol:" Width="78"/>
+                <ComboBox x:Name="comboBox" Width="120"/>
+            </WrapPanel>
+            <WrapPanel Height="45">
+                <Label Content="Volume:" Width="78"/>
+                <TextBox x:Name="volumeMin" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                <Label Content="to" Width="37"/>
+                <TextBox x:Name="volumeMax" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+            </WrapPanel>
+            <WrapPanel Height="45">
+                <Label Content="Open:" Width="62"/>
+                <Label Content="$"/>
+                <TextBox x:Name="openMin" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                <Label Content="to"/>
+                <Label Content="$"/>
+                <TextBox x:Name="openMax" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+            </WrapPanel>
+            <WrapPanel Height="45">
+                <Label Content="Close:" Width="62"/>
+                <Label Content="$"/>
+                <TextBox x:Name="closeMin" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                <Label Content="to"/>
+                <Label Content="$"/>
+                <TextBox x:Name="closeMax" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+            </WrapPanel>
+            <WrapPanel Height="45">
+                <Label Content="Adj Close:"/>
+                <Label Content="$"/>
+                <TextBox x:Name="adjCloseMin" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                <Label Content="to"/>
+                <Label Content="$"/>
+                <TextBox x:Name="adjCloseMax" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+            </WrapPanel>
+            <WrapPanel Height="45">
+                <Label Content="High:" Width="62"/>
+                <Label Content="$"/>
+                <TextBox x:Name="highMin" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                <Label Content="to"/>
+                <Label Content="$"/>
+                <TextBox x:Name="highmax" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+            </WrapPanel>
+            <WrapPanel Height="45">
+                <Label Content="Low:" Width="62"/>
+                <Label Content="$"/>
+                <TextBox x:Name="lowMin" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                <Label Content="to"/>
+                <Label Content="$"/>
+                <TextBox x:Name="lowmax" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+            </WrapPanel>
+            <Button x:Name="ApplyFilterButton" Content="Apply Filter" Click="ApplyFilterButton_Click" Margin="0,0,243,0"/>
+        </StackPanel>
+        <DataGrid CanUserAddRows="True" x:Name="StockEntriesDataGrid" Margin="382,10,10,10" VerticalAlignment="Stretch"/>
     </Grid>
 </Window>

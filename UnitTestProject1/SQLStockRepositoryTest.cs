@@ -2,15 +2,16 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MBM.DL;
 using MBM.BL;
+using System.Collections.Generic;
 
 namespace UnitTestProject1
 {
     [TestClass]
-    public class SQLRepositoryTest
+    public class SQLStockRepositoryTest
     {
 
         [TestMethod]
-        public void GetStockEntryTest()
+        public void GetStockEntryByIDTest()
         {
             //-- Arrange
             SQLStockRepository repository = new SQLStockRepository();
@@ -43,6 +44,27 @@ namespace UnitTestProject1
             Assert.AreEqual(expected.PriceHigh, actual.PriceHigh);
             Assert.AreEqual(expected.PriceLow, actual.PriceLow);
             Assert.AreEqual(expected.Volume, actual.Volume);
+        }
+
+        [TestMethod]
+        public void GetStockEntriesByFilterTest()
+        {
+            //-- Arrange
+            SQLStockRepository stockRepo = new SQLStockRepository();
+            List<StockEntry> actual;
+
+            SQLFilterRepository filterRepo = new SQLFilterRepository();
+            Filter filter = new Filter();
+
+            int expected = 102580;
+
+            //-- Act
+            filter = filterRepo.GetMinMaxValues();
+            actual = stockRepo.GetStockEntries(filter) as List<StockEntry>;
+
+            //-- Assert
+            Assert.AreEqual(expected, actual.Count);
+
         }
     }
 }
