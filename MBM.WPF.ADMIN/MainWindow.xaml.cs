@@ -2,18 +2,7 @@
 using MBM.DL;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MBM.WPF.ADMIN
 {
@@ -22,18 +11,42 @@ namespace MBM.WPF.ADMIN
     /// </summary>
     public partial class MainWindow : Window
     {
+        Filter WindowFilter = new Filter();
+
         public MainWindow()
         {
             InitializeComponent();
+
+            SQLFilterRepository filterRepo = new SQLFilterRepository();
+            WindowFilter = filterRepo.GetMinMaxValues();
+            WindowFilter.Symbols = filterRepo.GetSymbols();
+            FilterPanel.DataContext = WindowFilter;
         }
 
         private void ApplyFilterButton_Click(object sender, RoutedEventArgs e)
         {
-            SQLFilterRepository filterRepo = new SQLFilterRepository();
-            Filter filter = filterRepo.GetMinMaxValues();
+            Filter filter = GetFilterValues();
             SQLStockRepository stockRepo = new SQLStockRepository();
             List<StockEntry> stockEntries = stockRepo.GetStockEntries(filter) as List<StockEntry>;
             StockEntriesDataGrid.ItemsSource = stockEntries;
+        }
+
+        private Filter GetFilterValues()
+        {
+            SQLFilterRepository filterRepo = new SQLFilterRepository();
+            Filter filter = filterRepo.GetMinMaxValues();
+
+            uint Uint = 0;
+            if (uint.TryParse(volumeMin.Text, out Uint))
+            {
+                filter.VolumeStart = Uint;
+            }
+            
+            Console.WriteLine(volumeMin.Text);
+
+            
+
+            return filter;
         }
     }
 }

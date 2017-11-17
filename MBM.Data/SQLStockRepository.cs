@@ -40,7 +40,7 @@ namespace MBM.DL
 
                     cmd.Parameters.AddWithValue("DateStart", filter.DateStart);
                     cmd.Parameters.AddWithValue("DateEnd", filter.DateEnd);
-                    cmd.Parameters.AddWithValue("Symbol", filter.Symbol);
+                    cmd.Parameters.AddWithValue("Symbol", filter.SelectedSymbol);
                     cmd.Parameters.AddWithValue("VolumeStart", int.Parse(filter.VolumeStart.ToString()));
                     cmd.Parameters.AddWithValue("VolumeEnd", int.Parse(filter.VolumeEnd.ToString()));
                     cmd.Parameters.AddWithValue("OpenStart", filter.OpenStart);

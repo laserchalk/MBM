@@ -5,70 +5,84 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MBM.WPF.ADMIN"
         mc:Ignorable="d"
-        Title="Money-B-Mine" Height="614.202" Width="1381.795" WindowStartupLocation="CenterScreen">
+        Title="Money-B-Mine" Height="614.202" Width="1296.295" WindowStartupLocation="CenterScreen">
     <Grid>
-        <StackPanel Margin="10,10,0,10" HorizontalAlignment="Left" Width="367">
+        <StackPanel x:Name="FilterPanel" Margin="10,10,0,10" HorizontalAlignment="Left" Width="367">
             <StackPanel.Effect>
                 <DropShadowEffect Direction="230" BlurRadius="10" ShadowDepth="4" Opacity="0.2"/>
             </StackPanel.Effect>
             <WrapPanel Height="45">
                 <Label Content="Date range:" Width="78"/>
-                <DatePicker Width="120"/>
+                <DatePicker x:Name="DateMin" Width="120" />
                 <Label Content="to" Width="37"/>
-                <DatePicker Width="120"/>
+                <DatePicker x:Name="DateMax" Width="120"/>
             </WrapPanel>
             <WrapPanel Height="45">
                 <Label Content="Symbol:" Width="78"/>
-                <ComboBox x:Name="comboBox" Width="120"/>
+                <ComboBox x:Name="symbolsCombobox" Width="120" ItemsSource="{Binding Path=Symbols}" SelectedValue="{Binding Path=SelectedSymbol}"/>
             </WrapPanel>
             <WrapPanel Height="45">
                 <Label Content="Volume:" Width="78"/>
-                <TextBox x:Name="volumeMin" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                <TextBox x:Name="volumeMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=VolumeStart}"/>
                 <Label Content="to" Width="37"/>
-                <TextBox x:Name="volumeMax" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                <TextBox x:Name="volumeMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=VolumeEnd}"/>
             </WrapPanel>
             <WrapPanel Height="45">
                 <Label Content="Open:" Width="62"/>
                 <Label Content="$"/>
-                <TextBox x:Name="openMin" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                <TextBox x:Name="openMin" Height="23" TextWrapping="Wrap" Text="" Width="120"/>
                 <Label Content="to"/>
                 <Label Content="$"/>
-                <TextBox x:Name="openMax" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                <TextBox x:Name="openMax" Height="23" TextWrapping="Wrap" Text="" Width="120"/>
             </WrapPanel>
             <WrapPanel Height="45">
                 <Label Content="Close:" Width="62"/>
                 <Label Content="$"/>
-                <TextBox x:Name="closeMin" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                <TextBox x:Name="closeMin" Height="23" TextWrapping="Wrap" Text="" Width="120"/>
                 <Label Content="to"/>
                 <Label Content="$"/>
-                <TextBox x:Name="closeMax" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                <TextBox x:Name="closeMax" Height="23" TextWrapping="Wrap" Text="" Width="120"/>
             </WrapPanel>
             <WrapPanel Height="45">
                 <Label Content="Adj Close:"/>
                 <Label Content="$"/>
-                <TextBox x:Name="adjCloseMin" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                <TextBox x:Name="adjCloseMin" Height="23" TextWrapping="Wrap" Text="" Width="120"/>
                 <Label Content="to"/>
                 <Label Content="$"/>
-                <TextBox x:Name="adjCloseMax" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                <TextBox x:Name="adjCloseMax" Height="23" TextWrapping="Wrap" Text="" Width="120"/>
             </WrapPanel>
             <WrapPanel Height="45">
                 <Label Content="High:" Width="62"/>
                 <Label Content="$"/>
-                <TextBox x:Name="highMin" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                <TextBox x:Name="highMin" Height="23" TextWrapping="Wrap" Text="" Width="120"/>
                 <Label Content="to"/>
                 <Label Content="$"/>
-                <TextBox x:Name="highmax" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                <TextBox x:Name="highmax" Height="23" TextWrapping="Wrap" Text="" Width="120"/>
             </WrapPanel>
             <WrapPanel Height="45">
                 <Label Content="Low:" Width="62"/>
                 <Label Content="$"/>
-                <TextBox x:Name="lowMin" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                <TextBox x:Name="lowMin" Height="23" TextWrapping="Wrap" Text="" Width="120"/>
                 <Label Content="to"/>
                 <Label Content="$"/>
-                <TextBox x:Name="lowmax" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                <TextBox x:Name="lowmax" Height="23" TextWrapping="Wrap" Text="" Width="120"/>
             </WrapPanel>
             <Button x:Name="ApplyFilterButton" Content="Apply Filter" Click="ApplyFilterButton_Click" Margin="0,0,243,0"/>
+            <Slider x:Name="slider"/>
         </StackPanel>
-        <DataGrid CanUserAddRows="True" x:Name="StockEntriesDataGrid" Margin="382,10,10,10" VerticalAlignment="Stretch"/>
+        <DataGrid CanUserAddRows="True" x:Name="StockEntriesDataGrid" Margin="382,10,10,10" VerticalAlignment="Stretch" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                <DataGridTextColumn Header="Exchange" Binding="{Binding Exchange}"/>
+                <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}"/>
+                <DataGridTextColumn Header="Volume (1000 share/day)" Binding="{Binding Volume}"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=dd/MM/yyyy}"/>
+                <DataGridTextColumn Header="Price High" Binding="{Binding PriceHigh}"/>
+                <DataGridTextColumn Header="Price Low" Binding="{Binding PriceLow}"/>
+                <DataGridTextColumn Header="Price Open" Binding="{Binding PriceOpen}"/>
+                <DataGridTextColumn Header="Price Close" Binding="{Binding PriceClose}"/>
+                <DataGridTextColumn Header="Price Close Adjusted" Binding="{Binding PriceCloseAdjusted}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

@@ -11,7 +11,7 @@ namespace MBM.BL
     {
         public Filter()
         {
-            Symbol = "all symbols"
+            SelectedSymbol = "all symbols"
 ;       }
 
         public Filter(SqlDataReader reader)
@@ -20,7 +20,7 @@ namespace MBM.BL
             {
                 this.DateStart = DateTime.Parse(reader["MinDate"].ToString());
                 this.DateEnd = DateTime.Parse(reader["MaxDate"].ToString());
-                this.Symbol = "all symbols";
+                this.SelectedSymbol = "all symbols";
                 this.VolumeStart = uint.Parse(reader["MinVolume"].ToString());
                 this.VolumeEnd = uint.Parse(reader["MaxVolume"].ToString());
                 this.OpenStart = decimal.Parse(reader["MinPriceOpen"].ToString());
@@ -38,7 +38,8 @@ namespace MBM.BL
 
         public DateTime DateStart { get; set; }
         public DateTime DateEnd { get; set; }
-        public string Symbol { get; set; }
+        public string SelectedSymbol { get; set; }
+        public List<string> Symbols { get; set; }
         public uint VolumeStart { get; set; }
         public uint VolumeEnd { get; set; }
         public decimal OpenStart { get; set; }

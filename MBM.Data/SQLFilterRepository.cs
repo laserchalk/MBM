@@ -34,5 +34,31 @@ namespace MBM.DL
 
             return filter;
         }
+
+        public List<string> GetSymbols()
+        {
+            List<string> symbols = new List<string>();
+
+            string connStr = ConfigurationManager.ConnectionStrings["MBMconnection"].ToString();
+            SqlConnection conn = new SqlConnection(connStr);
+            conn.Open();
+
+            using (conn)
+            {
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT * From symbolsView";
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        symbols.Add(reader["stock_symbol"].ToString());
+                    }
+                }
+            }
+
+            return symbols;
+        }
     }
 }

@@ -4,6 +4,8 @@ using System.Configuration;
 using System.Data;
 using MBM.BL;
 using System.Data.SqlClient;
+using System.Collections.Generic;
+using MBM.DL;
 
 namespace UnitTestProject1
 {
@@ -62,6 +64,24 @@ namespace UnitTestProject1
             Assert.AreEqual(expected.HighEnd, actual.HighEnd);
             Assert.AreEqual(expected.LowStart, actual.LowStart);
             Assert.AreEqual(expected.LowEnd, actual.LowEnd);
+        }
+
+        [TestMethod]
+        public void GetSymbolsTest()
+        {
+            List<string> actual = new List<string>();
+            List<string> expected = new List<string>();
+
+            SQLFilterRepository filter = new SQLFilterRepository();
+            actual = filter.GetSymbols();
+
+            
+            foreach (string symbol in actual)
+            {
+                Console.WriteLine(symbol);
+            }
+
+            Assert.AreEqual(1, 1);
         }
     }
 }
