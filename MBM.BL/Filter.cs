@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,18 @@ namespace MBM.BL
     {
         public Filter()
         {
-            SelectedSymbol = "all symbols"
-;       }
+            this.SelectedSymbol = "all symbols";
+            this.OpenStart = new Price();
+            this.OpenEnd = new Price();
+            this.CloseStart = new Price();
+            this.CloseEnd = new Price();
+            this.CloseAdjustedStart = new Price();
+            this.CloseAdjustedEnd = new Price();
+            this.HighStart = new Price();
+            this.HighEnd = new Price();
+            this.LowStart = new Price();
+            this.LowEnd = new Price();
+        }
 
         public Filter(SqlDataReader reader)
         {
@@ -23,16 +34,28 @@ namespace MBM.BL
                 this.SelectedSymbol = "all symbols";
                 this.VolumeStart = uint.Parse(reader["MinVolume"].ToString());
                 this.VolumeEnd = uint.Parse(reader["MaxVolume"].ToString());
-                this.OpenStart = decimal.Parse(reader["MinPriceOpen"].ToString());
-                this.OpenEnd = decimal.Parse(reader["MaxPriceOpen"].ToString());
-                this.CloseStart = decimal.Parse(reader["MinPriceClose"].ToString());
-                this.CloseEnd = decimal.Parse(reader["MaxPriceClose"].ToString());
-                this.CloseAdjustedStart = decimal.Parse(reader["MinPriceCloseAdj"].ToString());
-                this.CloseAdjustedEnd= decimal.Parse(reader["MaxPriceCloseAdj"].ToString());
-                this.HighStart = decimal.Parse(reader["MinPriceHigh"].ToString());
-                this.HighEnd = decimal.Parse(reader["MaxPriceHigh"].ToString());
-                this.LowStart = decimal.Parse(reader["MinPriceLow"].ToString());
-                this.LowEnd = decimal.Parse(reader["MaxPriceLow"].ToString());
+
+                this.OpenStart = new Price();
+                this.OpenEnd = new Price();
+                this.CloseStart = new Price();
+                this.CloseEnd = new Price();
+                this.CloseAdjustedStart = new Price();
+                this.CloseAdjustedEnd = new Price();
+                this.HighStart = new Price();
+                this.HighEnd = new Price();
+                this.LowStart = new Price();
+                this.LowEnd = new Price();
+
+                this.OpenStart.Amount = decimal.Parse(reader["MinPriceOpen"].ToString());
+                this.OpenEnd.Amount = decimal.Parse(reader["MaxPriceOpen"].ToString());
+                this.CloseStart.Amount = decimal.Parse(reader["MinPriceClose"].ToString());
+                this.CloseEnd.Amount = decimal.Parse(reader["MaxPriceClose"].ToString());
+                this.CloseAdjustedStart.Amount = decimal.Parse(reader["MinPriceCloseAdj"].ToString());
+                this.CloseAdjustedEnd.Amount = decimal.Parse(reader["MaxPriceCloseAdj"].ToString());
+                this.HighStart.Amount = decimal.Parse(reader["MinPriceHigh"].ToString());
+                this.HighEnd.Amount = decimal.Parse(reader["MaxPriceHigh"].ToString());
+                this.LowStart.Amount = decimal.Parse(reader["MinPriceLow"].ToString());
+                this.LowEnd.Amount = decimal.Parse(reader["MaxPriceLow"].ToString());
             }
         }
 
@@ -42,15 +65,17 @@ namespace MBM.BL
         public List<string> Symbols { get; set; }
         public uint VolumeStart { get; set; }
         public uint VolumeEnd { get; set; }
-        public decimal OpenStart { get; set; }
-        public decimal OpenEnd { get; set; }
-        public decimal CloseStart { get; set; }
-        public decimal CloseEnd { get; set; }
-        public decimal CloseAdjustedStart { get; set; }
-        public decimal CloseAdjustedEnd { get; set; }
-        public decimal HighStart { get; set; }
-        public decimal HighEnd { get; set; }
-        public decimal LowStart { get; set; }
-        public decimal LowEnd { get; set; }
+
+
+        public Price OpenStart { get; set; }
+        public Price OpenEnd { get; set; }
+        public Price CloseStart { get; set; }
+        public Price CloseEnd { get; set; }
+        public Price CloseAdjustedStart { get; set; }
+        public Price CloseAdjustedEnd { get; set; }
+        public Price HighStart { get; set; }
+        public Price HighEnd { get; set; }
+        public Price LowStart { get; set; }
+        public Price LowEnd { get; set; }
     }
 }

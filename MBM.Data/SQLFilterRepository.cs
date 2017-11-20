@@ -51,6 +51,7 @@ namespace MBM.DL
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
+                    symbols.Add("all symbols");
                     while (reader.Read())
                     {
                         symbols.Add(reader["stock_symbol"].ToString());

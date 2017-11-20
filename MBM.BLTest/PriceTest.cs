@@ -26,45 +26,5 @@ namespace MBM.BLTest
                 throw;
             }
         }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void PriceTypeTooLowTest()
-        {
-            //-- Arrange
-            Price price = new Price();
-            int inputType = 0;
-
-            //-- Act
-            try
-            {
-                price.Type = inputType;
-            }
-            catch (Exception ex)
-            {
-                Assert.AreEqual("Price type must be an integer from 1-5", ex.Message);
-                throw;
-            }
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void PriceTypeTooHighTest()
-        {
-            //-- Arrange
-            Price price = new Price();
-            int inputType = 6;
-
-            //-- Act
-            try
-            {
-                price.Type = inputType;
-            }
-            catch (Exception ex)
-            {
-                Assert.AreEqual("Price type must be an integer from 1-5", ex.Message);
-                throw;
-            }
-        }
     }
 }

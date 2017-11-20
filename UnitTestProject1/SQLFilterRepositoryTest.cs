@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Collections.Generic;
 using MBM.DL;
 
-namespace UnitTestProject1
+namespace MBM.DLTest
 {
     [TestClass]
     public class SQLFilterRepositoryTest
@@ -22,48 +22,36 @@ namespace UnitTestProject1
                 DateEnd = DateTime.Parse("2010-02-08"),
                 VolumeStart = uint.Parse("0"),
                 VolumeEnd = uint.Parse("242106500"),
-                OpenStart = 0.35m,
-                OpenEnd = 183.50m,
-                CloseStart = 0.35m,
-                CloseEnd = 182.62m,
-                CloseAdjustedStart = 0.35m,
-                CloseAdjustedEnd = 134.92m,
-                HighStart = 0.40m,
-                HighEnd = 185.50m,
-                LowStart = 0.32m,
-                LowEnd = 170.00m
+
             };
+            expected.OpenStart.Amount = 0.35m;
+            expected.OpenEnd.Amount = 183.50m;
+            expected.CloseStart.Amount = 0.35m;
+            expected.CloseEnd.Amount = 182.62m;
+            expected.CloseAdjustedStart.Amount = 0.35m;
+            expected.CloseAdjustedEnd.Amount = 134.92m;
+            expected.HighStart.Amount = 0.40m;
+            expected.HighEnd.Amount = 185.50m;
+            expected.LowStart.Amount = 0.32m;
+            expected.LowEnd.Amount = 170.00m;
 
-            string connStr = ConfigurationManager.ConnectionStrings["MBMconnection"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
-            conn.Open();
-
-            using (conn)
-            {
-                using (SqlCommand cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = "MinMaxValues";
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    actual = new Filter(reader);
-                }
-            }
+            SQLFilterRepository filterRepo = new SQLFilterRepository();
+            actual = filterRepo.GetMinMaxValues();
 
             Assert.AreEqual(expected.DateStart, actual.DateStart);
             Assert.AreEqual(expected.DateEnd, actual.DateEnd);
             Assert.AreEqual(expected.VolumeStart, actual.VolumeStart);
             Assert.AreEqual(expected.VolumeEnd, actual.VolumeEnd);
-            Assert.AreEqual(expected.OpenStart, actual.OpenStart);
-            Assert.AreEqual(expected.OpenEnd, actual.OpenEnd);
-            Assert.AreEqual(expected.CloseStart, actual.CloseStart);
-            Assert.AreEqual(expected.CloseEnd, actual.CloseEnd);
-            Assert.AreEqual(expected.CloseAdjustedStart, actual.CloseAdjustedStart);
-            Assert.AreEqual(expected.CloseAdjustedEnd, actual.CloseAdjustedEnd);
-            Assert.AreEqual(expected.HighStart, actual.HighStart);
-            Assert.AreEqual(expected.HighEnd, actual.HighEnd);
-            Assert.AreEqual(expected.LowStart, actual.LowStart);
-            Assert.AreEqual(expected.LowEnd, actual.LowEnd);
+            Assert.AreEqual(expected.OpenStart.Amount, actual.OpenStart.Amount);
+            Assert.AreEqual(expected.OpenEnd.Amount, actual.OpenEnd.Amount);
+            Assert.AreEqual(expected.CloseStart.Amount, actual.CloseStart.Amount);
+            Assert.AreEqual(expected.CloseEnd.Amount, actual.CloseEnd.Amount);
+            Assert.AreEqual(expected.CloseAdjustedStart.Amount, actual.CloseAdjustedStart.Amount);
+            Assert.AreEqual(expected.CloseAdjustedEnd.Amount, actual.CloseAdjustedEnd.Amount);
+            Assert.AreEqual(expected.HighStart.Amount, actual.HighStart.Amount);
+            Assert.AreEqual(expected.HighEnd.Amount, actual.HighEnd.Amount);
+            Assert.AreEqual(expected.LowStart.Amount, actual.LowStart.Amount);
+            Assert.AreEqual(expected.LowEnd.Amount, actual.LowEnd.Amount);
         }
 
         [TestMethod]
@@ -71,6 +59,58 @@ namespace UnitTestProject1
         {
             List<string> actual = new List<string>();
             List<string> expected = new List<string>();
+            expected.Add("all symbols");
+            expected.Add("AMG");
+            expected.Add("ATT");
+            expected.Add("AMP");
+            expected.Add("AFG");
+            expected.Add("ATU");
+            expected.Add("AVB");
+            expected.Add("ARG");
+            expected.Add("AEO");
+            expected.Add("ASI");
+            expected.Add("ADI");
+            expected.Add("ARM");
+            expected.Add("ARD");
+            expected.Add("AGD");
+            expected.Add("ASP");
+            expected.Add("AGM");
+            expected.Add("ABB");
+            expected.Add("ASF");
+            expected.Add("AHS");
+            expected.Add("ARK");
+            expected.Add("AKP");
+            expected.Add("APF");
+            expected.Add("APL");
+            expected.Add("AEA");
+            expected.Add("ALV");
+            expected.Add("ATV");
+            expected.Add("AOL");
+            expected.Add("AHD");
+            expected.Add("ADY");
+            expected.Add("ATE");
+            expected.Add("ASG");
+            expected.Add("ALZ");
+            expected.Add("AVA");
+            expected.Add("AXE");
+            expected.Add("AHT");
+            expected.Add("AEG");
+            expected.Add("AIT");
+            expected.Add("AKT");
+            expected.Add("AVK");
+            expected.Add("AVT");
+            expected.Add("AMX");
+            expected.Add("ACM");
+            expected.Add("AEB");
+            expected.Add("ABK");
+            expected.Add("ABM");
+            expected.Add("AFB");
+            expected.Add("AWH");
+            expected.Add("APD");
+            expected.Add("ACH");
+            expected.Add("ARO");
+            expected.Add("ASA");
+            expected.Add("AA");
 
             SQLFilterRepository filter = new SQLFilterRepository();
             actual = filter.GetSymbols();
@@ -81,7 +121,7 @@ namespace UnitTestProject1
                 Console.WriteLine(symbol);
             }
 
-            Assert.AreEqual(1, 1);
+            CollectionAssert.AreEquivalent(expected, actual);
         }
     }
 }

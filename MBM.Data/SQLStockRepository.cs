@@ -12,9 +12,36 @@ namespace MBM.DL
 {
     public class SQLStockRepository : IStockRepository
     {
-        public void AddStockEntry(StockEntry stock)
+        int numberOfRowsAffected;
+        public int AddStockEntry(StockEntry stock)
         {
-            throw new NotImplementedException();
+            string connStr = ConfigurationManager.ConnectionStrings["MBMconnection"].ToString();
+            SqlConnection conn = new SqlConnection(connStr);
+            conn.Open();
+
+            using (conn)
+            {
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+
+                    cmd.CommandText = @"spInsertStockEntry";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("exchange", stock.Exchange);
+                    cmd.Parameters.AddWithValue("stock_symbol", stock.Symbol);
+                    cmd.Parameters.AddWithValue("date", stock.Date);
+                    cmd.Parameters.AddWithValue("stock_volume", int.Parse(stock.Volume.ToString()));
+                    cmd.Parameters.AddWithValue("stock_price_open", stock.PriceOpen.Amount);
+                    cmd.Parameters.AddWithValue("stock_price_close", stock.PriceClose.Amount);
+                    cmd.Parameters.AddWithValue("stock_price_adj_close", stock.PriceCloseAdjusted.Amount);
+                    cmd.Parameters.AddWithValue("stock_price_high", stock.PriceHigh.Amount);
+                    cmd.Parameters.AddWithValue("stock_price_low", stock.PriceLow.Amount);
+
+                    numberOfRowsAffected = cmd.ExecuteNonQuery();
+                }
+            }
+
+            return numberOfRowsAffected;
         }
 
         public void DeleteStock(uint id)
@@ -43,16 +70,16 @@ namespace MBM.DL
                     cmd.Parameters.AddWithValue("Symbol", filter.SelectedSymbol);
                     cmd.Parameters.AddWithValue("VolumeStart", int.Parse(filter.VolumeStart.ToString()));
                     cmd.Parameters.AddWithValue("VolumeEnd", int.Parse(filter.VolumeEnd.ToString()));
-                    cmd.Parameters.AddWithValue("OpenStart", filter.OpenStart);
-                    cmd.Parameters.AddWithValue("OpenEnd", filter.OpenEnd);
-                    cmd.Parameters.AddWithValue("CloseStart", filter.CloseStart);
-                    cmd.Parameters.AddWithValue("CloseEnd", filter.CloseEnd);
-                    cmd.Parameters.AddWithValue("CloseAdjustedStart", filter.CloseAdjustedStart);
-                    cmd.Parameters.AddWithValue("CloseAdjustedEnd", filter.CloseAdjustedEnd);
-                    cmd.Parameters.AddWithValue("HighStart", filter.HighStart);
-                    cmd.Parameters.AddWithValue("HighEnd", filter.HighEnd);
-                    cmd.Parameters.AddWithValue("LowStart", filter.LowStart);
-                    cmd.Parameters.AddWithValue("LowEnd", filter.LowEnd);
+                    cmd.Parameters.AddWithValue("OpenStart", filter.OpenStart.Amount);
+                    cmd.Parameters.AddWithValue("OpenEnd", filter.OpenEnd.Amount);
+                    cmd.Parameters.AddWithValue("CloseStart", filter.CloseStart.Amount);
+                    cmd.Parameters.AddWithValue("CloseEnd", filter.CloseEnd.Amount);
+                    cmd.Parameters.AddWithValue("CloseAdjustedStart", filter.CloseAdjustedStart.Amount);
+                    cmd.Parameters.AddWithValue("CloseAdjustedEnd", filter.CloseAdjustedEnd.Amount);
+                    cmd.Parameters.AddWithValue("HighStart", filter.HighStart.Amount);
+                    cmd.Parameters.AddWithValue("HighEnd", filter.HighEnd.Amount);
+                    cmd.Parameters.AddWithValue("LowStart", filter.LowStart.Amount);
+                    cmd.Parameters.AddWithValue("LowEnd", filter.LowEnd.Amount);
 
                     
                     SqlDataReader reader = cmd.ExecuteReader();

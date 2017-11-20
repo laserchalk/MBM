@@ -10,5 +10,6 @@ namespace MBM.DL
     public interface IFilterRepository
     {
         Filter GetMinMaxValues();
+        List<string> GetSymbols();
     }
 }

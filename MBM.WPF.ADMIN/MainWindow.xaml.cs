@@ -17,36 +17,28 @@ namespace MBM.WPF.ADMIN
         {
             InitializeComponent();
 
-            SQLFilterRepository filterRepo = new SQLFilterRepository();
-            WindowFilter = filterRepo.GetMinMaxValues();
-            WindowFilter.Symbols = filterRepo.GetSymbols();
-            FilterPanel.DataContext = WindowFilter;
+            ResetFilter();
         }
 
         private void ApplyFilterButton_Click(object sender, RoutedEventArgs e)
         {
-            Filter filter = GetFilterValues();
             SQLStockRepository stockRepo = new SQLStockRepository();
-            List<StockEntry> stockEntries = stockRepo.GetStockEntries(filter) as List<StockEntry>;
+            List<StockEntry> stockEntries = stockRepo.GetStockEntries(WindowFilter) as List<StockEntry>;
             StockEntriesDataGrid.ItemsSource = stockEntries;
         }
 
-        private Filter GetFilterValues()
+        private void ResetFilter()
         {
             SQLFilterRepository filterRepo = new SQLFilterRepository();
-            Filter filter = filterRepo.GetMinMaxValues();
+            WindowFilter = filterRepo.GetMinMaxValues();
+            WindowFilter.Symbols = filterRepo.GetSymbols();
+            FilterPanel.DataContext = WindowFilter;
+            //openMin.DataContext = WindowFilter.OpenPriceTest;
+        }
 
-            uint Uint = 0;
-            if (uint.TryParse(volumeMin.Text, out Uint))
-            {
-                filter.VolumeStart = Uint;
-            }
-            
-            Console.WriteLine(volumeMin.Text);
-
-            
-
-            return filter;
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            ResetFilter();
         }
     }
 }

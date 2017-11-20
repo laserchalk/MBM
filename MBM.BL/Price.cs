@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,24 +15,9 @@ namespace MBM.BL
 
         }
 
-        public Price(int type, decimal amount)
+        public Price(decimal amount)
         {
-            Type = type;
-            Amount = amount;
-        }
-
-        private int _type;
-        public int Type
-        {
-            get
-            {
-                return _type;
-            }
-            set
-            {
-                if(value < 1 || value > 5) throw new ArgumentException("Price type must be an integer from 1-5");
-                _type = value;
-            }
+            this.Amount = amount;
         }
 
         private decimal _amount;
