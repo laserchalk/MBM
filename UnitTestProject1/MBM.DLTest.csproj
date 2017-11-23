@@ -57,6 +57,7 @@
     <Compile Include="SQLStockRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLFilterRepositoryTest.cs" />
+    <Compile Include="MbmSqlConnectionTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MBM.BL\MBM.BL.csproj">

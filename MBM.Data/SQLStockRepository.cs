@@ -12,12 +12,11 @@ namespace MBM.DL
 {
     public class SQLStockRepository : IStockRepository
     {
-        int numberOfRowsAffected;
+        
         public int AddStockEntry(StockEntry stock)
         {
-            string connStr = ConfigurationManager.ConnectionStrings["MBMconnection"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
-            conn.Open();
+            int numberOfRowsAffected;
+            SqlConnection conn = MbmSqlConnection.GetSqlConnection();
 
             using (conn)
             {
@@ -44,18 +43,32 @@ namespace MBM.DL
             return numberOfRowsAffected;
         }
 
-        public void DeleteStock(uint id)
+        public int DeleteStock(uint id)
         {
-            throw new NotImplementedException();
+            int numberOfRowsAffected;
+            SqlConnection conn = MbmSqlConnection.GetSqlConnection();
+
+            using (conn)
+            {
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+
+                    cmd.CommandText = @"spDeleteStockEntry";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("id", int.Parse(id.ToString()));
+
+                    numberOfRowsAffected = cmd.ExecuteNonQuery();
+                }
+            }
+
+            return numberOfRowsAffected;
         }
 
         public IEnumerable<StockEntry> GetStockEntries(Filter filter)
         {
             List<StockEntry> stockEntries = new List<StockEntry>();
-
-            string connStr = ConfigurationManager.ConnectionStrings["MBMconnection"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
-            conn.Open();
+            SqlConnection conn = MbmSqlConnection.GetSqlConnection();
 
             using (conn)
             {
@@ -99,10 +112,7 @@ namespace MBM.DL
         public StockEntry GetStockEntry(uint id)
         {
             StockEntry stockEntry = new StockEntry();
-
-            string connStr = ConfigurationManager.ConnectionStrings["MBMconnection"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
-            conn.Open();
+            SqlConnection conn = MbmSqlConnection.GetSqlConnection();
 
             using (conn)
             {
@@ -132,9 +142,35 @@ namespace MBM.DL
             throw new NotImplementedException();
         }
 
-        public void UpdateStockEntry(StockEntry stock)
+        public int UpdateStockEntry(StockEntry stock)
         {
-            throw new NotImplementedException();
+            int numberOfRowsAffected;
+            SqlConnection conn = MbmSqlConnection.GetSqlConnection();
+
+            using (conn)
+            {
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+
+                    cmd.CommandText = @"spUpdateStockEntry";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("stock_id", int.Parse(stock.ID.ToString()));
+                    cmd.Parameters.AddWithValue("exchange", stock.Exchange);
+                    cmd.Parameters.AddWithValue("stock_symbol", stock.Symbol);
+                    cmd.Parameters.AddWithValue("date", stock.Date);
+                    cmd.Parameters.AddWithValue("stock_volume", int.Parse(stock.Volume.ToString()));
+                    cmd.Parameters.AddWithValue("stock_price_open", stock.PriceOpen.Amount);
+                    cmd.Parameters.AddWithValue("stock_price_close", stock.PriceClose.Amount);
+                    cmd.Parameters.AddWithValue("stock_price_adj_close", stock.PriceCloseAdjusted.Amount);
+                    cmd.Parameters.AddWithValue("stock_price_high", stock.PriceHigh.Amount);
+                    cmd.Parameters.AddWithValue("stock_price_low", stock.PriceLow.Amount);
+
+                    numberOfRowsAffected = cmd.ExecuteNonQuery();
+                }
+            }
+
+            return numberOfRowsAffected;
         }
     }
 }

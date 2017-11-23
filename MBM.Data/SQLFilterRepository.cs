@@ -15,10 +15,7 @@ namespace MBM.DL
         public Filter GetMinMaxValues()
         {
             Filter filter = new Filter();
-
-            string connStr = ConfigurationManager.ConnectionStrings["MBMconnection"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
-            conn.Open();
+            SqlConnection conn = MbmSqlConnection.GetSqlConnection();
 
             using (conn)
             {
@@ -38,10 +35,7 @@ namespace MBM.DL
         public List<string> GetSymbols()
         {
             List<string> symbols = new List<string>();
-
-            string connStr = ConfigurationManager.ConnectionStrings["MBMconnection"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
-            conn.Open();
+            SqlConnection conn = MbmSqlConnection.GetSqlConnection();
 
             using (conn)
             {

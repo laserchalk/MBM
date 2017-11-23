@@ -10,26 +10,25 @@ namespace MBM.DLTest
     public class SQLStockRepositoryTest
     {
 
+
+
         [TestMethod]
-        public void AddStockEntryTest()
+        public void UpdateStockEntryTest()
         {
             SQLStockRepository stockRepo = new SQLStockRepository();
+            StockEntry stockUpdate = new StockEntry();
+            stockUpdate.ID = 1;
+            stockUpdate.Exchange = "NYSE";
+            stockUpdate.Symbol = "AEA";
+            stockUpdate.Date = DateTime.Parse("13/1/2010");
+            stockUpdate.Volume = 205500;
+            stockUpdate.PriceOpen.Amount = 4.42m;
+            stockUpdate.PriceClose.Amount = 4.42m;
+            stockUpdate.PriceCloseAdjusted.Amount = 4.42m;
+            stockUpdate.PriceHigh.Amount = 4.42m;
+            stockUpdate.PriceLow.Amount = 4.42m;
 
-            StockEntry insertStock = new StockEntry()
-            {
-                ID = uint.Parse(500.ToString()),
-                Exchange = "NYSE",
-                Symbol = "AEA",
-                Date = DateTime.Parse("12/10/2017"),
-                Volume = uint.Parse(892800.ToString())
-            };
-            insertStock.PriceOpen.Amount = 8.00m;
-            insertStock.PriceClose.Amount = 7.75m;
-            insertStock.PriceHigh.Amount = 8.06m;
-            insertStock.PriceLow.Amount = 7.51m;
-            insertStock.PriceCloseAdjusted.Amount = 6.33m;
-
-            int actual = stockRepo.AddStockEntry(insertStock);
+            int actual = stockRepo.UpdateStockEntry(stockUpdate);
 
             Assert.AreEqual(1, actual);
         }
@@ -89,6 +88,40 @@ namespace MBM.DLTest
             //-- Assert
             Assert.AreEqual(expected, actual.Count);
 
+        }
+
+        [TestMethod]
+        public void AddStockEntryTest()
+        {
+            SQLStockRepository stockRepo = new SQLStockRepository();
+
+            StockEntry insertStock = new StockEntry()
+            {
+                ID = uint.Parse(500.ToString()),
+                Exchange = "NYSE",
+                Symbol = "AEA",
+                Date = DateTime.Parse("12/10/2017"),
+                Volume = uint.Parse(892800.ToString())
+            };
+            insertStock.PriceOpen.Amount = 8.00m;
+            insertStock.PriceClose.Amount = 7.75m;
+            insertStock.PriceHigh.Amount = 8.06m;
+            insertStock.PriceLow.Amount = 7.51m;
+            insertStock.PriceCloseAdjusted.Amount = 6.33m;
+
+            int actual = stockRepo.AddStockEntry(insertStock);
+
+            Assert.AreEqual(1, actual);
+        }
+
+        [TestMethod]
+        public void DeleteStockEntryTest()
+        {
+            SQLStockRepository stockRepo = new SQLStockRepository();
+
+            int actual = stockRepo.DeleteStock(102634);
+
+            Assert.AreEqual(1, actual);
         }
     }
 }

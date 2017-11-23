@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="IFilterRepository.cs" />
     <Compile Include="IStockRepository.cs" />
+    <Compile Include="MbmSqlConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLFilterRepository.cs" />
     <Compile Include="SQLStockRepository.cs" />
