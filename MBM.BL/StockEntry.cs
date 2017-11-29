@@ -11,10 +11,13 @@ using System.Windows.Data;
 
 namespace MBM.BL
 {
+    [Serializable]
     public class StockEntry
     {
         public StockEntry()
         {
+            Exchange = "AAAA";
+            Symbol = "AAA";
             PriceHigh = new Price();
             PriceLow = new Price();
             PriceOpen = new Price();
@@ -54,6 +57,7 @@ namespace MBM.BL
             set
             {
                 if(value.Length > 4) throw new ArgumentException("Exchange must have less than 5 characters");
+                if(String.IsNullOrEmpty(value)) throw new ArgumentException("Exchange can't be null or empty");
                 _exchange = value;
             }
         }
@@ -68,6 +72,7 @@ namespace MBM.BL
             set
             {
                 if (value.Length > 3) throw new ArgumentException("Symbol must have less than 4 characters");
+                if (String.IsNullOrEmpty(value)) throw new ArgumentException("Symbol can't be null or empty");
                 _symbol = value;
             }
         }

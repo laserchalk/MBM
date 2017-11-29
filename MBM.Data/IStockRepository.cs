@@ -9,7 +9,7 @@ namespace MBM.DL
 {
     public interface IStockRepository
     {
-        int AddStockEntry(StockEntry stock);
+        string AddStockEntry(StockEntry stock);
         StockEntry GetStockEntry(uint id);
         IEnumerable<StockEntry> GetStockEntries(Filter filter);
         int UpdateStockEntry(StockEntry stock);

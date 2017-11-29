@@ -91,13 +91,14 @@ namespace MBM.DLTest
         }
 
         [TestMethod]
-        public void AddStockEntryTest()
+        public void AddNewStockEntryTest()
         {
             SQLStockRepository stockRepo = new SQLStockRepository();
+            string expected = "102674";
 
             StockEntry insertStock = new StockEntry()
             {
-                ID = uint.Parse(500.ToString()),
+                ID = uint.Parse(0.ToString()),
                 Exchange = "NYSE",
                 Symbol = "AEA",
                 Date = DateTime.Parse("12/10/2017"),
@@ -109,9 +110,34 @@ namespace MBM.DLTest
             insertStock.PriceLow.Amount = 7.51m;
             insertStock.PriceCloseAdjusted.Amount = 6.33m;
 
-            int actual = stockRepo.AddStockEntry(insertStock);
+            string actual = stockRepo.AddStockEntry(insertStock);
 
-            Assert.AreEqual(1, actual);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void AddExistingStockEntryTest()
+        {
+            SQLStockRepository stockRepo = new SQLStockRepository();
+            string expected = "Item with symbol and date already exists";
+
+            StockEntry insertStock = new StockEntry()
+            {
+                ID = uint.Parse(0.ToString()),
+                Exchange = "NYSE",
+                Symbol = "AEA",
+                Date = DateTime.Parse("12/10/2017"),
+                Volume = uint.Parse(892800.ToString())
+            };
+            insertStock.PriceOpen.Amount = 8.00m;
+            insertStock.PriceClose.Amount = 7.75m;
+            insertStock.PriceHigh.Amount = 8.06m;
+            insertStock.PriceLow.Amount = 7.51m;
+            insertStock.PriceCloseAdjusted.Amount = 6.33m;
+
+            string actual = stockRepo.AddStockEntry(insertStock);
+
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -119,7 +145,7 @@ namespace MBM.DLTest
         {
             SQLStockRepository stockRepo = new SQLStockRepository();
 
-            int actual = stockRepo.DeleteStock(102634);
+            int actual = stockRepo.DeleteStock(102674);
 
             Assert.AreEqual(1, actual);
         }

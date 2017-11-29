@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace MBM.BL
 {
+    [Serializable]
     public class Price
     {
         public Price()

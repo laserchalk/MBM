@@ -66,7 +66,6 @@ namespace MBM.BL
         public uint VolumeStart { get; set; }
         public uint VolumeEnd { get; set; }
 
-
         public Price OpenStart { get; set; }
         public Price OpenEnd { get; set; }
         public Price CloseStart { get; set; }
@@ -77,5 +76,16 @@ namespace MBM.BL
         public Price HighEnd { get; set; }
         public Price LowStart { get; set; }
         public Price LowEnd { get; set; }
+
+        public void Validate()
+        {
+            if(DateStart > DateEnd) throw new ArgumentException("Invalid date range. First date can't be greater than second date.");
+            if (VolumeStart > VolumeEnd) throw new ArgumentException("Invalid volume range. First volume can't be greater than second volume.");
+            if (OpenStart.Amount > OpenEnd.Amount) throw new ArgumentException("Invalid open price range. First price can't be greater than second price.");
+            if (CloseStart.Amount > CloseEnd.Amount) throw new ArgumentException("Invalid close price range. First price can't be greater than second price.");
+            if (CloseAdjustedStart.Amount > CloseAdjustedEnd.Amount) throw new ArgumentException("Invalid close adjusted price range. First price can't be greater than second price.");
+            if (HighStart.Amount > HighEnd.Amount) throw new ArgumentException("Invalid high price range. First price can't be greater than second price.");
+            if (LowStart.Amount > LowEnd.Amount) throw new ArgumentException("Invalid low price range. First price can't be greater than second price.");
+        }
     }
 }

@@ -32,7 +32,7 @@ namespace MBM.DL
             return filter;
         }
 
-        public List<string> GetSymbols()
+        public IEnumerable<string> GetSymbols()
         {
             List<string> symbols = new List<string>();
             SqlConnection conn = MbmSqlConnection.GetSqlConnection();
