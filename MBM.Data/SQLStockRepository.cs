@@ -48,10 +48,11 @@ namespace MBM.DL
             return response.Value.ToString();
         }
 
-        public int DeleteStock(uint id)
+        public string DeleteStock(uint id)
         {
             int numberOfRowsAffected;
             SqlConnection conn = MbmSqlConnection.GetSqlConnection();
+            string serverResponse;
 
             using (conn)
             {
@@ -64,10 +65,19 @@ namespace MBM.DL
                     cmd.Parameters.AddWithValue("id", int.Parse(id.ToString()));
 
                     numberOfRowsAffected = cmd.ExecuteNonQuery();
+
+                    if(numberOfRowsAffected == 1)
+                    {
+                        serverResponse = "Stock entry " + id + " deleted";
+                    }
+                    else
+                    {
+                        serverResponse = "Failed to delete because entry doesn't exist";
+                    }
                 }
             }
 
-            return numberOfRowsAffected;
+            return serverResponse;
         }
 
         public IEnumerable<StockEntry> GetStockEntries(Filter filter)
@@ -147,10 +157,11 @@ namespace MBM.DL
             throw new NotImplementedException();
         }
 
-        public int UpdateStockEntry(StockEntry stock)
+        public string UpdateStockEntry(StockEntry stock)
         {
             int numberOfRowsAffected;
             SqlConnection conn = MbmSqlConnection.GetSqlConnection();
+            string serverResponse;
 
             using (conn)
             {
@@ -172,10 +183,19 @@ namespace MBM.DL
                     cmd.Parameters.AddWithValue("stock_price_low", stock.PriceLow.Amount);
 
                     numberOfRowsAffected = cmd.ExecuteNonQuery();
+
+                    if (numberOfRowsAffected == 1)
+                    {
+                        serverResponse = "Stock entry " + stock.ID + " updated";
+                    }
+                    else
+                    {
+                        serverResponse = "Failed to update";
+                    }
                 }
             }
 
-            return numberOfRowsAffected;
+            return serverResponse;
         }
     }
 }

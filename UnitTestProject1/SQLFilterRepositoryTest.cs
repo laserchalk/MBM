@@ -113,7 +113,7 @@ namespace MBM.DLTest
             expected.Add("AA");
 
             SQLFilterRepository filter = new SQLFilterRepository();
-            actual = filter.GetSymbols();
+            actual = filter.GetSymbols() as List<string>;
 
             
             foreach (string symbol in actual)

@@ -18,7 +18,7 @@ namespace MBM.DL
             return sqlConnection;
         }
 
-        public static string DataSource
+        public string DataSource
         {
             get
             {
@@ -36,7 +36,7 @@ namespace MBM.DL
                 ConfigurationManager.ConnectionStrings["MBMconnection"].ConnectionString = connStringbuilder.ConnectionString;
             }
         }
-        public static string InitialCatalog
+        public string InitialCatalog
         {
             get
             {

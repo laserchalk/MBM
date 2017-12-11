@@ -25,26 +25,14 @@ namespace MBM.BL
             this.LowEnd = new Price();
         }
 
-        public Filter(SqlDataReader reader)
+        public Filter(SqlDataReader reader) : this()
         {
             if (reader.Read())
             {
                 this.DateStart = DateTime.Parse(reader["MinDate"].ToString());
                 this.DateEnd = DateTime.Parse(reader["MaxDate"].ToString());
-                this.SelectedSymbol = "all symbols";
                 this.VolumeStart = uint.Parse(reader["MinVolume"].ToString());
                 this.VolumeEnd = uint.Parse(reader["MaxVolume"].ToString());
-
-                this.OpenStart = new Price();
-                this.OpenEnd = new Price();
-                this.CloseStart = new Price();
-                this.CloseEnd = new Price();
-                this.CloseAdjustedStart = new Price();
-                this.CloseAdjustedEnd = new Price();
-                this.HighStart = new Price();
-                this.HighEnd = new Price();
-                this.LowStart = new Price();
-                this.LowEnd = new Price();
 
                 this.OpenStart.Amount = decimal.Parse(reader["MinPriceOpen"].ToString());
                 this.OpenEnd.Amount = decimal.Parse(reader["MaxPriceOpen"].ToString());

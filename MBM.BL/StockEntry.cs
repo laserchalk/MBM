@@ -4,40 +4,37 @@ using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace MBM.BL
 {
     [Serializable]
-    public class StockEntry
+    public class StockEntry : INotifyPropertyChanged
     {
         public StockEntry()
         {
-            Exchange = "AAAA";
-            Symbol = "AAA";
-            PriceHigh = new Price();
-            PriceLow = new Price();
-            PriceOpen = new Price();
-            PriceClose = new Price();
-            PriceCloseAdjusted = new Price();
+            this.Exchange = "AAAA";
+            this.Symbol = "AAA";
+            this.Date = DateTime.Parse("1/1/1754");
+            this.PriceHigh = new Price();
+            this.PriceLow = new Price();
+            this.PriceOpen = new Price();
+            this.PriceClose = new Price();
+            this.PriceCloseAdjusted = new Price();
         }
 
-        public StockEntry(SqlDataReader reader)
+        public StockEntry(SqlDataReader reader) : this()
         {
             this.ID = uint.Parse(reader["stock_id"].ToString());
             this.Exchange = reader["exchange"].ToString();
             this.Symbol = reader["stock_symbol"].ToString();
             this.Date = DateTime.Parse(reader["date"].ToString());
             this.Volume = uint.Parse(reader["stock_volume"].ToString());
-
-            PriceHigh = new Price();
-            PriceLow = new Price();
-            PriceOpen = new Price();
-            PriceClose = new Price();
-            PriceCloseAdjusted = new Price();
 
             this.PriceHigh.Amount = decimal.Parse(reader["stock_price_high"].ToString());
             this.PriceLow.Amount = decimal.Parse(reader["stock_price_low"].ToString());
@@ -59,10 +56,12 @@ namespace MBM.BL
                 if(value.Length > 4) throw new ArgumentException("Exchange must have less than 5 characters");
                 if(String.IsNullOrEmpty(value)) throw new ArgumentException("Exchange can't be null or empty");
                 _exchange = value;
+                NotifyPropertyChanged("exchange");
             }
         }
 
         private string _symbol;
+
         public string Symbol
         {
             get
@@ -74,6 +73,7 @@ namespace MBM.BL
                 if (value.Length > 3) throw new ArgumentException("Symbol must have less than 4 characters");
                 if (String.IsNullOrEmpty(value)) throw new ArgumentException("Symbol can't be null or empty");
                 _symbol = value;
+                NotifyPropertyChanged("symbol");
             }
         }
         public uint Volume { get; set; }
@@ -83,6 +83,24 @@ namespace MBM.BL
         public Price PriceOpen { get; set; }
         public Price PriceClose { get; set; }
         public Price PriceCloseAdjusted { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public override string ToString()
+        {
+            string stockInformation;
+            stockInformation = this.ID.ToString() + ", ";
+            stockInformation += this.Exchange.ToString() + ", ";
+            stockInformation += this.Symbol.ToString() + ", ";
+            stockInformation += this.Date.ToString();
+
+            return stockInformation;
+        }
+
+        private void NotifyPropertyChanged(String propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
     }
 }

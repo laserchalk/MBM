@@ -12,9 +12,8 @@ namespace MBM.DL
         string AddStockEntry(StockEntry stock);
         StockEntry GetStockEntry(uint id);
         IEnumerable<StockEntry> GetStockEntries(Filter filter);
-        int UpdateStockEntry(StockEntry stock);
-        void UpdateStockEntries(IEnumerable<StockEntry> stockEntries);
-        int DeleteStock(uint id);
+        string UpdateStockEntry(StockEntry stock);
+        string DeleteStock(uint id);
 
     }
 }

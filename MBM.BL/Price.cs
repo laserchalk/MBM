@@ -34,5 +34,14 @@ namespace MBM.BL
                 _amount = value;
             }
         }
+
+        public override string ToString()
+        {
+            string priceInformation;
+
+            priceInformation = this.Amount.ToString();
+
+            return priceInformation;
+        }
     }
 }

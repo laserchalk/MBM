@@ -28,7 +28,7 @@ namespace MBM.DLTest
             stockUpdate.PriceHigh.Amount = 4.42m;
             stockUpdate.PriceLow.Amount = 4.42m;
 
-            int actual = stockRepo.UpdateStockEntry(stockUpdate);
+            string actual = stockRepo.UpdateStockEntry(stockUpdate);
 
             Assert.AreEqual(1, actual);
         }
@@ -145,7 +145,7 @@ namespace MBM.DLTest
         {
             SQLStockRepository stockRepo = new SQLStockRepository();
 
-            int actual = stockRepo.DeleteStock(102674);
+            string actual = stockRepo.DeleteStock(102674);
 
             Assert.AreEqual(1, actual);
         }

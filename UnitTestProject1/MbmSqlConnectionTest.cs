@@ -9,23 +9,6 @@ namespace MBM.DLTest
     [TestClass]
     public class MbmSqlConnectionTest
     {
-        [TestMethod]
-        public void GetDataSourceTest()
-        {
-            string actual = MbmSqlConnection.DataSource;
-            string expected = "JOHNS-PC\\MAIN";
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void GetInitialCatalogTest()
-        {
-            string actual = MbmSqlConnection.InitialCatalog;
-            string expected = "MBM";
-
-            Assert.AreEqual(expected, actual);
-        }
 
         [TestMethod]
         public void SqlConnectionTest()
