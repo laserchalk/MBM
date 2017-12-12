@@ -26,7 +26,14 @@ namespace MBM.BL
             this.PriceOpen = new Price();
             this.PriceClose = new Price();
             this.PriceCloseAdjusted = new Price();
+            PriceHigh.PropertyChanged += Price_PropertyChanged;
+            PriceLow.PropertyChanged += Price_PropertyChanged;
+            PriceOpen.PropertyChanged += Price_PropertyChanged;
+            PriceClose.PropertyChanged += Price_PropertyChanged;
+            PriceCloseAdjusted.PropertyChanged += Price_PropertyChanged;
         }
+
+
 
         public StockEntry(SqlDataReader reader) : this()
         {
@@ -56,7 +63,7 @@ namespace MBM.BL
                 if(value.Length > 4) throw new ArgumentException("Exchange must have less than 5 characters");
                 if(String.IsNullOrEmpty(value)) throw new ArgumentException("Exchange can't be null or empty");
                 _exchange = value;
-                NotifyPropertyChanged("exchange");
+                NotifyPropertyChanged("Exchange");
             }
         }
 
@@ -73,11 +80,38 @@ namespace MBM.BL
                 if (value.Length > 3) throw new ArgumentException("Symbol must have less than 4 characters");
                 if (String.IsNullOrEmpty(value)) throw new ArgumentException("Symbol can't be null or empty");
                 _symbol = value;
-                NotifyPropertyChanged("symbol");
+                NotifyPropertyChanged("Symbol");
             }
         }
-        public uint Volume { get; set; }
-        public DateTime Date { get; set; }
+
+        private uint _volume;
+        public uint Volume
+        {
+            get
+            {
+                return _volume;
+            }
+            set
+            {
+                _volume = value;
+                NotifyPropertyChanged("Volume");
+            }
+        }
+
+        private DateTime _date;
+        public DateTime Date
+        {
+            get
+            {
+                return _date;
+            }
+            set
+            {
+                _date = value;
+                NotifyPropertyChanged("Date");
+            }
+        }
+
         public Price PriceHigh { get; set; }
         public Price PriceLow { get; set; }
         public Price PriceOpen { get; set; }
@@ -100,6 +134,11 @@ namespace MBM.BL
         private void NotifyPropertyChanged(String propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void Price_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(e.PropertyName));
         }
 
     }

@@ -34,66 +34,79 @@ namespace MBM.WPF.ADMIN
 
         private void WindowStockEntriesBound_ItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            StockEntry stockChanged = new StockEntry();
-            SQLStockRepository stockRepo = new SQLStockRepository();
-            string serverResponse;
-            uint stockID;
-
-            stockChanged = sender as StockEntry;
-            
-
-            if(stockChanged.ID == 0)
+            try
             {
-                //Insert stock
-                serverResponse = stockRepo.AddStockEntry(stockChanged);
+                StockEntry stockChanged = new StockEntry();
+                SQLStockRepository stockRepo = new SQLStockRepository();
+                string serverResponse;
+                uint stockID;
 
-                if (uint.TryParse(serverResponse, out stockID))
+                stockChanged = sender as StockEntry;
+
+
+                if (stockChanged.ID == 0)
                 {
-                    stockChanged.ID = stockID;
-                    serverResponse = "Stock entry inserted with ID of " + stockID;
+                    //Insert stock
+                    serverResponse = stockRepo.AddStockEntry(stockChanged);
+
+                    if (uint.TryParse(serverResponse, out stockID))
+                    {
+                        stockChanged.ID = stockID;
+                        serverResponse = "Stock entry inserted with ID of " + stockID;
+                    }
+
+                }
+                else
+                {
+                    //Update stock
+                    serverResponse = stockRepo.UpdateStockEntry(stockChanged);
                 }
 
+                Messages.Items.Insert(0, serverResponse);
             }
-            else
+            catch (Exception ex)
             {
-                //Update stock
-                serverResponse = stockRepo.UpdateStockEntry(stockChanged);
+                Messages.Items.Insert(0, ex.Message.ToString());
             }
-
-            //Messages.Items.Add(serverResponse);
-            Messages.Items.Insert(0, serverResponse);
 
         }
 
         private void WindowStockEntriesBound_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            StockEntry stockChanged = new StockEntry();
-            SQLStockRepository stockRepo = new SQLStockRepository();
-            string serverResponse = "";
-
-            if (e.OldItems != null)
+            try
             {
-                stockChanged = e.OldItems[0] as StockEntry;
-                serverResponse = stockRepo.DeleteStock(stockChanged.ID);
-            }
+                StockEntry stockChanged = new StockEntry();
+                SQLStockRepository stockRepo = new SQLStockRepository();
+                string serverResponse = "";
 
-            if (e.NewItems != null)
-            {
-                stockChanged = e.NewItems[0] as StockEntry;
-                
-                serverResponse = stockRepo.AddStockEntry(stockChanged);
-                uint stockID;
-
-                if (uint.TryParse(serverResponse, out stockID))
+                if (e.OldItems != null)
                 {
-                    stockChanged.ID = stockID;
-                    serverResponse = "Stock entry inserted with ID of " + stockID;
+                    stockChanged = e.OldItems[0] as StockEntry;
+                    serverResponse = stockRepo.DeleteStock(stockChanged.ID);
                 }
-            }
 
-            if(serverResponse != "")
-            //Messages.Items.Add(serverResponse);
-            Messages.Items.Insert(0, serverResponse);
+                if (e.NewItems != null)
+                {
+                    stockChanged = e.NewItems[0] as StockEntry;
+
+                    serverResponse = stockRepo.AddStockEntry(stockChanged);
+                    uint stockID;
+
+                    if (uint.TryParse(serverResponse, out stockID))
+                    {
+                        stockChanged.ID = stockID;
+                        serverResponse = "Stock entry inserted with ID of " + stockID;
+                    }
+                }
+
+                if (serverResponse != "")
+                    Messages.Items.Insert(0, serverResponse);
+            }
+            catch (Exception ex)
+            {
+
+                Messages.Items.Insert(0, ex.Message.ToString());
+            }
         }
 
         private void ApplyFilterButton_Click(object sender, RoutedEventArgs e)
@@ -109,6 +122,8 @@ namespace MBM.WPF.ADMIN
                 StockEntriesDataGrid.ItemsSource = WindowStockEntriesBound;
                 WindowStockEntriesBound.ItemPropertyChanged += WindowStockEntriesBound_ItemPropertyChanged;
                 WindowStockEntriesBound.CollectionChanged += WindowStockEntriesBound_CollectionChanged;
+
+                Messages.Items.Insert(0, "Retrieved " + WindowStockEntriesBound.Count.ToString() + " entries");
             }
             catch (Exception ex)
             {
@@ -160,6 +175,12 @@ namespace MBM.WPF.ADMIN
         {
             OptionsWindow settingsWindow = new OptionsWindow();
             settingsWindow.Show();
+        }
+
+        private void Help_Click(object sender, RoutedEventArgs e)
+        {
+            DocumenationWindow documenationWindow = new DocumenationWindow();
+            documenationWindow.Show();
         }
     }
 }

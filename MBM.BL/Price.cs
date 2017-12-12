@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace MBM.BL
 {
     [Serializable]
-    public class Price
+    public class Price : INotifyPropertyChanged
     {
         public Price()
         {
@@ -22,6 +22,9 @@ namespace MBM.BL
         }
 
         private decimal _amount;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public decimal Amount
         {
             get
@@ -32,6 +35,7 @@ namespace MBM.BL
             {
                 if (value < 0) throw new ArgumentException("Price cannot be negative");
                 _amount = value;
+                NotifyPropertyChanged("Price");
             }
         }
 
@@ -42,6 +46,11 @@ namespace MBM.BL
             priceInformation = this.Amount.ToString();
 
             return priceInformation;
+        }
+
+        private void NotifyPropertyChanged(String propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

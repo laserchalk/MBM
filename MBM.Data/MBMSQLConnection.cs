@@ -12,10 +12,17 @@ namespace MBM.DL
     {
         public static SqlConnection GetSqlConnection()
         {
-            SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["MBMconnection"].ConnectionString);
-            sqlConnection.Open();
+            try
+            {
+                SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["MBMconnection"].ConnectionString);
+                sqlConnection.Open();
 
-            return sqlConnection;
+                return sqlConnection;
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("Failed to connect to database.");
+            }
         }
 
         public string DataSource

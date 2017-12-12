@@ -22,6 +22,9 @@
             <MenuItem Header="_File">
                 <MenuItem Header="_Settings" Click="Settings_Click"/>
             </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_User Documentation" Click="Help_Click"/>
+            </MenuItem>
         </Menu>
         
         <StackPanel x:Name="FilterPanel" Margin="10,15,14,15" Grid.Column="0" Grid.Row="1">
