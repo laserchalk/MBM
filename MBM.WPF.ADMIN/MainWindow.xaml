@@ -6,7 +6,7 @@
         xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:local="clr-namespace:MBM.WPF.ADMIN"
         mc:Ignorable="d"
-        Title="Money-B-Mine" Height="849.002" Width="1340.295" WindowStartupLocation="CenterScreen">
+        Title="Money-B-Mine" Height="849.002" Width="1340.295" WindowStartupLocation="CenterScreen" Loaded="MainWindow1_Loaded">
     
     <Grid >
         <Grid.ColumnDefinitions>

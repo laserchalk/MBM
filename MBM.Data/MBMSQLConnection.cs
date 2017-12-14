@@ -10,6 +10,66 @@ namespace MBM.DL
 {
     public class MbmSqlConnection
     {
+        public MbmSqlConnection()
+        {
+            string configConnectionString = ConfigurationManager.ConnectionStrings["MBMconnection"].ConnectionString;
+            ConnectionStringBuilder = new SqlConnectionStringBuilder(configConnectionString);
+
+            _datasource = ConnectionStringBuilder.DataSource.ToString();
+            _initialCatalogue = ConnectionStringBuilder.InitialCatalog.ToString();
+        }
+
+        SqlConnectionStringBuilder ConnectionStringBuilder;
+        string _datasource;
+        string _initialCatalogue;
+
+
+
+        public string DataSource
+        {
+            get
+            {
+                return _datasource;
+            }
+            set
+            {
+                _datasource = value;
+
+                string configConnectionString = ConfigurationManager.ConnectionStrings["MBMconnection"].ConnectionString;
+                SqlConnectionStringBuilder connStringbuilder = new SqlConnectionStringBuilder(configConnectionString);
+                connStringbuilder.DataSource = _datasource;
+                
+
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                config.ConnectionStrings.ConnectionStrings["MBMconnection"].ConnectionString = connStringbuilder.ConnectionString;
+                config.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection("connectionStrings");
+
+
+            }
+        }
+        public string InitialCatalog
+        {
+            get
+            {
+                return _initialCatalogue;
+            }
+            set
+            {
+                _initialCatalogue = value;
+
+                string configConnectionString = ConfigurationManager.ConnectionStrings["MBMconnection"].ConnectionString;
+                SqlConnectionStringBuilder connStringbuilder = new SqlConnectionStringBuilder(configConnectionString);
+                connStringbuilder.InitialCatalog = _initialCatalogue;
+                
+
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                config.ConnectionStrings.ConnectionStrings["MBMconnection"].ConnectionString = connStringbuilder.ConnectionString;
+                config.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection("connectionStrings");
+            }
+        }
+
         public static SqlConnection GetSqlConnection()
         {
             try
@@ -22,43 +82,6 @@ namespace MBM.DL
             catch (Exception)
             {
                 throw new ArgumentException("Failed to connect to database.");
-            }
-        }
-
-        public string DataSource
-        {
-            get
-            {
-                string configConnectionString = ConfigurationManager.ConnectionStrings["MBMconnection"].ConnectionString;
-                SqlConnectionStringBuilder connStringbuilder = new SqlConnectionStringBuilder(configConnectionString);
-
-                return connStringbuilder.DataSource.ToString();
-            }
-            set
-            {
-                string configConnectionString = ConfigurationManager.ConnectionStrings["MBMconnection"].ConnectionString;
-                SqlConnectionStringBuilder connStringbuilder = new SqlConnectionStringBuilder(configConnectionString);
-                connStringbuilder.DataSource = value;
-
-                ConfigurationManager.ConnectionStrings["MBMconnection"].ConnectionString = connStringbuilder.ConnectionString;
-            }
-        }
-        public string InitialCatalog
-        {
-            get
-            {
-                string configConnectionString = ConfigurationManager.ConnectionStrings["MBMconnection"].ConnectionString;
-                SqlConnectionStringBuilder connStringbuilder = new SqlConnectionStringBuilder(configConnectionString);
-
-                return connStringbuilder.InitialCatalog.ToString();
-            }
-            set
-            {
-                string configConnectionString = ConfigurationManager.ConnectionStrings["MBMconnection"].ConnectionString;
-                SqlConnectionStringBuilder connStringbuilder = new SqlConnectionStringBuilder(configConnectionString);
-                connStringbuilder.InitialCatalog = value;
-
-                ConfigurationManager.ConnectionStrings["MBMconnection"].ConnectionString = connStringbuilder.ConnectionString;
             }
         }
     }

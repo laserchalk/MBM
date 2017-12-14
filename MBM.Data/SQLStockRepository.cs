@@ -152,11 +152,6 @@ namespace MBM.DL
             return stockEntry;
         }
 
-        public void UpdateStockEntries(IEnumerable<StockEntry> stockEntries)
-        {
-            throw new NotImplementedException();
-        }
-
         public string UpdateStockEntry(StockEntry stock)
         {
             int numberOfRowsAffected;

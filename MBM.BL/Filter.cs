@@ -67,7 +67,7 @@ namespace MBM.BL
 
         public void Validate()
         {
-            if(DateStart > DateEnd) throw new ArgumentException("Invalid date range. First date can't be greater than second date.");
+            if (DateStart > DateEnd) throw new ArgumentException("Invalid date range. First date can't be greater than second date.");
             if (VolumeStart > VolumeEnd) throw new ArgumentException("Invalid volume range. First volume can't be greater than second volume.");
             if (OpenStart.Amount > OpenEnd.Amount) throw new ArgumentException("Invalid open price range. First price can't be greater than second price.");
             if (CloseStart.Amount > CloseEnd.Amount) throw new ArgumentException("Invalid close price range. First price can't be greater than second price.");

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace MBM.WPF.ADMIN
 {
@@ -21,11 +22,6 @@ namespace MBM.WPF.ADMIN
         public MainWindow()
         {
             InitializeComponent();
-
-            ClearGrid();
-            ResetFilter();
-
-            
         }
 
         Filter WindowFilter = new Filter();
@@ -113,6 +109,7 @@ namespace MBM.WPF.ADMIN
         {
             try
             {
+                Mouse.OverrideCursor = Cursors.Wait;
                 WindowFilter.Validate();
                 FilterError.Text = "";
                 FilterError.Visibility = Visibility.Collapsed;
@@ -129,7 +126,8 @@ namespace MBM.WPF.ADMIN
             {
                 FilterError.Text = ex.Message;
                 FilterError.Visibility = Visibility.Visible;
-            }  
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
@@ -155,6 +153,7 @@ namespace MBM.WPF.ADMIN
         {
             try
             {
+                Mouse.OverrideCursor = Cursors.Wait;
                 SQLFilterRepository filterRepo = new SQLFilterRepository();
                 WindowFilter = filterRepo.GetMinMaxValues();
                 WindowFilter.Symbols = filterRepo.GetSymbols() as List<string>;
@@ -169,6 +168,7 @@ namespace MBM.WPF.ADMIN
                 FilterError.Text = ex.Message;
                 FilterError.Visibility = Visibility.Visible;
             }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
@@ -181,6 +181,12 @@ namespace MBM.WPF.ADMIN
         {
             DocumenationWindow documenationWindow = new DocumenationWindow();
             documenationWindow.Show();
+        }
+
+        private void MainWindow1_Loaded(object sender, RoutedEventArgs e)
+        {
+            ClearGrid();
+            ResetFilter();
         }
     }
 }
