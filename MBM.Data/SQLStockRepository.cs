@@ -36,7 +36,7 @@ namespace MBM.DL
                     cmd.Parameters.AddWithValue("stock_price_high", stock.PriceHigh.Amount);
                     cmd.Parameters.AddWithValue("stock_price_low", stock.PriceLow.Amount);
 
-                    response = new SqlParameter("@Text", SqlDbType.NVarChar, 1000);
+                    response = new SqlParameter("@response", SqlDbType.NVarChar, 1000);
                     response.Direction = ParameterDirection.Output;
                     cmd.Parameters.Add(response);
 
@@ -154,9 +154,9 @@ namespace MBM.DL
 
         public string UpdateStockEntry(StockEntry stock)
         {
-            int numberOfRowsAffected;
             SqlConnection conn = MbmSqlConnection.GetSqlConnection();
             string serverResponse;
+            SqlParameter response = new SqlParameter();
 
             using (conn)
             {
@@ -177,16 +177,13 @@ namespace MBM.DL
                     cmd.Parameters.AddWithValue("stock_price_high", stock.PriceHigh.Amount);
                     cmd.Parameters.AddWithValue("stock_price_low", stock.PriceLow.Amount);
 
-                    numberOfRowsAffected = cmd.ExecuteNonQuery();
+                    response = new SqlParameter("@response", SqlDbType.NVarChar, 1000);
+                    response.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(response);
 
-                    if (numberOfRowsAffected == 1)
-                    {
-                        serverResponse = "Stock entry " + stock.ID + " updated";
-                    }
-                    else
-                    {
-                        serverResponse = "Failed to update";
-                    }
+                    cmd.ExecuteNonQuery();
+
+                    serverResponse = response.Value.ToString();
                 }
             }
 

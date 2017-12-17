@@ -24,8 +24,8 @@ namespace MBM.WPF.ADMIN
             InitializeComponent();
         }
 
-        Filter WindowFilter = new Filter();
-        TrulyObservableCollection<StockEntry> WindowStockEntriesBound = new TrulyObservableCollection<StockEntry>();
+        Filter FilterBound = new Filter();
+        TrulyObservableCollection<StockEntry> StockEntriesBound = new TrulyObservableCollection<StockEntry>();
 
 
         private void WindowStockEntriesBound_ItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -110,17 +110,17 @@ namespace MBM.WPF.ADMIN
             try
             {
                 Mouse.OverrideCursor = Cursors.Wait;
-                WindowFilter.Validate();
+                FilterBound.Validate();
                 FilterError.Text = "";
                 FilterError.Visibility = Visibility.Collapsed;
 
                 SQLStockRepository stockRepo = new SQLStockRepository();
-                WindowStockEntriesBound = new TrulyObservableCollection<StockEntry>(stockRepo.GetStockEntries(WindowFilter));
-                StockEntriesDataGrid.ItemsSource = WindowStockEntriesBound;
-                WindowStockEntriesBound.ItemPropertyChanged += WindowStockEntriesBound_ItemPropertyChanged;
-                WindowStockEntriesBound.CollectionChanged += WindowStockEntriesBound_CollectionChanged;
+                StockEntriesBound = new TrulyObservableCollection<StockEntry>(stockRepo.GetStockEntries(FilterBound));
+                StockEntriesDataGrid.ItemsSource = StockEntriesBound;
+                StockEntriesBound.ItemPropertyChanged += WindowStockEntriesBound_ItemPropertyChanged;
+                StockEntriesBound.CollectionChanged += WindowStockEntriesBound_CollectionChanged;
 
-                Messages.Items.Insert(0, "Retrieved " + WindowStockEntriesBound.Count.ToString() + " entries");
+                Messages.Items.Insert(0, "Retrieved " + StockEntriesBound.Count.ToString() + " entries");
             }
             catch (Exception ex)
             {
@@ -143,10 +143,10 @@ namespace MBM.WPF.ADMIN
 
         private void ClearGrid()
         {
-            WindowStockEntriesBound = new TrulyObservableCollection<StockEntry>();
-            StockEntriesDataGrid.ItemsSource = WindowStockEntriesBound;
-            WindowStockEntriesBound.ItemPropertyChanged += WindowStockEntriesBound_ItemPropertyChanged;
-            WindowStockEntriesBound.CollectionChanged += WindowStockEntriesBound_CollectionChanged;
+            StockEntriesBound = new TrulyObservableCollection<StockEntry>();
+            StockEntriesDataGrid.ItemsSource = StockEntriesBound;
+            StockEntriesBound.ItemPropertyChanged += WindowStockEntriesBound_ItemPropertyChanged;
+            StockEntriesBound.CollectionChanged += WindowStockEntriesBound_CollectionChanged;
         }
 
         private void ResetFilter()
@@ -155,11 +155,11 @@ namespace MBM.WPF.ADMIN
             {
                 Mouse.OverrideCursor = Cursors.Wait;
                 SQLFilterRepository filterRepo = new SQLFilterRepository();
-                WindowFilter = filterRepo.GetMinMaxValues();
-                WindowFilter.Symbols = filterRepo.GetSymbols() as List<string>;
-                FilterPanel.DataContext = WindowFilter;
+                FilterBound = filterRepo.GetMinMaxValues();
+                FilterBound.Symbols = filterRepo.GetSymbols() as List<string>;
+                FilterPanel.DataContext = FilterBound;
 
-                WindowFilter.Validate();
+                FilterBound.Validate();
                 FilterError.Text = "";
                 FilterError.Visibility = Visibility.Collapsed;
             }

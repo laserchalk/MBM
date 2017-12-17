@@ -1,6 +1,7 @@
 ﻿using MBM.DL;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,5 +30,27 @@ namespace MBM.WPF.ADMIN
         }
 
         MbmSqlConnection DatabaseConnection = new MbmSqlConnection();
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Mouse.OverrideCursor = Cursors.Wait;
+                SqlConnection conn = MbmSqlConnection.GetSqlConnection();
+
+                using (conn)
+                {
+
+                }
+                ConnectionLabel.Content = "Connection was successful";
+            }
+            catch (Exception ex)
+            {
+                ConnectionLabel.Content = ex.Message.ToString();
+            }
+
+            Mouse.OverrideCursor = Cursors.Arrow;
+
+        }
     }
 }

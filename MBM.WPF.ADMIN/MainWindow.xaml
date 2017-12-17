@@ -18,7 +18,7 @@
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Menu Grid.ColumnSpan="2">
+        <Menu Grid.ColumnSpan="2" Background="#FFDEDEDE">
             <MenuItem Header="_File">
                 <MenuItem Header="_Settings" Click="Settings_Click"/>
             </MenuItem>
@@ -44,24 +44,24 @@
             <WrapPanel Height="75">
                 <Label Content="Volume:" Width="78"/>
                 <StackPanel>
-                    <wpfTool:RangeSlider Minimum="{Binding Path=VolumeStart, Mode=OneTime}" Maximum="{Binding Path=VolumeEnd, Mode=OneTime}" LowerValue="{Binding Path=VolumeStart}" HigherValue="{Binding Path=VolumeEnd}" ></wpfTool:RangeSlider>
+                    <wpfTool:RangeSlider Minimum="{Binding Path=VolumeStart, Mode=OneTime}" Maximum="{Binding Path=VolumeEnd, Mode=OneTime}" LowerValue="{Binding Path=VolumeStart, Mode=TwoWay}" HigherValue="{Binding Path=VolumeEnd, Mode=TwoWay}" ></wpfTool:RangeSlider>
                     <WrapPanel>
-                        <TextBox x:Name="volumeMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=VolumeStart}"/>
+                        <TextBox x:Name="volumeMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=VolumeStart, Mode=TwoWay}"/>
                         <Label Content="to" Width="37"/>
-                        <TextBox x:Name="volumeMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=VolumeEnd}" TextAlignment="Right"/>
+                        <TextBox x:Name="volumeMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=VolumeEnd, Mode=TwoWay}" TextAlignment="Right"/>
                     </WrapPanel>
                 </StackPanel>
             </WrapPanel>
             <WrapPanel Height="75">
                 <Label Content="Open:" Width="62"/>
                 <StackPanel Width="316">
-                    <wpfTool:RangeSlider Minimum="{Binding Path=OpenStart.Amount, Mode=OneTime}" Maximum="{Binding Path=OpenEnd.Amount, Mode=OneTime}" LowerValue="{Binding Path=OpenStart.Amount}" HigherValue="{Binding Path=OpenEnd.Amount}" Width="277" HorizontalAlignment="Center" Margin="16,0,23,0" ></wpfTool:RangeSlider>
+                    <wpfTool:RangeSlider Minimum="{Binding Path=OpenStart.Amount, Mode=OneTime}" Maximum="{Binding Path=OpenEnd.Amount, Mode=OneTime}" LowerValue="{Binding Path=OpenStart.Amount, Mode=TwoWay}" HigherValue="{Binding Path=OpenEnd.Amount, Mode=TwoWay}" Width="277" HorizontalAlignment="Center" Margin="16,0,23,0" ></wpfTool:RangeSlider>
                     <WrapPanel >
                         <Label Content="$"/>
-                        <TextBox x:Name="openMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=OpenStart.Amount, ValidatesOnExceptions=True}"/>
+                        <TextBox x:Name="openMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=OpenStart.Amount, ValidatesOnExceptions=True, Mode=TwoWay}"/>
                         <Label Content="to" Width="21"/>
                         <Label Content="$"/>
-                        <TextBox x:Name="openMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=OpenEnd.Amount, ValidatesOnExceptions=True}" TextAlignment="Right"/>
+                        <TextBox x:Name="openMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=OpenEnd.Amount, ValidatesOnExceptions=True, Mode=TwoWay}" TextAlignment="Right"/>
                     </WrapPanel>
                 </StackPanel>
             </WrapPanel>

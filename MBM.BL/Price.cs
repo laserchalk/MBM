@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace MBM.BL
 {
     [Serializable]
-    public class Price : INotifyPropertyChanged
+    public class Price
     {
         public Price()
         {
@@ -21,9 +21,8 @@ namespace MBM.BL
             this.Amount = amount;
         }
 
-        private decimal _amount;
-
         public event PropertyChangedEventHandler PropertyChanged;
+        private decimal _amount;
 
         public decimal Amount
         {
