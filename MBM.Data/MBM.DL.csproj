@@ -11,6 +11,7 @@
     <AssemblyName>MBM.DL</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,6 +34,8 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,6 +48,7 @@
     <Compile Include="IStockRepository.cs" />
     <Compile Include="MbmSqlConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerStatsRepository.cs" />
     <Compile Include="SQLFilterRepository.cs" />
     <Compile Include="SQLStockRepository.cs" />
   </ItemGroup>
@@ -53,6 +57,9 @@
       <Project>{725B9D5D-C5A0-4F72-8371-2CD3616BBD27}</Project>
       <Name>MBM.BL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

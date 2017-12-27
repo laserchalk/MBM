@@ -1,0 +1,54 @@
+﻿<Window x:Class="MBM.WPF.ADMIN.ServerStatistics"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MBM.WPF.ADMIN"
+        mc:Ignorable="d"
+        Title="Server Statistics" Height="254.52" Width="364.723">
+    <Grid>
+        <StackPanel x:Name="StatsPanel" Margin="10">
+            <GroupBox Header="CPU Usage">
+                <StackPanel>
+                    <WrapPanel>
+                        <TextBlock Text="SQL: "></TextBlock>
+                        <TextBlock Text="{Binding Path=CpuSql}"></TextBlock>
+                        <TextBlock Text="%"></TextBlock>
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Text="Idle: "></TextBlock>
+                        <TextBlock Text="{Binding Path=CpuIdle}"></TextBlock>
+                        <TextBlock Text="%"></TextBlock>
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Text="Other: "></TextBlock>
+                        <TextBlock Text="{Binding Path=CpuOther}"></TextBlock>
+                        <TextBlock Text="%"></TextBlock>
+                    </WrapPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Memory Usage">
+                <WrapPanel>
+                    <TextBlock Text="{Binding Path=MemoryUtilization}"></TextBlock>
+                    <TextBlock>%</TextBlock>
+                </WrapPanel>
+            </GroupBox>
+            <GroupBox Header="Storage">
+                <StackPanel>
+                    <WrapPanel>
+                        <TextBlock Text="Total: "></TextBlock>
+                        <TextBlock Text="{Binding Path=TotalSpace}"></TextBlock>
+                        <TextBlock Text="GB"></TextBlock>
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Text="Available: "></TextBlock>
+                        <TextBlock Text="{Binding Path=AvailableSpace}"></TextBlock>
+                        <TextBlock Text="GB"></TextBlock>
+                    </WrapPanel>
+                </StackPanel>
+            </GroupBox>
+            <Button Content="Run" Margin="0,10,0,0" Width="100" Click="Run_Button_Click" HorizontalAlignment="Left"></Button>
+        </StackPanel>
+        
+    </Grid>
+</Window>

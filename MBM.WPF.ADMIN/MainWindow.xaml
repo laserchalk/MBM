@@ -21,6 +21,7 @@
         <Menu Grid.ColumnSpan="2" Background="#FFDEDEDE">
             <MenuItem Header="_File">
                 <MenuItem Header="_Settings" Click="Settings_Click"/>
+                <MenuItem Header="_Server Statistics" Click="ServerStatistics_Click"/>
             </MenuItem>
             <MenuItem Header="_Help">
                 <MenuItem Header="_User Documentation" Click="Help_Click"/>

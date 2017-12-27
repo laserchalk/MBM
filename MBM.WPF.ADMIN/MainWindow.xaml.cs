@@ -188,5 +188,11 @@ namespace MBM.WPF.ADMIN
             ClearGrid();
             ResetFilter();
         }
+
+        private void ServerStatistics_Click(object sender, RoutedEventArgs e)
+        {
+            ServerStatistics serverStatsWindow = new ServerStatistics();
+            serverStatsWindow.Show();
+        }
     }
 }

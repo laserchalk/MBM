@@ -22,8 +22,8 @@ namespace MBM.BL
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private decimal _amount;
 
+        private decimal _amount;
         public decimal Amount
         {
             get

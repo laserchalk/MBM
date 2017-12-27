@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Filter.cs" />
     <Compile Include="Price.cs" />
+    <Compile Include="ServerStat.cs" />
     <Compile Include="StockEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
