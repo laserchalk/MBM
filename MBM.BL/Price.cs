@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace MBM.BL
 {
     [Serializable]
+    [DataContract]
     public class Price
     {
         public Price()
@@ -24,6 +21,8 @@ namespace MBM.BL
         public event PropertyChangedEventHandler PropertyChanged;
 
         private decimal _amount;
+
+        [DataMember]
         public decimal Amount
         {
             get

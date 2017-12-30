@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
-using System.Globalization;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
+using System.Runtime.Serialization;
 
 namespace MBM.BL
 {
     [Serializable]
+    [DataContract]
     public class StockEntry : INotifyPropertyChanged
     {
         public StockEntry()
@@ -50,9 +43,12 @@ namespace MBM.BL
             this.PriceCloseAdjusted.Amount = decimal.Parse(reader["stock_price_adj_close"].ToString());
         }
 
+        [DataMember]
         public uint ID { get; set; }
 
         private string _exchange;
+
+        [DataMember]
         public string Exchange {
             get
             {
@@ -69,6 +65,7 @@ namespace MBM.BL
 
         private string _symbol;
 
+        [DataMember]
         public string Symbol
         {
             get
@@ -85,6 +82,8 @@ namespace MBM.BL
         }
 
         private uint _volume;
+
+        [DataMember]
         public uint Volume
         {
             get
@@ -99,6 +98,8 @@ namespace MBM.BL
         }
 
         private DateTime _date;
+
+        [DataMember]
         public DateTime Date
         {
             get
@@ -112,10 +113,19 @@ namespace MBM.BL
             }
         }
 
+        [DataMember]
         public Price PriceHigh { get; set; }
+
+        [DataMember]
         public Price PriceLow { get; set; }
+
+        [DataMember]
         public Price PriceOpen { get; set; }
+
+        [DataMember]
         public Price PriceClose { get; set; }
+
+        [DataMember]
         public Price PriceCloseAdjusted { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;

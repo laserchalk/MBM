@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5d03df88-746d-40b9-b84c-575a43d1e476" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:64978/FilterService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="FilterService.xsd" MetadataType="Schema" ID="fea71928-3644-436d-b9cc-c84d1aa82cee" SourceId="1" SourceUrl="http://localhost:64978/FilterService.svc?xsd=xsd1" />
+    <MetadataFile FileName="FilterService1.xsd" MetadataType="Schema" ID="9fc1060f-7aaa-4ca3-84a6-f2f93990267d" SourceId="1" SourceUrl="http://localhost:64978/FilterService.svc?xsd=xsd0" />
+    <MetadataFile FileName="FilterService2.xsd" MetadataType="Schema" ID="e500123d-500c-4824-803c-05ad93d0783e" SourceId="1" SourceUrl="http://localhost:64978/FilterService.svc?xsd=xsd3" />
+    <MetadataFile FileName="FilterService3.xsd" MetadataType="Schema" ID="764a160b-70f2-4cbc-bc29-c8108188864e" SourceId="1" SourceUrl="http://localhost:64978/FilterService.svc?xsd=xsd2" />
+    <MetadataFile FileName="FilterService.wsdl" MetadataType="Wsdl" ID="f107b99c-ad51-4fa6-9da5-159558447ee2" SourceId="1" SourceUrl="http://localhost:64978/FilterService.svc?wsdl" />
+    <MetadataFile FileName="FilterService.disco" MetadataType="Disco" ID="57f4302b-e2fe-448a-bff5-7436ec6a9607" SourceId="1" SourceUrl="http://localhost:64978/FilterService.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

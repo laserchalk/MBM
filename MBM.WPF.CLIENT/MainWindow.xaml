@@ -1,0 +1,159 @@
+﻿<Window x:Class="MBM.WPF.CLIENT.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MBM.WPF.CLIENT"
+        xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="704" Width="1197">
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="410"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.ColumnSpan="2" Background="#FFDEDEDE">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Settings" Click="Settings_Click"/>
+                <MenuItem Header="_Server Statistics" Click="ServerStatistics_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_User Documentation" Click="Help_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <StackPanel x:Name="FilterPanel" Margin="10,15,14,15" Grid.Column="0" Grid.Row="1">
+            <StackPanel.Effect>
+                <DropShadowEffect Direction="230" ShadowDepth="4" Opacity="0.1"/>
+            </StackPanel.Effect>
+            <WrapPanel Height="45">
+                <Label Content="Date range:" Width="78"/>
+                <DatePicker x:Name="DateMin" Width="120" SelectedDate="{Binding Path=DateStart}"/>
+                <Label Content="to" Width="37"/>
+                <DatePicker x:Name="DateMax" Width="120" SelectedDate="{Binding Path=DateEnd}"/>
+            </WrapPanel>
+            <WrapPanel Height="45">
+                <Label Content="Symbol:" Width="78"/>
+                <ComboBox x:Name="symbolsCombobox" Width="120" ItemsSource="{Binding Path=Symbols}" SelectedValue="{Binding Path=SelectedSymbol}"/>
+            </WrapPanel>
+            <WrapPanel Height="75">
+                <Label Content="Volume:" Width="78"/>
+                <StackPanel>
+                    <wpfTool:RangeSlider Minimum="{Binding Path=VolumeStart, Mode=OneTime}" Maximum="{Binding Path=VolumeEnd, Mode=OneTime}" LowerValue="{Binding Path=VolumeStart, Mode=TwoWay}" HigherValue="{Binding Path=VolumeEnd, Mode=TwoWay}" ></wpfTool:RangeSlider>
+                    <WrapPanel>
+                        <TextBox x:Name="volumeMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=VolumeStart, Mode=TwoWay}"/>
+                        <Label Content="to" Width="37"/>
+                        <TextBox x:Name="volumeMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=VolumeEnd, Mode=TwoWay}" TextAlignment="Right"/>
+                    </WrapPanel>
+                </StackPanel>
+            </WrapPanel>
+            <WrapPanel Height="75">
+                <Label Content="Open:" Width="62"/>
+                <StackPanel Width="316">
+                    <wpfTool:RangeSlider Minimum="{Binding Path=OpenStart.Amount, Mode=OneTime}" Maximum="{Binding Path=OpenEnd.Amount, Mode=OneTime}" LowerValue="{Binding Path=OpenStart.Amount, Mode=TwoWay}" HigherValue="{Binding Path=OpenEnd.Amount, Mode=TwoWay}" Width="277" HorizontalAlignment="Center" Margin="16,0,23,0" ></wpfTool:RangeSlider>
+                    <WrapPanel >
+                        <Label Content="$"/>
+                        <TextBox x:Name="openMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=OpenStart.Amount, ValidatesOnExceptions=True, Mode=TwoWay}"/>
+                        <Label Content="to" Width="21"/>
+                        <Label Content="$"/>
+                        <TextBox x:Name="openMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=OpenEnd.Amount, ValidatesOnExceptions=True, Mode=TwoWay}" TextAlignment="Right"/>
+                    </WrapPanel>
+                </StackPanel>
+            </WrapPanel>
+            <WrapPanel Height="75">
+                <Label Content="Close:" Width="62"/>
+                <StackPanel Width="316">
+                    <wpfTool:RangeSlider Minimum="{Binding Path=CloseStart.Amount, Mode=OneTime}" Maximum="{Binding Path=CloseEnd.Amount, Mode=OneTime}" LowerValue="{Binding Path=CloseStart.Amount}" HigherValue="{Binding Path=CloseEnd.Amount}" Width="277" HorizontalAlignment="Center" Margin="16,0,23,0" ></wpfTool:RangeSlider>
+                    <WrapPanel>
+                        <Label Content="$"/>
+                        <TextBox x:Name="closeMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=CloseStart.Amount, ValidatesOnExceptions=True}"/>
+                        <Label Content="to" Width="21"/>
+                        <Label Content="$"/>
+                        <TextBox x:Name="closeMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=CloseEnd.Amount, ValidatesOnExceptions=True}" TextAlignment="Right"/>
+                    </WrapPanel>
+                </StackPanel>
+            </WrapPanel>
+            <WrapPanel Height="75">
+                <Label Content="Close Adj:" Width="62"/>
+                <StackPanel Width="316">
+                    <wpfTool:RangeSlider Minimum="{Binding Path=CloseAdjustedStart.Amount, Mode=OneTime}" Maximum="{Binding Path=CloseAdjustedEnd.Amount, Mode=OneTime}" LowerValue="{Binding Path=CloseAdjustedStart.Amount}" HigherValue="{Binding Path=CloseAdjustedEnd.Amount}" Width="277" HorizontalAlignment="Center" Margin="16,0,23,0" ></wpfTool:RangeSlider>
+                    <WrapPanel>
+                        <Label Content="$"/>
+                        <TextBox x:Name="closeAdjMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=CloseAdjustedStart.Amount, ValidatesOnExceptions=True}"/>
+                        <Label Content="to" Width="21"/>
+                        <Label Content="$"/>
+                        <TextBox x:Name="closeAdjMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=CloseAdjustedEnd.Amount, ValidatesOnExceptions=True}" TextAlignment="Right"/>
+                    </WrapPanel>
+                </StackPanel>
+            </WrapPanel>
+            <WrapPanel Height="75">
+                <Label Content="High:" Width="62"/>
+                <StackPanel Width="316">
+                    <wpfTool:RangeSlider Minimum="{Binding Path=HighStart.Amount, Mode=OneTime}" Maximum="{Binding Path=HighEnd.Amount, Mode=OneTime}" LowerValue="{Binding Path=HighStart.Amount}" HigherValue="{Binding Path=HighEnd.Amount}" Width="277" HorizontalAlignment="Center" Margin="16,0,23,0" ></wpfTool:RangeSlider>
+                    <WrapPanel>
+                        <Label Content="$"/>
+                        <TextBox x:Name="highMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=HighStart.Amount, ValidatesOnExceptions=True}"/>
+                        <Label Content="to" Width="21"/>
+                        <Label Content="$"/>
+                        <TextBox x:Name="highMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=HighEnd.Amount, ValidatesOnExceptions=True}" TextAlignment="Right"/>
+                    </WrapPanel>
+                </StackPanel>
+            </WrapPanel>
+            <WrapPanel Height="75">
+                <Label Content="Low:" Width="62"/>
+                <StackPanel Width="316">
+                    <wpfTool:RangeSlider Minimum="{Binding Path=LowStart.Amount, Mode=OneTime}"  Maximum="{Binding Path=LowEnd.Amount, Mode=OneTime}"  LowerValue="{Binding Path=LowStart.Amount}" HigherValue="{Binding Path=LowEnd.Amount}" Width="277" HorizontalAlignment="Center" Margin="16,0,23,0" ></wpfTool:RangeSlider>
+                    <WrapPanel>
+                        <Label Content="$"/>
+                        <TextBox x:Name="lowMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=LowStart.Amount, ValidatesOnExceptions=True}"/>
+                        <Label Content="to" Width="21"/>
+                        <Label Content="$"/>
+                        <TextBox x:Name="lowMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=LowEnd.Amount, ValidatesOnExceptions=True}" TextAlignment="Right"/>
+                    </WrapPanel>
+                </StackPanel>
+            </WrapPanel>
+            <TextBlock x:Name="FilterError" TextWrapping="Wrap" Text="" Foreground="Red" Margin="0,0,25,10"/>
+            <WrapPanel Margin="0,2,0,0">
+                <Button x:Name="ApplyFilterButton" Content="Apply Filter" Click="ApplyFilterButton_Click" Width="100" Margin="0,0,20,0"/>
+                <Button x:Name="ResetButton" Content="Reset" Click="ResetButton_Click" Width="100"/>
+            </WrapPanel>
+        </StackPanel>
+
+
+
+        <Grid Margin="17,18,16,18" Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="261"></RowDefinition>
+            </Grid.RowDefinitions>
+            <DataGrid CanUserAddRows="True" x:Name="StockEntriesDataGrid" VerticalAlignment="Stretch" AutoGenerateColumns="False" Margin="0,0,0,10" Grid.Row="0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ID,  ValidatesOnExceptions=True, Mode=TwoWay}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Exchange" Binding="{Binding Exchange, ValidatesOnExceptions=True, Mode=TwoWay}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol, ValidatesOnExceptions=True, Mode=TwoWay}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Volume (1000 share/day)" Binding="{Binding Volume, ValidatesOnExceptions=True, Mode=TwoWay}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=dd/MM/yyyy, ValidatesOnExceptions=True, Mode=TwoWay}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Price High" Binding="{Binding Path=PriceHigh.Amount, ValidatesOnExceptions=True, Mode=TwoWay}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Price Low" Binding="{Binding Path=PriceLow.Amount, ValidatesOnExceptions=True, Mode=TwoWay}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Price Open" Binding="{Binding Path=PriceOpen.Amount, ValidatesOnExceptions=True, Mode=TwoWay}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Price Close" Binding="{Binding Path=PriceClose.Amount, ValidatesOnExceptions=True, Mode=TwoWay}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Price Close Adjusted" Binding="{Binding Path=PriceCloseAdjusted.Amount, ValidatesOnExceptions=True, Mode=TwoWay}" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Grid.Row="1">
+                <Button x:Name="ClearButton" Content="Clear" Width="100" Click="ClearButton_Click" HorizontalAlignment="Left" Margin="0,20"/>
+
+                <Label Content="Messages"></Label>
+                <ListBox x:Name="Messages" Height="164" />
+            </StackPanel>
+
+
+        </Grid>
+    </Grid>
+</Window>

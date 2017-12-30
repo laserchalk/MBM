@@ -4,16 +4,19 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{450EAB9F-3407-413D-B802-7BAF6AEB6575}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{5201A461-6E1D-4D7E-9106-61BC87860CF2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MBM.DL</RootNamespace>
-    <AssemblyName>MBM.DL</AssemblyName>
+    <RootNamespace>MBM.WPF.CLIENT</RootNamespace>
+    <AssemblyName>MBM.WPF.CLIENT</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +26,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,48 +36,76 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
-    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net35\WPFToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net35\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IFilterRepository.cs" />
-    <Compile Include="IStockRepository.cs" />
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
     <Compile Include="Service References\WCFFilterService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\WCFStockService\Reference.cs">
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SQL\MbmSqlConnection.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQL\ServerStatsRepository.cs" />
-    <Compile Include="SQL\SQLFilterRepository.cs" />
-    <Compile Include="SQL\SQLStockRepository.cs" />
-    <Compile Include="WCF\WCFFilterRepository.cs" />
-    <Compile Include="WCF\WCFStockRepository.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MBM.BL\MBM.BL.csproj">
-      <Project>{725B9D5D-C5A0-4F72-8371-2CD3616BBD27}</Project>
-      <Name>MBM.BL</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="Properties\DataSources\MBM.BL.Filter.datasource" />
     <None Include="Properties\DataSources\MBM.BL.StockEntry.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
     <None Include="Service References\WCFFilterService\FilterService.wsdl" />
     <None Include="Service References\WCFFilterService\FilterService.xsd">
       <SubType>Designer</SubType>
@@ -87,41 +119,25 @@
     <None Include="Service References\WCFFilterService\FilterService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\WCFStockService\Service1.wsdl" />
-    <None Include="Service References\WCFStockService\StockService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\WCFStockService\StockService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\WCFStockService\StockService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\WCFStockService\StockService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MBM.BL\MBM.BL.csproj">
+      <Project>{725B9D5D-C5A0-4F72-8371-2CD3616BBD27}</Project>
+      <Name>MBM.BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MBM.Data\MBM.DL.csproj">
+      <Project>{450EAB9F-3407-413D-B802-7BAF6AEB6575}</Project>
+      <Name>MBM.DL</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\WCFFilterService\" />
-    <WCFMetadataStorage Include="Service References\WCFStockService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\WCFStockService\StockService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\WCFStockService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\WCFStockService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\WCFStockService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\WCFFilterService\FilterService.disco" />

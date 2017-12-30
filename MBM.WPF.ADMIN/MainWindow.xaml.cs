@@ -24,9 +24,15 @@ namespace MBM.WPF.ADMIN
             InitializeComponent();
         }
 
+
         Filter FilterBound = new Filter();
         TrulyObservableCollection<StockEntry> StockEntriesBound = new TrulyObservableCollection<StockEntry>();
 
+        private void MainWindow1_Loaded(object sender, RoutedEventArgs e)
+        {
+            ClearGrid();
+            ResetFilter();
+        }
 
         private void WindowStockEntriesBound_ItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -183,11 +189,7 @@ namespace MBM.WPF.ADMIN
             documenationWindow.Show();
         }
 
-        private void MainWindow1_Loaded(object sender, RoutedEventArgs e)
-        {
-            ClearGrid();
-            ResetFilter();
-        }
+        
 
         private void ServerStatistics_Click(object sender, RoutedEventArgs e)
         {

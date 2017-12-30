@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace MBM.BL
 {
+    [Serializable]
+    [DataContract]
     public class Filter
     {
         public Filter()
@@ -47,22 +46,52 @@ namespace MBM.BL
             }
         }
 
+        [DataMember]
         public DateTime DateStart { get; set; }
+
+        [DataMember]
         public DateTime DateEnd { get; set; }
+
+        [DataMember]
         public string SelectedSymbol { get; set; }
+
+        [DataMember]
         public List<string> Symbols { get; set; }
+
+        [DataMember]
         public uint VolumeStart { get; set; }
+
+        [DataMember]
         public uint VolumeEnd { get; set; }
 
+        [DataMember]
         public Price OpenStart { get; set; }
+
+        [DataMember]
         public Price OpenEnd { get; set; }
+
+        [DataMember]
         public Price CloseStart { get; set; }
+
+        [DataMember]
         public Price CloseEnd { get; set; }
+
+        [DataMember]
         public Price CloseAdjustedStart { get; set; }
+
+        [DataMember]
         public Price CloseAdjustedEnd { get; set; }
+
+        [DataMember]
         public Price HighStart { get; set; }
+
+        [DataMember]
         public Price HighEnd { get; set; }
+
+        [DataMember]
         public Price LowStart { get; set; }
+
+        [DataMember]
         public Price LowEnd { get; set; }
 
         public void Validate()
