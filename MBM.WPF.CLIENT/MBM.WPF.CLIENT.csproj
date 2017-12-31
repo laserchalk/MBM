@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
@@ -63,11 +64,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DocumentationWindow.xaml.cs">
+      <DependentUpon>DocumentationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\WCFStockService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\WCFFilterService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Page Include="DocumentationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -106,6 +119,19 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\WCFStockService\Service1.wsdl" />
+    <None Include="Service References\WCFStockService\StockService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WCFStockService\StockService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WCFStockService\StockService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WCFStockService\StockService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\WCFFilterService\FilterService.wsdl" />
     <None Include="Service References\WCFFilterService\FilterService.xsd">
       <SubType>Designer</SubType>
@@ -137,6 +163,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\WCFStockService\" />
     <WCFMetadataStorage Include="Service References\WCFFilterService\" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +180,24 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\WCFStockService\StockService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\WCFStockService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\WCFStockService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\WCFStockService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\mbm_filter_controls.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

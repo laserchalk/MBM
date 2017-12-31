@@ -49,22 +49,47 @@ namespace MBM.WPF.CLIENT
 
         private void Help_Click(object sender, RoutedEventArgs e)
         {
-
+            DocumentationWindow documenationWindow = new DocumentationWindow();
+            documenationWindow.Show();
         }
 
         private void ApplyFilterButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                Mouse.OverrideCursor = Cursors.Wait;
+                FilterBound.Validate();
+                FilterError.Text = "";
+                FilterError.Visibility = Visibility.Collapsed;
 
+                WCFStockRepository stockRepo = new WCFStockRepository();
+                StockEntriesBound = new ObservableCollection<StockEntry>(stockRepo.GetStockEntries(FilterBound));
+                StockEntriesDataGrid.ItemsSource = StockEntriesBound;
+
+                Messages.Items.Insert(0, "Retrieved " + StockEntriesBound.Count.ToString() + " entries");
+            }
+            catch (Exception ex)
+            {
+                FilterError.Text = ex.Message;
+                FilterError.Visibility = Visibility.Visible;
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
-
+            ResetFilter();
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
+            ClearGrid();
+        }
 
+        private void ClearGrid()
+        {
+            StockEntriesBound = new ObservableCollection<StockEntry>();
+            StockEntriesDataGrid.ItemsSource = StockEntriesBound;
         }
 
         private void ResetFilter()
