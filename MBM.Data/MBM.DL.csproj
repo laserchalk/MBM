@@ -44,6 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CSV\CSVFilterRepository.cs" />
+    <Compile Include="CSV\CSVStockRepository.cs" />
+    <Compile Include="CSV\FileManager.cs" />
+    <Compile Include="FilterRepositoryFactory.cs" />
     <Compile Include="IFilterRepository.cs" />
     <Compile Include="IStockRepository.cs" />
     <Compile Include="Service References\WCFFilterService\Reference.cs">
@@ -61,6 +65,7 @@
     <Compile Include="SQL\ServerStatsRepository.cs" />
     <Compile Include="SQL\SQLFilterRepository.cs" />
     <Compile Include="SQL\SQLStockRepository.cs" />
+    <Compile Include="StockRepositoryFactory.cs" />
     <Compile Include="WCF\WCFFilterRepository.cs" />
     <Compile Include="WCF\WCFStockRepository.cs" />
   </ItemGroup>
@@ -138,6 +143,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

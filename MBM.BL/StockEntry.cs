@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Runtime.Serialization;
@@ -41,6 +42,27 @@ namespace MBM.BL
             this.PriceOpen.Amount = decimal.Parse(reader["stock_price_open"].ToString());
             this.PriceClose.Amount = decimal.Parse(reader["stock_price_close"].ToString());
             this.PriceCloseAdjusted.Amount = decimal.Parse(reader["stock_price_adj_close"].ToString());
+        }
+
+
+        public StockEntry(string line) : this()
+        {
+            List<string> words = new List<string>();
+
+            //line = line.Replace(" ", string.Empty);
+            words = new List<string>(line.Split(','));
+
+            this.ID = uint.Parse(words[0]);
+            this.Exchange = words[1];
+            this.Symbol = words[2];
+            this.Volume = uint.Parse(words[3]);
+            this.Date = DateTime.Parse(words[4]);
+
+            this.PriceHigh.Amount = decimal.Parse(words[5]);
+            this.PriceLow.Amount = decimal.Parse(words[6]);
+            this.PriceOpen.Amount = decimal.Parse(words[7]);
+            this.PriceClose.Amount = decimal.Parse(words[8]);
+            this.PriceCloseAdjusted.Amount = decimal.Parse(words[9]);
         }
 
         [DataMember]
@@ -133,10 +155,16 @@ namespace MBM.BL
         public override string ToString()
         {
             string stockInformation;
-            stockInformation = this.ID.ToString() + ", ";
-            stockInformation += this.Exchange.ToString() + ", ";
-            stockInformation += this.Symbol.ToString() + ", ";
-            stockInformation += this.Date.ToString();
+            stockInformation = this.ID.ToString() + ",";
+            stockInformation += this.Exchange.ToString() + ",";
+            stockInformation += this.Symbol.ToString() + ",";
+            stockInformation += this.Volume.ToString() + ",";
+            stockInformation += this.Date.ToString("dd/MM/yyyy") + ",";
+            stockInformation += this.PriceHigh.ToString() + ",";
+            stockInformation += this.PriceLow.ToString() + ",";
+            stockInformation += this.PriceOpen.ToString() + ",";
+            stockInformation += this.PriceClose.ToString() + ",";
+            stockInformation += this.PriceCloseAdjusted.ToString();
 
             return stockInformation;
         }

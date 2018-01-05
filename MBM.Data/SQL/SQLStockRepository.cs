@@ -16,7 +16,7 @@ namespace MBM.DL
         public string AddStockEntry(StockEntry stock)
         {
             SqlConnection conn = MbmSqlConnection.GetSqlConnection();
-            SqlParameter response = new SqlParameter();
+            SqlParameter serverResponse = new SqlParameter();
 
             using (conn)
             {
@@ -36,16 +36,16 @@ namespace MBM.DL
                     cmd.Parameters.AddWithValue("stock_price_high", stock.PriceHigh.Amount);
                     cmd.Parameters.AddWithValue("stock_price_low", stock.PriceLow.Amount);
 
-                    response = new SqlParameter("@response", SqlDbType.NVarChar, 1000);
-                    response.Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add(response);
+                    serverResponse = new SqlParameter("@response", SqlDbType.NVarChar, 1000);
+                    serverResponse.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(serverResponse);
 
                     cmd.ExecuteNonQuery();
-                    Console.WriteLine(response.Value.ToString());
+                    Console.WriteLine(serverResponse.Value.ToString());
                 }
             }
 
-            return response.Value.ToString();
+            return serverResponse.Value.ToString();
         }
 
         public string DeleteStock(uint id)

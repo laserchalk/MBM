@@ -10,12 +10,12 @@ namespace MBM.DL
 {
     public class WCFStockRepository : IStockRepository
     {
-        private StockServiceClient _stockClient;
-
         public WCFStockRepository()
         {
             _stockClient = new StockServiceClient();
         }
+
+        private StockServiceClient _stockClient;
 
         public string AddStockEntry(StockEntry stock)
         {
@@ -27,7 +27,10 @@ namespace MBM.DL
 
         public string DeleteStock(uint id)
         {
-            throw new NotImplementedException();
+            string response;
+            response = _stockClient.DeleteStock(id);
+
+            return response;
         }
 
         public IEnumerable<StockEntry> GetStockEntries(Filter filter)
@@ -40,12 +43,18 @@ namespace MBM.DL
 
         public StockEntry GetStockEntry(uint id)
         {
-            throw new NotImplementedException();
+            StockEntry response;
+            response = _stockClient.GetStockEntry(id);
+
+            return response;
         }
 
         public string UpdateStockEntry(StockEntry stock)
         {
-            throw new NotImplementedException();
+            string response;
+            response = _stockClient.UpdateStockEntry(stock);
+
+            return response;
         }
     }
 }

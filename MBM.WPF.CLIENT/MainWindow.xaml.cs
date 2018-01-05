@@ -26,26 +26,34 @@ namespace MBM.WPF.CLIENT
         public MainWindow()
         {
             InitializeComponent();
-            ResetFilter();
+
+            if (ConnectToWFC())
+            {
+                OfflineMode = false;
+                ResetFilter("WCF");
+                GetStockEntries("WCF");
+
+                CSVStockRepository stockRepo = new CSVStockRepository();
+                stockRepo.AddStockEntries(StockEntriesBound);
+            }
+            else
+            {
+                MessageBox.Show("Couldn't connect to service. Now running in offline mode.");
+                OfflineMode = true;
+                OfflineButton.IsChecked = true;
+                ResetFilter("CSV");
+            }
         }
 
         private void MainWindow1_Loaded(object sender, RoutedEventArgs e)
         {
-            ResetFilter();
+            
+            
         }
 
+        bool OfflineMode;
         Filter FilterBound = new Filter();
         ObservableCollection<StockEntry> StockEntriesBound = new ObservableCollection<StockEntry>();
-
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ServerStatistics_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void Help_Click(object sender, RoutedEventArgs e)
         {
@@ -53,7 +61,47 @@ namespace MBM.WPF.CLIENT
             documenationWindow.Show();
         }
 
+        private void Offline_Click(object sender, RoutedEventArgs e)
+        {
+            if (OfflineButton.IsChecked)
+            {
+                OfflineMode = true;
+            }else
+            {
+                OfflineMode = false;
+            }
+        }
+
         private void ApplyFilterButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (OfflineMode)
+            {
+                GetStockEntries("CSV");
+            }
+            else
+            {
+                GetStockEntries("WCF");
+            } 
+        }
+
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (OfflineMode)
+            {
+                ResetFilter("CSV");
+            }
+            else
+            {
+                ResetFilter("WCF");
+            }
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            ClearGrid();
+        }
+
+        private void GetStockEntries(string repositoryType)
         {
             try
             {
@@ -62,7 +110,7 @@ namespace MBM.WPF.CLIENT
                 FilterError.Text = "";
                 FilterError.Visibility = Visibility.Collapsed;
 
-                WCFStockRepository stockRepo = new WCFStockRepository();
+                IStockRepository stockRepo = StockRepositoryFactory.GetRepository(repositoryType);
                 StockEntriesBound = new ObservableCollection<StockEntry>(stockRepo.GetStockEntries(FilterBound));
                 StockEntriesDataGrid.ItemsSource = StockEntriesBound;
 
@@ -76,28 +124,18 @@ namespace MBM.WPF.CLIENT
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
-        private void ResetButton_Click(object sender, RoutedEventArgs e)
-        {
-            ResetFilter();
-        }
-
-        private void ClearButton_Click(object sender, RoutedEventArgs e)
-        {
-            ClearGrid();
-        }
-
         private void ClearGrid()
         {
             StockEntriesBound = new ObservableCollection<StockEntry>();
             StockEntriesDataGrid.ItemsSource = StockEntriesBound;
         }
 
-        private void ResetFilter()
+        private void ResetFilter(string repositoryType)
         {
             try
             {
                 Mouse.OverrideCursor = Cursors.Wait;
-                WCFFilterRepository filterRepo = new WCFFilterRepository();
+                IFilterRepository filterRepo = FilterRepositoryFactory.GetRepository(repositoryType);
                 FilterBound = filterRepo.GetMinMaxValues();
                 FilterBound.Symbols = filterRepo.GetSymbols() as List<string>;
                 FilterPanel.DataContext = FilterBound;
@@ -113,5 +151,23 @@ namespace MBM.WPF.CLIENT
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+        private bool ConnectToWFC()
+        {
+            try
+            {
+                Mouse.OverrideCursor = Cursors.Wait;
+                WCFFilterRepository filterRepo = new WCFFilterRepository();
+                filterRepo.GetMinMaxValues();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+
     }
 }

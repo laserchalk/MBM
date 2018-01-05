@@ -18,6 +18,9 @@
         </Grid.RowDefinitions>
 
         <Menu Grid.ColumnSpan="2" Background="#FFDEDEDE">
+            <MenuItem Header="_File">
+                <MenuItem x:Name="OfflineButton" Header="_Offline Mode" IsCheckable="True" Click="Offline_Click"/>
+            </MenuItem>
             <MenuItem Header="_Help">
                 <MenuItem Header="_User Documentation" Click="Help_Click"/>
             </MenuItem>
