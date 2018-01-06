@@ -5,26 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MBM.WPF.CLIENT"
         mc:Ignorable="d"
-        Title="DocumentationWindow" Height="782.461" Width="475.802">
+        Title="User Documentation" Height="782" Width="475">
     <Grid>
         <RichTextBox IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Padding="10,10,10,10">
             <FlowDocument>
                 <Paragraph FontWeight="Bold" FontSize="18">
-                    <Run Text="1. Connecting to a Database"/>
+                    <Run Text="1. "/>
+                    <Run Text="Offline Mode"/>
                 </Paragraph>
                 <Paragraph FontWeight="Normal" FontSize="14">
-                    <Run Text="Click on File and select Settings."/>
-                    <Run Text="Enter the path of the server you want to connect to in the server "/>
-                    <Run Text="name "/>
-                    <Run Text="textbox."/>
-                    <Run Text="Enter the name of the database you want to connect to in the database name textbox."/>
-                    <Run Text="Click on the Connect button to connect to the database."/>
-                    <Run Text=" You will see a message telling you if the connection was successful or not."/>
+                    <Run Text="If you are unable to connect to the online service, you will be automatically switched to offline mode. In offline mode, the application will use locally stored data that was retrieved while connected online. Local data may not be up to date."/>
+                </Paragraph>
+                <Paragraph FontWeight="Normal" FontSize="14">
+                    <Run Text="To switch between online and offline mode, go to File and clock on &quot;Offline mode&quot;. A checkmark will appear next to it to indicate that it is in offline mode. "/>
                 </Paragraph>
                 <Paragraph>
                     <InlineUIContainer>
                         <Image
-                            Width="361" Source="pack://application:,,,/MBM.WPF.CLIENT;component/Resources/mbm_filter_controls.png" Margin="0,20,0,0" Height="198" HorizontalAlignment="Left"/>
+                            Width="249" Source="pack://application:,,,/MBM.WPF.CLIENT;component/Resources/offline_mode.png" Margin="0,20,0,0" Height="129" HorizontalAlignment="Left"/>
                     </InlineUIContainer>
                 </Paragraph>
                 <Paragraph FontWeight="Bold" FontSize="18">
@@ -35,6 +33,7 @@
                 </Paragraph>
                 <Paragraph FontWeight="Normal" FontSize="14">
                     <Run Text="You can use the date range to select entries within a certain time period."/>
+                    <Run Text=" "/>
                     <Run Text="The symbol dropdown menu can be used to select entries with the selected symbol. To use the volume and price ranges, you can adjust the values using the sliders or by typing into the textboxes."/>
                 </Paragraph>
                 <Paragraph FontWeight="Normal" FontSize="14">
@@ -44,29 +43,6 @@
                     <InlineUIContainer>
                         <Image
                             Width="392" Source="pack://application:,,,/MBM.WPF.CLIENT;component/Resources/mbm_filter_controls.png" Margin="0,20,0,0" Height="196" HorizontalAlignment="Left"/>
-                    </InlineUIContainer>
-                </Paragraph>
-                <Paragraph FontWeight="Bold" FontSize="18">
-                    <Run Text="3. Updating Entries"/>
-                </Paragraph>
-                <Paragraph FontWeight="Normal" FontSize="14">
-                    <Run Text="To update the entries, you can use the "/>
-                    <Run Text="table. If you want to add a new entry, double click on the empty row. The new entry will have the default values that can be changed and it will get a new ID number. You can't create a new entry that has the same stock symbol and date as an existing entry. The messages below the table will show you if an entry was successfully created or not."/>
-                </Paragraph>
-                <Paragraph FontWeight="Normal" FontSize="14">
-                    <Run Text="To update an entry, double click on a cell and type a new value, then hit enter. The messages will tell you if the entry was successfully updated."/>
-                </Paragraph>
-                <Paragraph FontWeight="Normal" FontSize="14">
-                    <Run Text="To delete an entry, you can highlight it and press the Delete key on your keyboard. You can delete multiple entries at once by clicking and dragging on the table "/>
-                    <Run Text="to "/>
-                    <Run Text="select multiple entries."/>
-                </Paragraph>
-                <Paragraph FontWeight="Normal" FontSize="14">
-                    <Run Text="Below the table is the Clear button. This will clear the table so there is nothing in it. It won't delete the entries from the database. "/>
-                </Paragraph>
-                <Paragraph>
-                    <InlineUIContainer>
-                        <Image Width="392" Source="pack://application:,,,/MBM.WPF.CLIENT;component/Resources/mbm_filter_controls.png" Margin="0,20,0,0" Height="50" HorizontalAlignment="Left"/>
                     </InlineUIContainer>
                 </Paragraph>
             </FlowDocument>

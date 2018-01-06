@@ -150,6 +150,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{0232DE9F-841F-4326-88AF-3785BFC883C9}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MBM.BL\MBM.BL.csproj">
       <Project>{725B9D5D-C5A0-4F72-8371-2CD3616BBD27}</Project>
       <Name>MBM.BL</Name>
@@ -198,6 +202,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\mbm_filter_controls.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\offline_mode.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

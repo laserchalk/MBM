@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
@@ -8,7 +9,7 @@ namespace MBM.BL
 {
     [Serializable]
     [DataContract]
-    public class StockEntry : INotifyPropertyChanged
+    public class StockEntry : INotifyPropertyChanged , ILoggable
     {
         public StockEntry()
         {
@@ -155,6 +156,7 @@ namespace MBM.BL
         public override string ToString()
         {
             string stockInformation;
+
             stockInformation = this.ID.ToString() + ",";
             stockInformation += this.Exchange.ToString() + ",";
             stockInformation += this.Symbol.ToString() + ",";
@@ -169,6 +171,11 @@ namespace MBM.BL
             return stockInformation;
         }
 
+        public string Log()
+        {
+            return ToString();
+        }
+
         private void NotifyPropertyChanged(String propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -179,5 +186,6 @@ namespace MBM.BL
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(e.PropertyName));
         }
 
+        
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 
@@ -6,7 +7,7 @@ namespace MBM.BL
 {
     [Serializable]
     [DataContract]
-    public class Price
+    public class Price : INotifyPropertyChanged, ILoggable
     {
         public Price()
         {
@@ -46,9 +47,16 @@ namespace MBM.BL
             return priceInformation;
         }
 
+        public string Log()
+        {
+            return ToString();
+        }
+
         private void NotifyPropertyChanged(String propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        
     }
 }

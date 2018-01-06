@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Data.SqlClient;
 
 namespace MBM.BL
 {
-    public class ServerStat
+    public class ServerStat : ILoggable 
     {
         public ServerStat()
         {
@@ -81,5 +82,24 @@ namespace MBM.BL
         }
         public uint TotalSpace { get; set; }
         public uint AvailableSpace { get; set; }
+
+        public override string ToString()
+        {
+            string serverInformation;
+
+            serverInformation = this.CpuIdle.ToString() + ",";
+            serverInformation += this.CpuOther.ToString() + ",";
+            serverInformation += this.CpuSql.ToString() + ",";
+            serverInformation += this.MemoryUtilization.ToString() + ",";
+            serverInformation += this.TotalSpace.ToString() + ",";
+            serverInformation += this.AvailableSpace.ToString();
+
+            return serverInformation;
+        }
+
+        public string Log()
+        {
+            return ToString();
+        }
     }
 }

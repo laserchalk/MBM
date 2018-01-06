@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Runtime.Serialization;
@@ -7,7 +8,7 @@ namespace MBM.BL
 {
     [Serializable]
     [DataContract]
-    public class Filter
+    public class Filter : ILoggable 
     {
         public Filter()
         {
@@ -103,6 +104,34 @@ namespace MBM.BL
             if (CloseAdjustedStart.Amount > CloseAdjustedEnd.Amount) throw new ArgumentException("Invalid close adjusted price range. First price can't be greater than second price.");
             if (HighStart.Amount > HighEnd.Amount) throw new ArgumentException("Invalid high price range. First price can't be greater than second price.");
             if (LowStart.Amount > LowEnd.Amount) throw new ArgumentException("Invalid low price range. First price can't be greater than second price.");
+        }
+
+        public override string ToString()
+        {
+            string filterInformation;
+
+            filterInformation = this.DateStart.ToString("dd/MM/yyyy") + ",";
+            filterInformation += this.DateEnd.ToString("dd/MM/yyyy") + ",";
+            filterInformation += this.SelectedSymbol.ToString() + ",";
+            filterInformation += this.VolumeStart.ToString() + ",";
+            filterInformation += this.VolumeEnd.ToString() + ",";
+            filterInformation += this.OpenStart.ToString() + ",";
+            filterInformation += this.OpenEnd.ToString() + ",";
+            filterInformation += this.CloseStart.ToString() + ",";
+            filterInformation += this.CloseEnd.ToString() + ",";
+            filterInformation += this.CloseAdjustedStart.ToString() + ",";
+            filterInformation += this.CloseAdjustedEnd.ToString() + ",";
+            filterInformation += this.HighStart.ToString() + ",";
+            filterInformation += this.HighEnd.ToString() + ",";
+            filterInformation += this.LowStart.ToString() + ",";
+            filterInformation += this.LowEnd.ToString();
+
+            return filterInformation;
+        }
+
+        public string Log()
+        {
+            return ToString();
         }
     }
 }

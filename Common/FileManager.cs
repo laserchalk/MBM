@@ -1,12 +1,8 @@
-﻿using MBM.BL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MBM.DL
+namespace Common
 {
     public class FileManager
     {
@@ -16,9 +12,9 @@ namespace MBM.DL
             {
                 using (StreamWriter sw = new StreamWriter(path))
                 {
-                    foreach (object line in objects)
+                    foreach (object item in objects)
                     {
-                        sw.WriteLine(line.ToString());
+                        sw.WriteLine(item);
                     }
                 }
             }
@@ -26,8 +22,8 @@ namespace MBM.DL
             {
                 throw new ArgumentException(ex.Message.ToString());
             }
-
         }
+
 
 
         public static IEnumerable<string> Load(string path)
@@ -53,6 +49,11 @@ namespace MBM.DL
             }
 
             return objects;
+        }
+
+        public static void Delete(string path)
+        {
+            File.Delete(path);
         }
     }
 }

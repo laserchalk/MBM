@@ -121,4 +121,7 @@
   <data name="mbm_filter_controls" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mbm_filter_controls.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="offline_mode" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\offline_mode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

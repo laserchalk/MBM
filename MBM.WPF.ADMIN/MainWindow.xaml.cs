@@ -4,6 +4,7 @@ using MBM.DL;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +23,7 @@ namespace MBM.WPF.ADMIN
         public MainWindow()
         {
             InitializeComponent();
+            File.Delete("Log.txt");
         }
 
 
@@ -115,6 +117,8 @@ namespace MBM.WPF.ADMIN
         {
             try
             {
+                LoggingService.Log("Applying Filter", "Log.txt");
+
                 Mouse.OverrideCursor = Cursors.Wait;
                 FilterBound.Validate();
                 FilterError.Text = "";
@@ -127,6 +131,8 @@ namespace MBM.WPF.ADMIN
                 StockEntriesBound.CollectionChanged += WindowStockEntriesBound_CollectionChanged;
 
                 Messages.Items.Insert(0, "Retrieved " + StockEntriesBound.Count.ToString() + " entries");
+
+                LoggingService.Log(StockEntriesBound, "Log.txt");
             }
             catch (Exception ex)
             {
@@ -159,6 +165,8 @@ namespace MBM.WPF.ADMIN
         {
             try
             {
+                LoggingService.Log("Reseting Filter", "Log.txt");
+
                 Mouse.OverrideCursor = Cursors.Wait;
                 SQLFilterRepository filterRepo = new SQLFilterRepository();
                 FilterBound = filterRepo.GetMinMaxValues();
@@ -168,6 +176,8 @@ namespace MBM.WPF.ADMIN
                 FilterBound.Validate();
                 FilterError.Text = "";
                 FilterError.Visibility = Visibility.Collapsed;
+
+                LoggingService.Log(FilterBound, "Log.txt");
             }
             catch (Exception ex)
             {

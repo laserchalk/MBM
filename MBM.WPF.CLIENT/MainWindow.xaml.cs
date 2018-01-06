@@ -1,4 +1,5 @@
-﻿using MBM.BL;
+﻿using Common;
+using MBM.BL;
 using MBM.DL;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,12 @@ namespace MBM.WPF.CLIENT
         {
             InitializeComponent();
 
-            if (ConnectToWFC())
+            Initialise();
+        }
+
+        private void Initialise()
+        {
+            if (CanConnectToWFC())
             {
                 OfflineMode = false;
                 ResetFilter("WCF");
@@ -43,12 +49,6 @@ namespace MBM.WPF.CLIENT
                 OfflineButton.IsChecked = true;
                 ResetFilter("CSV");
             }
-        }
-
-        private void MainWindow1_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-            
         }
 
         bool OfflineMode;
@@ -105,6 +105,8 @@ namespace MBM.WPF.CLIENT
         {
             try
             {
+                LoggingService.Log("Applying Filter", "Log.txt");
+
                 Mouse.OverrideCursor = Cursors.Wait;
                 FilterBound.Validate();
                 FilterError.Text = "";
@@ -115,6 +117,8 @@ namespace MBM.WPF.CLIENT
                 StockEntriesDataGrid.ItemsSource = StockEntriesBound;
 
                 Messages.Items.Insert(0, "Retrieved " + StockEntriesBound.Count.ToString() + " entries");
+
+                LoggingService.Log(StockEntriesBound, "Log.txt");
             }
             catch (Exception ex)
             {
@@ -134,6 +138,8 @@ namespace MBM.WPF.CLIENT
         {
             try
             {
+                LoggingService.Log("Resetting Filter", "Log.txt");
+
                 Mouse.OverrideCursor = Cursors.Wait;
                 IFilterRepository filterRepo = FilterRepositoryFactory.GetRepository(repositoryType);
                 FilterBound = filterRepo.GetMinMaxValues();
@@ -143,6 +149,8 @@ namespace MBM.WPF.CLIENT
                 FilterBound.Validate();
                 FilterError.Text = "";
                 FilterError.Visibility = Visibility.Collapsed;
+
+                LoggingService.Log(FilterBound, "Log.txt");
             }
             catch (Exception ex)
             {
@@ -152,7 +160,7 @@ namespace MBM.WPF.CLIENT
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
-        private bool ConnectToWFC()
+        private bool CanConnectToWFC()
         {
             try
             {

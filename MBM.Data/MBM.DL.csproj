@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="CSV\CSVFilterRepository.cs" />
     <Compile Include="CSV\CSVStockRepository.cs" />
-    <Compile Include="CSV\FileManager.cs" />
     <Compile Include="FilterRepositoryFactory.cs" />
     <Compile Include="IFilterRepository.cs" />
     <Compile Include="IStockRepository.cs" />
@@ -70,6 +69,10 @@
     <Compile Include="WCF\WCFStockRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{0232DE9F-841F-4326-88AF-3785BFC883C9}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MBM.BL\MBM.BL.csproj">
       <Project>{725B9D5D-C5A0-4F72-8371-2CD3616BBD27}</Project>
       <Name>MBM.BL</Name>
