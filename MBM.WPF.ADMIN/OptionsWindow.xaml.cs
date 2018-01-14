@@ -1,6 +1,7 @@
 ﻿using MBM.DL;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -37,12 +38,20 @@ namespace MBM.WPF.ADMIN
             {
                 Mouse.OverrideCursor = Cursors.Wait;
                 SqlConnection conn = MbmSqlConnection.GetSqlConnection();
+                ConnectionState connState;
 
                 using (conn)
                 {
-
+                    connState = conn.State;
                 }
-                ConnectionLabel.Content = "Connection was successful";
+
+                if(connState == ConnectionState.Open)
+                {
+                    ConnectionLabel.Content = "Connection was successful";
+                }else
+                {
+                    ConnectionLabel.Content = "Failed to connect to database";
+                }
             }
             catch (Exception ex)
             {

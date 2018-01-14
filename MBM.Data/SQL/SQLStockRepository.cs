@@ -96,18 +96,18 @@ namespace MBM.DL
                     cmd.Parameters.AddWithValue("DateStart", filter.DateStart);
                     cmd.Parameters.AddWithValue("DateEnd", filter.DateEnd);
                     cmd.Parameters.AddWithValue("Symbol", filter.SelectedSymbol);
-                    cmd.Parameters.AddWithValue("VolumeStart", int.Parse(filter.VolumeStart.ToString()));
-                    cmd.Parameters.AddWithValue("VolumeEnd", int.Parse(filter.VolumeEnd.ToString()));
-                    cmd.Parameters.AddWithValue("OpenStart", filter.OpenStart.Amount);
-                    cmd.Parameters.AddWithValue("OpenEnd", filter.OpenEnd.Amount);
-                    cmd.Parameters.AddWithValue("CloseStart", filter.CloseStart.Amount);
-                    cmd.Parameters.AddWithValue("CloseEnd", filter.CloseEnd.Amount);
-                    cmd.Parameters.AddWithValue("CloseAdjustedStart", filter.CloseAdjustedStart.Amount);
-                    cmd.Parameters.AddWithValue("CloseAdjustedEnd", filter.CloseAdjustedEnd.Amount);
-                    cmd.Parameters.AddWithValue("HighStart", filter.HighStart.Amount);
-                    cmd.Parameters.AddWithValue("HighEnd", filter.HighEnd.Amount);
-                    cmd.Parameters.AddWithValue("LowStart", filter.LowStart.Amount);
-                    cmd.Parameters.AddWithValue("LowEnd", filter.LowEnd.Amount);
+                    cmd.Parameters.AddWithValue("VolumeStart", int.Parse(filter.VolumeMin.ToString()));
+                    cmd.Parameters.AddWithValue("VolumeEnd", int.Parse(filter.VolumeMax.ToString()));
+                    cmd.Parameters.AddWithValue("OpenStart", filter.OpenMin.Amount);
+                    cmd.Parameters.AddWithValue("OpenEnd", filter.OpenMax.Amount);
+                    cmd.Parameters.AddWithValue("CloseStart", filter.CloseMin.Amount);
+                    cmd.Parameters.AddWithValue("CloseEnd", filter.CloseMax.Amount);
+                    cmd.Parameters.AddWithValue("CloseAdjustedStart", filter.CloseAdjustedMin.Amount);
+                    cmd.Parameters.AddWithValue("CloseAdjustedEnd", filter.CloseAdjustedMax.Amount);
+                    cmd.Parameters.AddWithValue("HighStart", filter.HighMin.Amount);
+                    cmd.Parameters.AddWithValue("HighEnd", filter.HighMax.Amount);
+                    cmd.Parameters.AddWithValue("LowStart", filter.LowMin.Amount);
+                    cmd.Parameters.AddWithValue("LowEnd", filter.LowMax.Amount);
 
                     
                     SqlDataReader reader = cmd.ExecuteReader();

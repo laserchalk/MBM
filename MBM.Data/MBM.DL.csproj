@@ -61,6 +61,7 @@
     </Compile>
     <Compile Include="SQL\MbmSqlConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQL\ObservableStockEntries.cs" />
     <Compile Include="SQL\ServerStatsRepository.cs" />
     <Compile Include="SQL\SQLFilterRepository.cs" />
     <Compile Include="SQL\SQLStockRepository.cs" />

@@ -8,6 +8,9 @@ namespace MBM.DL
 {
     public class StockRepositoryFactory
     {
+        /// <summary>
+        /// Gets a stock repository. Values "WCF", "SQL", "CSV"
+        /// </summary>
         public static IStockRepository GetRepository(string repositoryType)
         {
             IStockRepository repo = null;

@@ -57,12 +57,12 @@ namespace MBM.DL
             {
                 query = (from stock in stockEntries
                          where stock.Date >= filter.DateStart && stock.Date <= filter.DateEnd
-                         && stock.Volume >= filter.VolumeStart && stock.Volume <= filter.VolumeEnd
-                         && stock.PriceOpen.Amount >= filter.OpenStart.Amount && stock.PriceOpen.Amount <= filter.OpenEnd.Amount
-                         && stock.PriceClose.Amount >= filter.CloseStart.Amount && stock.PriceClose.Amount <= filter.CloseEnd.Amount
-                         && stock.PriceCloseAdjusted.Amount >= filter.CloseAdjustedStart.Amount && stock.PriceCloseAdjusted.Amount <= filter.CloseAdjustedEnd.Amount
-                         && stock.PriceHigh.Amount >= filter.HighStart.Amount && stock.PriceHigh.Amount <= filter.HighEnd.Amount
-                         && stock.PriceLow.Amount >= filter.LowStart.Amount && stock.PriceLow.Amount <= filter.LowEnd.Amount
+                         && stock.Volume >= filter.VolumeMin && stock.Volume <= filter.VolumeMax
+                         && stock.PriceOpen.Amount >= filter.OpenMin.Amount && stock.PriceOpen.Amount <= filter.OpenMax.Amount
+                         && stock.PriceClose.Amount >= filter.CloseMin.Amount && stock.PriceClose.Amount <= filter.CloseMax.Amount
+                         && stock.PriceCloseAdjusted.Amount >= filter.CloseAdjustedMin.Amount && stock.PriceCloseAdjusted.Amount <= filter.CloseAdjustedMax.Amount
+                         && stock.PriceHigh.Amount >= filter.HighMin.Amount && stock.PriceHigh.Amount <= filter.HighMax.Amount
+                         && stock.PriceLow.Amount >= filter.LowMin.Amount && stock.PriceLow.Amount <= filter.LowMax.Amount
                          select stock)
                          as IEnumerable<StockEntry>;
             }
@@ -70,12 +70,12 @@ namespace MBM.DL
             {
                 query = (from stock in stockEntries
                          where stock.Date >= filter.DateStart && stock.Date <= filter.DateEnd
-                         && stock.Volume >= filter.VolumeStart && stock.Volume <= filter.VolumeEnd
-                         && stock.PriceOpen.Amount >= filter.OpenStart.Amount && stock.PriceOpen.Amount <= filter.OpenEnd.Amount
-                         && stock.PriceClose.Amount >= filter.CloseStart.Amount && stock.PriceClose.Amount <= filter.CloseEnd.Amount
-                         && stock.PriceCloseAdjusted.Amount >= filter.CloseAdjustedStart.Amount && stock.PriceCloseAdjusted.Amount <= filter.CloseAdjustedEnd.Amount
-                         && stock.PriceHigh.Amount >= filter.HighStart.Amount && stock.PriceHigh.Amount <= filter.HighEnd.Amount
-                         && stock.PriceLow.Amount >= filter.LowStart.Amount && stock.PriceLow.Amount <= filter.LowEnd.Amount
+                         && stock.Volume >= filter.VolumeMin && stock.Volume <= filter.VolumeMax
+                         && stock.PriceOpen.Amount >= filter.OpenMin.Amount && stock.PriceOpen.Amount <= filter.OpenMax.Amount
+                         && stock.PriceClose.Amount >= filter.CloseMin.Amount && stock.PriceClose.Amount <= filter.CloseMax.Amount
+                         && stock.PriceCloseAdjusted.Amount >= filter.CloseAdjustedMin.Amount && stock.PriceCloseAdjusted.Amount <= filter.CloseAdjustedMax.Amount
+                         && stock.PriceHigh.Amount >= filter.HighMin.Amount && stock.PriceHigh.Amount <= filter.HighMax.Amount
+                         && stock.PriceLow.Amount >= filter.LowMin.Amount && stock.PriceLow.Amount <= filter.LowMax.Amount
                          && stock.Symbol == filter.SelectedSymbol
                          select stock)
                          as IEnumerable<StockEntry>;

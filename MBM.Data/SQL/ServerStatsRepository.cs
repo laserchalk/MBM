@@ -11,14 +11,20 @@ namespace MBM.DL
 {
     public class ServerStatsRepository
     {
+        public ServerStatsRepository()
+        {
+            Connection = MbmSqlConnection.GetSqlConnection();
+        }
+
+        private SqlConnection Connection;
+
         public IEnumerable<ServerStat> GetServerStats()
         {
             List<ServerStat> serverStats = new List<ServerStat>();
-            SqlConnection conn = MbmSqlConnection.GetSqlConnection();
 
-            using (conn)
+            using (Connection)
             {
-                using (SqlCommand cmd = conn.CreateCommand())
+                using (SqlCommand cmd = Connection.CreateCommand())
                 {
 
                     cmd.CommandText = @"spServerStats";
@@ -40,11 +46,10 @@ namespace MBM.DL
         public ServerStat GetMostRecent()
         {
             ServerStat serverStat = new ServerStat();
-            SqlConnection conn = MbmSqlConnection.GetSqlConnection();
 
-            using (conn)
+            using (Connection)
             {
-                using (SqlCommand cmd = conn.CreateCommand())
+                using (SqlCommand cmd = Connection.CreateCommand())
                 {
                     cmd.CommandText = @"spServerStats";
                     cmd.CommandType = CommandType.StoredProcedure;

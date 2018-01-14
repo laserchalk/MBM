@@ -7,6 +7,10 @@ using System.Runtime.Serialization;
 
 namespace MBM.BL
 {
+
+    /// <summary>
+    /// Manages stock data.
+    /// </summary>
     [Serializable]
     [DataContract]
     public class StockEntry : INotifyPropertyChanged , ILoggable
@@ -29,7 +33,12 @@ namespace MBM.BL
         }
 
 
-
+        /// <summary>
+        /// Initialises a new instance of the <see cref="StockEntry"/> class using an SqlDataReader
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Thrown when trying to parse a null value</exception>
+        /// <exception cref="FormatException">Thrown when trying to parse invalid values</exception>
+        /// <exception cref="OverflowException">Thrown when trying to parse a value outside of the valid range</exception>
         public StockEntry(SqlDataReader reader) : this()
         {
             this.ID = uint.Parse(reader["stock_id"].ToString());
@@ -45,25 +54,29 @@ namespace MBM.BL
             this.PriceCloseAdjusted.Amount = decimal.Parse(reader["stock_price_adj_close"].ToString());
         }
 
-
+        /// <summary>
+        /// Initialises a new instance of the <see cref="StockEntry"/> class using a string with comma separated values
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Thrown when trying to parse a null value</exception>
+        /// <exception cref="FormatException">Thrown when trying to parse invalid values</exception>
+        /// <exception cref="OverflowException">Thrown when trying to parse a value outside of the valid range</exception>
         public StockEntry(string line) : this()
         {
-            List<string> words = new List<string>();
+            List<string> values = new List<string>();
 
-            //line = line.Replace(" ", string.Empty);
-            words = new List<string>(line.Split(','));
+            values = new List<string>(line.Split(','));
 
-            this.ID = uint.Parse(words[0]);
-            this.Exchange = words[1];
-            this.Symbol = words[2];
-            this.Volume = uint.Parse(words[3]);
-            this.Date = DateTime.Parse(words[4]);
+            this.ID = uint.Parse(values[0]);
+            this.Exchange = values[1];
+            this.Symbol = values[2];
+            this.Volume = uint.Parse(values[3]);
+            this.Date = DateTime.Parse(values[4]);
 
-            this.PriceHigh.Amount = decimal.Parse(words[5]);
-            this.PriceLow.Amount = decimal.Parse(words[6]);
-            this.PriceOpen.Amount = decimal.Parse(words[7]);
-            this.PriceClose.Amount = decimal.Parse(words[8]);
-            this.PriceCloseAdjusted.Amount = decimal.Parse(words[9]);
+            this.PriceHigh.Amount = decimal.Parse(values[5]);
+            this.PriceLow.Amount = decimal.Parse(values[6]);
+            this.PriceOpen.Amount = decimal.Parse(values[7]);
+            this.PriceClose.Amount = decimal.Parse(values[8]);
+            this.PriceCloseAdjusted.Amount = decimal.Parse(values[9]);
         }
 
         [DataMember]
@@ -71,6 +84,10 @@ namespace MBM.BL
 
         private string _exchange;
 
+        /// <summary>
+        /// Gets or sets Exchange
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown if setting a value with more than 5 character or using a value that is null or empty</exception>
         [DataMember]
         public string Exchange {
             get
@@ -88,6 +105,10 @@ namespace MBM.BL
 
         private string _symbol;
 
+        /// <summary>
+        /// Gets or sets Exchange
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown if setting a value with more than 4 character or using a value that is null or empty</exception>
         [DataMember]
         public string Symbol
         {
@@ -151,8 +172,17 @@ namespace MBM.BL
         [DataMember]
         public Price PriceCloseAdjusted { get; set; }
 
+        /// <summary>
+        /// Occurs when a property is changed
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+
+        /// <summary>
+        /// Returns the StockEntry as a string
+        /// </summary>
+        /// <exception cref="FormatException">Thrown when date values have an invalid format</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when date values are outside of valid range</exception>
         public override string ToString()
         {
             string stockInformation;
@@ -171,6 +201,11 @@ namespace MBM.BL
             return stockInformation;
         }
 
+        /// <summary>
+        /// Returns the StockEntry as a string
+        /// </summary>
+        /// <exception cref="FormatException">Thrown when date values have an invalid format</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when date values are outside of valid range</exception>
         public string Log()
         {
             return ToString();

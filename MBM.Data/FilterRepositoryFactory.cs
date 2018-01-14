@@ -8,6 +8,9 @@ namespace MBM.DL
 {
     public class FilterRepositoryFactory
     {
+        /// <summary>
+        /// Gets a filter repository. Values "WCF", "SQL", "CSV"
+        /// </summary>
         public static IFilterRepository GetRepository(string repositoryType)
         {
             IFilterRepository repo = null;

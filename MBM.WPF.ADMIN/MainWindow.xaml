@@ -45,76 +45,76 @@
             <WrapPanel Height="75">
                 <Label Content="Volume:" Width="78"/>
                 <StackPanel>
-                    <wpfTool:RangeSlider Minimum="{Binding Path=VolumeStart, Mode=OneTime}" Maximum="{Binding Path=VolumeEnd, Mode=OneTime}" LowerValue="{Binding Path=VolumeStart, Mode=TwoWay}" HigherValue="{Binding Path=VolumeEnd, Mode=TwoWay}" ></wpfTool:RangeSlider>
+                    <wpfTool:RangeSlider Minimum="{Binding Path=VolumeMin, Mode=OneTime}" Maximum="{Binding Path=VolumeMax, Mode=OneTime}" LowerValue="{Binding Path=VolumeMin, Mode=TwoWay}" HigherValue="{Binding Path=VolumeMax, Mode=TwoWay}" ></wpfTool:RangeSlider>
                     <WrapPanel>
-                        <TextBox x:Name="volumeMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=VolumeStart, Mode=TwoWay}"/>
+                        <TextBox x:Name="volumeMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=VolumeMin, Mode=TwoWay}"/>
                         <Label Content="to" Width="37"/>
-                        <TextBox x:Name="volumeMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=VolumeEnd, Mode=TwoWay}" TextAlignment="Right"/>
+                        <TextBox x:Name="volumeMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=VolumeMax, Mode=TwoWay}" TextAlignment="Right"/>
                     </WrapPanel>
                 </StackPanel>
             </WrapPanel>
             <WrapPanel Height="75">
                 <Label Content="Open:" Width="62"/>
                 <StackPanel Width="316">
-                    <wpfTool:RangeSlider Minimum="{Binding Path=OpenStart.Amount, Mode=OneTime}" Maximum="{Binding Path=OpenEnd.Amount, Mode=OneTime}" LowerValue="{Binding Path=OpenStart.Amount, Mode=TwoWay}" HigherValue="{Binding Path=OpenEnd.Amount, Mode=TwoWay}" Width="277" HorizontalAlignment="Center" Margin="16,0,23,0" ></wpfTool:RangeSlider>
+                    <wpfTool:RangeSlider Minimum="{Binding Path=OpenMin.Amount, Mode=OneTime}" Maximum="{Binding Path=OpenMax.Amount, Mode=OneTime}" LowerValue="{Binding Path=OpenMin.Amount, Mode=TwoWay}" HigherValue="{Binding Path=OpenMax.Amount, Mode=TwoWay}" Width="277" HorizontalAlignment="Center" Margin="16,0,23,0" ></wpfTool:RangeSlider>
                     <WrapPanel >
                         <Label Content="$"/>
-                        <TextBox x:Name="openMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=OpenStart.Amount, ValidatesOnExceptions=True, Mode=TwoWay}"/>
+                        <TextBox x:Name="openMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=OpenMin.Amount, ValidatesOnExceptions=True, Mode=TwoWay}"/>
                         <Label Content="to" Width="21"/>
                         <Label Content="$"/>
-                        <TextBox x:Name="openMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=OpenEnd.Amount, ValidatesOnExceptions=True, Mode=TwoWay}" TextAlignment="Right"/>
+                        <TextBox x:Name="openMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=OpenMax.Amount, ValidatesOnExceptions=True, Mode=TwoWay}" TextAlignment="Right"/>
                     </WrapPanel>
                 </StackPanel>
             </WrapPanel>
             <WrapPanel Height="75">
                 <Label Content="Close:" Width="62"/>
                 <StackPanel Width="316">
-                    <wpfTool:RangeSlider Minimum="{Binding Path=CloseStart.Amount, Mode=OneTime}" Maximum="{Binding Path=CloseEnd.Amount, Mode=OneTime}" LowerValue="{Binding Path=CloseStart.Amount}" HigherValue="{Binding Path=CloseEnd.Amount}" Width="277" HorizontalAlignment="Center" Margin="16,0,23,0" ></wpfTool:RangeSlider>
+                    <wpfTool:RangeSlider Minimum="{Binding Path=CloseMin.Amount, Mode=OneTime}" Maximum="{Binding Path=CloseMax.Amount, Mode=OneTime}" LowerValue="{Binding Path=CloseMin.Amount}" HigherValue="{Binding Path=CloseMax.Amount}" Width="277" HorizontalAlignment="Center" Margin="16,0,23,0" ></wpfTool:RangeSlider>
                     <WrapPanel>
                         <Label Content="$"/>
-                        <TextBox x:Name="closeMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=CloseStart.Amount, ValidatesOnExceptions=True}"/>
+                        <TextBox x:Name="closeMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=CloseMin.Amount, ValidatesOnExceptions=True}"/>
                         <Label Content="to" Width="21"/>
                         <Label Content="$"/>
-                        <TextBox x:Name="closeMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=CloseEnd.Amount, ValidatesOnExceptions=True}" TextAlignment="Right"/>
+                        <TextBox x:Name="closeMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=CloseMax.Amount, ValidatesOnExceptions=True}" TextAlignment="Right"/>
                     </WrapPanel>
                 </StackPanel>
             </WrapPanel>
             <WrapPanel Height="75">
                 <Label Content="Close Adj:" Width="62"/>
                 <StackPanel Width="316">
-                    <wpfTool:RangeSlider Minimum="{Binding Path=CloseAdjustedStart.Amount, Mode=OneTime}" Maximum="{Binding Path=CloseAdjustedEnd.Amount, Mode=OneTime}" LowerValue="{Binding Path=CloseAdjustedStart.Amount}" HigherValue="{Binding Path=CloseAdjustedEnd.Amount}" Width="277" HorizontalAlignment="Center" Margin="16,0,23,0" ></wpfTool:RangeSlider>
+                    <wpfTool:RangeSlider Minimum="{Binding Path=CloseAdjustedMin.Amount, Mode=OneTime}" Maximum="{Binding Path=CloseAdjustedMax.Amount, Mode=OneTime}" LowerValue="{Binding Path=CloseAdjustedMin.Amount}" HigherValue="{Binding Path=CloseAdjustedMax.Amount}" Width="277" HorizontalAlignment="Center" Margin="16,0,23,0" ></wpfTool:RangeSlider>
                     <WrapPanel>
                         <Label Content="$"/>
-                        <TextBox x:Name="closeAdjMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=CloseAdjustedStart.Amount, ValidatesOnExceptions=True}"/>
+                        <TextBox x:Name="closeAdjMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=CloseAdjustedMin.Amount, ValidatesOnExceptions=True}"/>
                         <Label Content="to" Width="21"/>
                         <Label Content="$"/>
-                        <TextBox x:Name="closeAdjMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=CloseAdjustedEnd.Amount, ValidatesOnExceptions=True}" TextAlignment="Right"/>
+                        <TextBox x:Name="closeAdjMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=CloseAdjustedMax.Amount, ValidatesOnExceptions=True}" TextAlignment="Right"/>
                     </WrapPanel>
                 </StackPanel>
             </WrapPanel>
             <WrapPanel Height="75">
                 <Label Content="High:" Width="62"/>
                 <StackPanel Width="316">
-                    <wpfTool:RangeSlider Minimum="{Binding Path=HighStart.Amount, Mode=OneTime}" Maximum="{Binding Path=HighEnd.Amount, Mode=OneTime}" LowerValue="{Binding Path=HighStart.Amount}" HigherValue="{Binding Path=HighEnd.Amount}" Width="277" HorizontalAlignment="Center" Margin="16,0,23,0" ></wpfTool:RangeSlider>
+                    <wpfTool:RangeSlider Minimum="{Binding Path=HighMin.Amount, Mode=OneTime}" Maximum="{Binding Path=HighMax.Amount, Mode=OneTime}" LowerValue="{Binding Path=HighMin.Amount}" HigherValue="{Binding Path=HighMax.Amount}" Width="277" HorizontalAlignment="Center" Margin="16,0,23,0" ></wpfTool:RangeSlider>
                     <WrapPanel>
                         <Label Content="$"/>
-                        <TextBox x:Name="highMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=HighStart.Amount, ValidatesOnExceptions=True}"/>
+                        <TextBox x:Name="highMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=HighMin.Amount, ValidatesOnExceptions=True}"/>
                         <Label Content="to" Width="21"/>
                         <Label Content="$"/>
-                        <TextBox x:Name="highMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=HighEnd.Amount, ValidatesOnExceptions=True}" TextAlignment="Right"/>
+                        <TextBox x:Name="highMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=HighMax.Amount, ValidatesOnExceptions=True}" TextAlignment="Right"/>
                     </WrapPanel>
                 </StackPanel>
             </WrapPanel>
             <WrapPanel Height="75">
                 <Label Content="Low:" Width="62"/>
                 <StackPanel Width="316">
-                    <wpfTool:RangeSlider Minimum="{Binding Path=LowStart.Amount, Mode=OneTime}"  Maximum="{Binding Path=LowEnd.Amount, Mode=OneTime}"  LowerValue="{Binding Path=LowStart.Amount}" HigherValue="{Binding Path=LowEnd.Amount}" Width="277" HorizontalAlignment="Center" Margin="16,0,23,0" ></wpfTool:RangeSlider>
+                    <wpfTool:RangeSlider Minimum="{Binding Path=LowMin.Amount, Mode=OneTime}"  Maximum="{Binding Path=LowMax.Amount, Mode=OneTime}"  LowerValue="{Binding Path=LowMin.Amount}" HigherValue="{Binding Path=LowMax.Amount}" Width="277" HorizontalAlignment="Center" Margin="16,0,23,0" ></wpfTool:RangeSlider>
                     <WrapPanel>
                         <Label Content="$"/>
-                        <TextBox x:Name="lowMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=LowStart.Amount, ValidatesOnExceptions=True}"/>
+                        <TextBox x:Name="lowMin" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=LowMin.Amount, ValidatesOnExceptions=True}"/>
                         <Label Content="to" Width="21"/>
                         <Label Content="$"/>
-                        <TextBox x:Name="lowMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=LowEnd.Amount, ValidatesOnExceptions=True}" TextAlignment="Right"/>
+                        <TextBox x:Name="lowMax" Height="23" TextWrapping="Wrap" Width="120" Text="{Binding Path=LowMax.Amount, ValidatesOnExceptions=True}" TextAlignment="Right"/>
                     </WrapPanel>
                 </StackPanel>
             </WrapPanel>

@@ -27,9 +27,12 @@ namespace MBM.WPF.CLIENT
         public MainWindow()
         {
             InitializeComponent();
-
             Initialise();
         }
+
+        bool OfflineMode;
+        Filter FilterBound = new Filter();
+        ObservableCollection<StockEntry> StockEntriesBound = new ObservableCollection<StockEntry>();
 
         private void Initialise()
         {
@@ -49,56 +52,6 @@ namespace MBM.WPF.CLIENT
                 OfflineButton.IsChecked = true;
                 ResetFilter("CSV");
             }
-        }
-
-        bool OfflineMode;
-        Filter FilterBound = new Filter();
-        ObservableCollection<StockEntry> StockEntriesBound = new ObservableCollection<StockEntry>();
-
-        private void Help_Click(object sender, RoutedEventArgs e)
-        {
-            DocumentationWindow documenationWindow = new DocumentationWindow();
-            documenationWindow.Show();
-        }
-
-        private void Offline_Click(object sender, RoutedEventArgs e)
-        {
-            if (OfflineButton.IsChecked)
-            {
-                OfflineMode = true;
-            }else
-            {
-                OfflineMode = false;
-            }
-        }
-
-        private void ApplyFilterButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (OfflineMode)
-            {
-                GetStockEntries("CSV");
-            }
-            else
-            {
-                GetStockEntries("WCF");
-            } 
-        }
-
-        private void ResetButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (OfflineMode)
-            {
-                ResetFilter("CSV");
-            }
-            else
-            {
-                ResetFilter("WCF");
-            }
-        }
-
-        private void ClearButton_Click(object sender, RoutedEventArgs e)
-        {
-            ClearGrid();
         }
 
         private void GetStockEntries(string repositoryType)
@@ -167,14 +120,64 @@ namespace MBM.WPF.CLIENT
                 Mouse.OverrideCursor = Cursors.Wait;
                 WCFFilterRepository filterRepo = new WCFFilterRepository();
                 filterRepo.GetMinMaxValues();
+                Mouse.OverrideCursor = Cursors.Arrow;
                 return true;
             }
             catch (Exception)
             {
+                Mouse.OverrideCursor = Cursors.Arrow;
                 return false;
             }
-            Mouse.OverrideCursor = Cursors.Arrow;
+
         }
+
+        private void Help_Click(object sender, RoutedEventArgs e)
+        {
+            DocumentationWindow documenationWindow = new DocumentationWindow();
+            documenationWindow.Show();
+        }
+
+        private void Offline_Click(object sender, RoutedEventArgs e)
+        {
+            if (OfflineButton.IsChecked)
+            {
+                OfflineMode = true;
+            }else
+            {
+                OfflineMode = false;
+            }
+        }
+
+        private void ApplyFilterButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (OfflineMode)
+            {
+                GetStockEntries("CSV");
+            }
+            else
+            {
+                GetStockEntries("WCF");
+            } 
+        }
+
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (OfflineMode)
+            {
+                ResetFilter("CSV");
+            }
+            else
+            {
+                ResetFilter("WCF");
+            }
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            ClearGrid();
+        }
+
+
 
 
     }

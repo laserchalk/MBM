@@ -17,21 +17,21 @@ namespace MBM.DL
 
             stockEntries = stockRepo.GetStockEntries() as List<StockEntry>;
 
-            filter.HighStart.Amount = stockEntries.Min(y => y.PriceHigh.Amount);
-            filter.HighEnd.Amount = stockEntries.Max(y => y.PriceHigh.Amount);
-            filter.LowStart.Amount = stockEntries.Min(y => y.PriceLow.Amount);
-            filter.LowEnd.Amount = stockEntries.Max(y => y.PriceLow.Amount);
-            filter.OpenStart.Amount = stockEntries.Min(y => y.PriceOpen.Amount);
-            filter.OpenEnd.Amount = stockEntries.Max(y => y.PriceOpen.Amount);
-            filter.CloseStart.Amount = stockEntries.Min(y => y.PriceClose.Amount);
-            filter.CloseEnd.Amount = stockEntries.Max(y => y.PriceClose.Amount);
-            filter.CloseAdjustedStart.Amount = stockEntries.Min(y => y.PriceCloseAdjusted.Amount);
-            filter.CloseAdjustedEnd.Amount = stockEntries.Max(y => y.PriceCloseAdjusted.Amount);
+            filter.HighMin.Amount = stockEntries.Min(y => y.PriceHigh.Amount);
+            filter.HighMax.Amount = stockEntries.Max(y => y.PriceHigh.Amount);
+            filter.LowMin.Amount = stockEntries.Min(y => y.PriceLow.Amount);
+            filter.LowMax.Amount = stockEntries.Max(y => y.PriceLow.Amount);
+            filter.OpenMin.Amount = stockEntries.Min(y => y.PriceOpen.Amount);
+            filter.OpenMax.Amount = stockEntries.Max(y => y.PriceOpen.Amount);
+            filter.CloseMin.Amount = stockEntries.Min(y => y.PriceClose.Amount);
+            filter.CloseMax.Amount = stockEntries.Max(y => y.PriceClose.Amount);
+            filter.CloseAdjustedMin.Amount = stockEntries.Min(y => y.PriceCloseAdjusted.Amount);
+            filter.CloseAdjustedMax.Amount = stockEntries.Max(y => y.PriceCloseAdjusted.Amount);
 
             filter.DateStart = stockEntries.Min(y => y.Date);
             filter.DateEnd = stockEntries.Max(y => y.Date);
-            filter.VolumeStart = stockEntries.Min(y => y.Volume);
-            filter.VolumeEnd = stockEntries.Max(y => y.Volume);
+            filter.VolumeMin = stockEntries.Min(y => y.Volume);
+            filter.VolumeMax = stockEntries.Max(y => y.Volume);
 
             return filter;
         }

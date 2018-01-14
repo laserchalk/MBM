@@ -14,10 +14,10 @@ namespace Common
     where T : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler ItemPropertyChanged;
+        public event EventHandler<TrulyObservableCollectionChangedEventArgs> ObservableCollectionChanged; 
 
         public TrulyObservableCollection() : base()
         {
-            //CollectionChanged += new NotifyCollectionChangedEventHandler(TrulyObservableCollection_CollectionChanged);
             CollectionChanged += TrulyObservableCollection_CollectionChanged;
         }
 
@@ -33,14 +33,16 @@ namespace Common
 
         void TrulyObservableCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            //MessageBox.Show("Truly raised");
+            TrulyObservableCollectionChangedEventArgs ObservableEventArgs;
+            ObservableEventArgs = new TrulyObservableCollectionChangedEventArgs(null, "None");
+
             if (e.NewItems != null)
             {
                 foreach (Object item in e.NewItems)
                 {
-                    
                     (item as INotifyPropertyChanged).PropertyChanged += new PropertyChangedEventHandler(item_PropertyChanged);
-                    //MessageBox.Show("new item property changed even handler");
+                    TrulyObservableCollectionChangedEventArgs eventArgs = new TrulyObservableCollectionChangedEventArgs(item, "Item Added");
+                    ObservableCollectionChanged?.Invoke("sd", eventArgs);
                 }
             }
             if (e.OldItems != null)
@@ -48,7 +50,8 @@ namespace Common
                 foreach (Object item in e.OldItems)
                 {
                     (item as INotifyPropertyChanged).PropertyChanged -= new PropertyChangedEventHandler(item_PropertyChanged);
-                    //MessageBox.Show("old item property changed even handler");
+                    TrulyObservableCollectionChangedEventArgs eventArgs = new TrulyObservableCollectionChangedEventArgs(item, "Item Deleted");
+                    ObservableCollectionChanged?.Invoke("sd", eventArgs);
                 }
             }
         }
@@ -59,6 +62,9 @@ namespace Common
             OnCollectionChanged(a);
 
             ItemPropertyChanged?.Invoke(sender, e);
+
+            TrulyObservableCollectionChangedEventArgs eventArgs = new TrulyObservableCollectionChangedEventArgs(sender, "Item Changed");
+            ObservableCollectionChanged?.Invoke("sd", eventArgs);
 
         }
     }

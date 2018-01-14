@@ -4,6 +4,9 @@ using System.Data.SqlClient;
 
 namespace MBM.BL
 {
+    /// <summary>
+    /// Holds information about server statistics
+    /// </summary>
     public class ServerStat : ILoggable 
     {
         public ServerStat()
@@ -11,6 +14,9 @@ namespace MBM.BL
 
         }
 
+        /// <summary>
+        /// Initialises a new instance of the <see cref="ServerStat"/> classfrom an SqlDataReader
+        /// </summary>
         public ServerStat(SqlDataReader reader)
         {
             this.Time = DateTime.Parse(reader["EventTime"].ToString());
@@ -28,6 +34,11 @@ namespace MBM.BL
         private uint _cpuSql;
         private uint _cpuOther;
         private uint _memoryUtilization;
+
+        /// <summary>
+        /// Gets or sets CpuIdle
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown if setting a value above 100</exception>
         public uint CpuIdle
         {
             get
@@ -37,10 +48,15 @@ namespace MBM.BL
 
             set
             {
-                if (value > 1000) throw new ArgumentException("CpuIdle cannot be above 100");
+                if (value > 100) throw new ArgumentException("CpuIdle cannot be above 100");
                 _cpuIdle = value;
             }
         }
+
+        /// <summary>
+        /// Gets or sets CpuSql
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown if setting a value above 100</exception>
         public uint CpuSql
         {
             get
@@ -50,10 +66,15 @@ namespace MBM.BL
 
             set
             {
-                if (value > 1000) throw new ArgumentException("CpuSql cannot be above 100");
+                if (value > 100) throw new ArgumentException("CpuSql cannot be above 100");
                 _cpuSql = value;
             }
         }
+
+        /// <summary>
+        /// Gets or sets CpuOther
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown if setting a value above 100</exception>
         public uint CpuOther
         {
             get
@@ -67,6 +88,11 @@ namespace MBM.BL
                 _cpuOther = value;
             }
         }
+
+        /// <summary>
+        /// Gets or sets MemoryUtilization
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown if setting a value above 100</exception>
         public uint MemoryUtilization
         {
             get
@@ -83,6 +109,9 @@ namespace MBM.BL
         public uint TotalSpace { get; set; }
         public uint AvailableSpace { get; set; }
 
+        /// <summary>
+        /// Returns the ServerStat as a string
+        /// </summary>
         public override string ToString()
         {
             string serverInformation;
@@ -97,6 +126,9 @@ namespace MBM.BL
             return serverInformation;
         }
 
+        /// <summary>
+        /// Returns the ServerStat as a string
+        /// </summary>
         public string Log()
         {
             return ToString();

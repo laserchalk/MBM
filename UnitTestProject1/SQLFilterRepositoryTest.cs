@@ -20,38 +20,38 @@ namespace MBM.DLTest
             {
                 DateStart = DateTime.Parse("2000-01-03"),
                 DateEnd = DateTime.Parse("2010-02-08"),
-                VolumeStart = uint.Parse("0"),
-                VolumeEnd = uint.Parse("242106500"),
+                VolumeMin = uint.Parse("0"),
+                VolumeMax = uint.Parse("242106500"),
 
             };
-            expected.OpenStart.Amount = 0.35m;
-            expected.OpenEnd.Amount = 183.50m;
-            expected.CloseStart.Amount = 0.35m;
-            expected.CloseEnd.Amount = 182.62m;
-            expected.CloseAdjustedStart.Amount = 0.35m;
-            expected.CloseAdjustedEnd.Amount = 134.92m;
-            expected.HighStart.Amount = 0.40m;
-            expected.HighEnd.Amount = 185.50m;
-            expected.LowStart.Amount = 0.32m;
-            expected.LowEnd.Amount = 170.00m;
+            expected.OpenMin.Amount = 0.35m;
+            expected.OpenMax.Amount = 183.50m;
+            expected.CloseMin.Amount = 0.35m;
+            expected.CloseMax.Amount = 182.62m;
+            expected.CloseAdjustedMin.Amount = 0.35m;
+            expected.CloseAdjustedMax.Amount = 134.92m;
+            expected.HighMin.Amount = 0.40m;
+            expected.HighMax.Amount = 185.50m;
+            expected.LowMin.Amount = 0.32m;
+            expected.LowMax.Amount = 170.00m;
 
             SQLFilterRepository filterRepo = new SQLFilterRepository();
             actual = filterRepo.GetMinMaxValues();
 
             Assert.AreEqual(expected.DateStart, actual.DateStart);
             Assert.AreEqual(expected.DateEnd, actual.DateEnd);
-            Assert.AreEqual(expected.VolumeStart, actual.VolumeStart);
-            Assert.AreEqual(expected.VolumeEnd, actual.VolumeEnd);
-            Assert.AreEqual(expected.OpenStart.Amount, actual.OpenStart.Amount);
-            Assert.AreEqual(expected.OpenEnd.Amount, actual.OpenEnd.Amount);
-            Assert.AreEqual(expected.CloseStart.Amount, actual.CloseStart.Amount);
-            Assert.AreEqual(expected.CloseEnd.Amount, actual.CloseEnd.Amount);
-            Assert.AreEqual(expected.CloseAdjustedStart.Amount, actual.CloseAdjustedStart.Amount);
-            Assert.AreEqual(expected.CloseAdjustedEnd.Amount, actual.CloseAdjustedEnd.Amount);
-            Assert.AreEqual(expected.HighStart.Amount, actual.HighStart.Amount);
-            Assert.AreEqual(expected.HighEnd.Amount, actual.HighEnd.Amount);
-            Assert.AreEqual(expected.LowStart.Amount, actual.LowStart.Amount);
-            Assert.AreEqual(expected.LowEnd.Amount, actual.LowEnd.Amount);
+            Assert.AreEqual(expected.VolumeMin, actual.VolumeMin);
+            Assert.AreEqual(expected.VolumeMax, actual.VolumeMax);
+            Assert.AreEqual(expected.OpenMin.Amount, actual.OpenMin.Amount);
+            Assert.AreEqual(expected.OpenMax.Amount, actual.OpenMax.Amount);
+            Assert.AreEqual(expected.CloseMin.Amount, actual.CloseMin.Amount);
+            Assert.AreEqual(expected.CloseMax.Amount, actual.CloseMax.Amount);
+            Assert.AreEqual(expected.CloseAdjustedMin.Amount, actual.CloseAdjustedMin.Amount);
+            Assert.AreEqual(expected.CloseAdjustedMax.Amount, actual.CloseAdjustedMax.Amount);
+            Assert.AreEqual(expected.HighMin.Amount, actual.HighMin.Amount);
+            Assert.AreEqual(expected.HighMax.Amount, actual.HighMax.Amount);
+            Assert.AreEqual(expected.LowMin.Amount, actual.LowMin.Amount);
+            Assert.AreEqual(expected.LowMax.Amount, actual.LowMax.Amount);
         }
 
         [TestMethod]
