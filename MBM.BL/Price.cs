@@ -10,7 +10,7 @@ namespace MBM.BL
     /// </summary>
     [Serializable]
     [DataContract]
-    public class Price : ILoggable
+    public class Price : EntityBase
     {
         public Price()
         {
@@ -24,11 +24,6 @@ namespace MBM.BL
         {
             this.Amount = amount;
         }
-
-        /// <summary>
-        /// Occurs when a property is changed
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
 
         private decimal _amount;
 
@@ -61,22 +56,6 @@ namespace MBM.BL
             priceInformation = this.Amount.ToString();
 
             return priceInformation;
-        }
-
-        /// <summary>
-        /// For the ILoggable interface. Returns the price as a string
-        /// </summary>
-        public string Log()
-        {
-            return ToString();
-        }
-
-        /// <summary>
-        /// Invokes the property changed event
-        /// </summary>
-        private void NotifyPropertyChanged(String propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         

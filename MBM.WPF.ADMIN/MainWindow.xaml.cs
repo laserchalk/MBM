@@ -126,6 +126,7 @@ namespace MBM.WPF.ADMIN
                 FilterError.Visibility = Visibility.Collapsed;
 
                 SQLStockRepository stockRepo = new SQLStockRepository();
+                StockEntriesBound = null;
                 StockEntriesBound = new TrulyObservableCollection<StockEntry>(stockRepo.GetStockEntries(FilterBound));
                 StockEntriesDataGrid.ItemsSource = StockEntriesBound;
                 StockEntriesBound.ItemPropertyChanged += StockEntriesBound_ItemPropertyChanged;
@@ -161,6 +162,7 @@ namespace MBM.WPF.ADMIN
 
         private void ClearGrid()
         {
+            StockEntriesBound = null;
             StockEntriesBound = new TrulyObservableCollection<StockEntry>();
             StockEntriesDataGrid.ItemsSource = StockEntriesBound;
             StockEntriesBound.ItemPropertyChanged += StockEntriesBound_ItemPropertyChanged;

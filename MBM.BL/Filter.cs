@@ -11,7 +11,7 @@ namespace MBM.BL
     /// </summary>
     [Serializable]
     [DataContract]
-    public class Filter : ILoggable 
+    public class Filter : EntityBase 
     {
         /// <summary>
         /// Initialises a new instance of the <see cref="Filter"/> class
@@ -112,7 +112,7 @@ namespace MBM.BL
         /// Validates the filter
         /// </summary>
         /// <exception cref="ArgumentException">Thrown when filter values are outside valid range</exception>
-        public void Validate()
+        public override bool Validate()
         {
             if (DateStart > DateEnd) throw new ArgumentException("Invalid date range. First date can't be greater than second date.");
             if (VolumeMin > VolumeMax) throw new ArgumentException("Invalid volume range. First volume can't be greater than second volume.");
@@ -121,6 +121,8 @@ namespace MBM.BL
             if (CloseAdjustedMin.Amount > CloseAdjustedMax.Amount) throw new ArgumentException("Invalid close adjusted price range. First price can't be greater than second price.");
             if (HighMin.Amount > HighMax.Amount) throw new ArgumentException("Invalid high price range. First price can't be greater than second price.");
             if (LowMin.Amount > LowMax.Amount) throw new ArgumentException("Invalid low price range. First price can't be greater than second price.");
+
+            return true;
         }
 
         /// <summary>
@@ -149,16 +151,6 @@ namespace MBM.BL
             filterInformation += this.LowMax.ToString();
 
             return filterInformation;
-        }
-
-        /// <summary>
-        /// Returns the filter as a string
-        /// </summary>
-        /// <exception cref="FormatException">Thrown when date values have an invalid format</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when date values are outside of valid range</exception>
-        public string Log()
-        {
-            return ToString();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace MBM.BL
     /// <summary>
     /// Holds information about server statistics
     /// </summary>
-    public class ServerStat : ILoggable 
+    public class ServerStat : EntityBase
     {
         public ServerStat()
         {
@@ -124,14 +124,6 @@ namespace MBM.BL
             serverInformation += this.AvailableSpace.ToString();
 
             return serverInformation;
-        }
-
-        /// <summary>
-        /// Returns the ServerStat as a string
-        /// </summary>
-        public string Log()
-        {
-            return ToString();
         }
     }
 }

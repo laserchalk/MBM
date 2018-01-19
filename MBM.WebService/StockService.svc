@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="MBM.WebService.Service1" CodeBehind="StockService.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="MBM.WebService.StockService" CodeBehind="StockService.svc.cs" %>

@@ -13,7 +13,7 @@ namespace MBM.BL
     /// </summary>
     [Serializable]
     [DataContract]
-    public class StockEntry : INotifyPropertyChanged , ILoggable
+    public class StockEntry : EntityBase, INotifyPropertyChanged
     {
         public StockEntry()
         {
@@ -172,11 +172,6 @@ namespace MBM.BL
         [DataMember]
         public Price PriceCloseAdjusted { get; set; }
 
-        /// <summary>
-        /// Occurs when a property is changed
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
 
         /// <summary>
         /// Returns the StockEntry as a string
@@ -201,24 +196,9 @@ namespace MBM.BL
             return stockInformation;
         }
 
-        /// <summary>
-        /// Returns the StockEntry as a string
-        /// </summary>
-        /// <exception cref="FormatException">Thrown when date values have an invalid format</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when date values are outside of valid range</exception>
-        public string Log()
-        {
-            return ToString();
-        }
-
-        private void NotifyPropertyChanged(String propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         private void Price_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(e.PropertyName));
+            this.NotifyPropertyChanged(e.PropertyName);
         }
 
         
