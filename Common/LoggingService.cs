@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+    ///<summary>Used for logging information to a file</summary>
     public class LoggingService
     {
+        ///<summary>Logs a list of objects to a file</summary>
+        /// <exception cref="ArgumentException">Thrown when failed to log data to file.</exception>
         public static void Log(IEnumerable<ILoggable> objects, string path)
         {
             try
@@ -25,12 +28,14 @@ namespace Common
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new ArgumentException(ex.Message.ToString());
+                throw new ArgumentException("Failed to log data to file.");
             }
         }
 
+        ///<summary>Logs a single object to a file</summary>
+        ///<exception cref="ArgumentException">Thrown when failed to log data to file.</exception>
         public static void Log(ILoggable item, string path)
         {
             try
@@ -43,12 +48,14 @@ namespace Common
                         sw.WriteLine(logLine);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new ArgumentException(ex.Message.ToString());
+                throw new ArgumentException("Failed to log data to file.");
             }
         }
 
+        ///<summary>Logs a single single line of text to a file using the input parameter</summary>
+        /// <exception cref="ArgumentException">Thrown when failed to log data to file.</exception>
         public static void Log(string eventName, string path)
         {
             try
@@ -59,9 +66,9 @@ namespace Common
                     sw.WriteLine(logLine);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new ArgumentException(ex.Message.ToString());
+                throw new ArgumentException("Failed to log data to file.");
             }
         }
 

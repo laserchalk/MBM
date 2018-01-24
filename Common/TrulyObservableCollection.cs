@@ -31,7 +31,7 @@ namespace Common
             }
         }
 
-        void TrulyObservableCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void TrulyObservableCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             TrulyObservableCollectionChangedEventArgs ObservableEventArgs;
             ObservableEventArgs = new TrulyObservableCollectionChangedEventArgs(null, "None");
@@ -56,7 +56,7 @@ namespace Common
             }
         }
 
-        void item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void item_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             NotifyCollectionChangedEventArgs a = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
             OnCollectionChanged(a);

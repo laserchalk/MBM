@@ -4,40 +4,41 @@ using System.Data.SqlClient;
 
 namespace MBM.BL
 {
-    /// <summary>
-    /// Holds information about server statistics
-    /// </summary>
+    /// <summary>Holds information about server statistics</summary>
     public class ServerStat : EntityBase
     {
+        /// <summary>Initialises a new instance of <see cref="ServerStat"/></summary>
         public ServerStat()
         {
 
         }
 
-        /// <summary>
-        /// Initialises a new instance of the <see cref="ServerStat"/> classfrom an SqlDataReader
-        /// </summary>
+        /// <summary>Initialises a new instance of <see cref="ServerStat"/> using an SqlDataReader</summary>
+        /// <exception cref="ArgumentException">Thrown if setting a value above 100</exception>
         public ServerStat(SqlDataReader reader)
         {
-            this.Time = DateTime.Parse(reader["EventTime"].ToString());
-            this.CpuIdle = uint.Parse(reader["SystemIdle"].ToString());
-            this.CpuSql = uint.Parse(reader["SQLProcessUtilization"].ToString());
-            this.CpuOther = uint.Parse(reader["OtherProcessCPUUtilization"].ToString());
-            this.MemoryUtilization = uint.Parse(reader["MemoryUtilization"].ToString());
-            this.TotalSpace = uint.Parse(reader["TotalSpaceGigabytes"].ToString());
-            this.AvailableSpace = uint.Parse(reader["AvailableSpaceGigabytes"].ToString());
+            try
+            {
+                this.Time = DateTime.Parse(reader["EventTime"].ToString());
+                this.CpuIdle = uint.Parse(reader["SystemIdle"].ToString());
+                this.CpuSql = uint.Parse(reader["SQLProcessUtilization"].ToString());
+                this.CpuOther = uint.Parse(reader["OtherProcessCPUUtilization"].ToString());
+                this.MemoryUtilization = uint.Parse(reader["MemoryUtilization"].ToString());
+                this.TotalSpace = uint.Parse(reader["TotalSpaceGigabytes"].ToString());
+                this.AvailableSpace = uint.Parse(reader["AvailableSpaceGigabytes"].ToString());
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("Failed to initialise ServerStat using SqlDataReader");
+            }
         }
 
 
+        /// <summary>Gets or sets Time</summary>
         DateTime Time { get; set; }
+        
         private uint _cpuIdle;
-        private uint _cpuSql;
-        private uint _cpuOther;
-        private uint _memoryUtilization;
-
-        /// <summary>
-        /// Gets or sets CpuIdle
-        /// </summary>
+        /// <summary>Gets or sets CpuIdle</summary>
         /// <exception cref="ArgumentException">Thrown if setting a value above 100</exception>
         public uint CpuIdle
         {
@@ -53,9 +54,8 @@ namespace MBM.BL
             }
         }
 
-        /// <summary>
-        /// Gets or sets CpuSql
-        /// </summary>
+        private uint _cpuSql;
+        /// <summary>Gets or sets CpuSql</summary>
         /// <exception cref="ArgumentException">Thrown if setting a value above 100</exception>
         public uint CpuSql
         {
@@ -71,9 +71,8 @@ namespace MBM.BL
             }
         }
 
-        /// <summary>
-        /// Gets or sets CpuOther
-        /// </summary>
+        private uint _cpuOther;
+        /// <summary>Gets or sets CpuOther</summary>
         /// <exception cref="ArgumentException">Thrown if setting a value above 100</exception>
         public uint CpuOther
         {
@@ -89,9 +88,8 @@ namespace MBM.BL
             }
         }
 
-        /// <summary>
-        /// Gets or sets MemoryUtilization
-        /// </summary>
+        private uint _memoryUtilization;
+        /// <summary>Gets or sets MemoryUtilization</summary>
         /// <exception cref="ArgumentException">Thrown if setting a value above 100</exception>
         public uint MemoryUtilization
         {
@@ -106,12 +104,14 @@ namespace MBM.BL
                 _memoryUtilization = value;
             }
         }
+
+        /// <summary>Gets or sets TotalSpace</summary>
         public uint TotalSpace { get; set; }
+
+        /// <summary>Gets or sets AvailableSpace</summary>
         public uint AvailableSpace { get; set; }
 
-        /// <summary>
-        /// Returns the ServerStat as a string
-        /// </summary>
+        /// <summary>Returns the ServerStat as a string</summary>
         public override string ToString()
         {
             string serverInformation;
