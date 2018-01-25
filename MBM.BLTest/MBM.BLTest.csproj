@@ -57,6 +57,7 @@
     <Compile Include="StockTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PriceTest.cs" />
+    <Compile Include="FilterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MBM.BL\MBM.BL.csproj">

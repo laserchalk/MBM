@@ -11,7 +11,7 @@ namespace Common
     public class LoggingService
     {
         ///<summary>Logs a list of objects to a file</summary>
-        /// <exception cref="ArgumentException">Thrown when failed to log data to file.</exception>
+        /// <exception cref="Exception">Thrown when failed to log data to file.</exception>
         public static void Log(IEnumerable<ILoggable> objects, string path)
         {
             try
@@ -30,12 +30,12 @@ namespace Common
             }
             catch (Exception)
             {
-                throw new ArgumentException("Failed to log data to file.");
+                throw new Exception("Failed to log data to file.");
             }
         }
 
         ///<summary>Logs a single object to a file</summary>
-        ///<exception cref="ArgumentException">Thrown when failed to log data to file.</exception>
+        ///<exception cref="Exception">Thrown when failed to log data to file.</exception>
         public static void Log(ILoggable item, string path)
         {
             try
@@ -50,12 +50,12 @@ namespace Common
             }
             catch (Exception)
             {
-                throw new ArgumentException("Failed to log data to file.");
+                throw new Exception("Failed to log data to file.");
             }
         }
 
-        ///<summary>Logs a single single line of text to a file using the input parameter</summary>
-        /// <exception cref="ArgumentException">Thrown when failed to log data to file.</exception>
+        ///<summary>Logs a single line of text to a file using the input parameter</summary>
+        /// <exception cref="Exception">Thrown when failed to log data to file.</exception>
         public static void Log(string eventName, string path)
         {
             try
@@ -68,7 +68,25 @@ namespace Common
             }
             catch (Exception)
             {
-                throw new ArgumentException("Failed to log data to file.");
+                throw new Exception("Failed to log data to file.");
+            }
+        }
+
+        ///<summary>Logs exception details to a file using the input parameters</summary>
+        /// <exception cref="Exception">Thrown when failed to log data to file.</exception>
+        public static void Log(Exception exception, string path)
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(path, true))
+                {
+                    string logLine = DateTime.Now.ToString() + ", " + "Exception: " + exception.ToString();
+                    sw.WriteLine(logLine);
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Failed to log data to file.");
             }
         }
 

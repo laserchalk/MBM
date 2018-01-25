@@ -8,13 +8,13 @@ using System.Runtime.Serialization;
 namespace MBM.BL
 {
 
-    /// <summary>Manages stock data.</summary>
+    /// <summary>Holds stock data.</summary>
     [Serializable]
     [DataContract]
     public class StockEntry : EntityBase, INotifyPropertyChanged
     {
         /// <summary>Initialises a new instance of <see cref="StockEntry"/></summary>
-        /// <exception cref="ArgumentException">Thrown when StockEntry failed to initialise</exception>
+        /// <exception cref="Exception">Thrown when StockEntry failed to initialise</exception>
         public StockEntry()
         {
             try
@@ -35,13 +35,13 @@ namespace MBM.BL
             }
             catch (Exception)
             {
-                throw new ArgumentException("Failed to initialise StockEntry");
+                throw new Exception("Failed to initialise StockEntry");
             }
         }
 
 
         /// <summary>Initialises a new instance of <see cref="StockEntry"/> using an SqlDataReader</summary>
-        /// <exception cref="ArgumentException">Thrown when StockEntry failed to initialise</exception>
+        /// <exception cref="Exception">Thrown when StockEntry failed to initialise</exception>
         public StockEntry(SqlDataReader reader) : this()
         {
             try
@@ -60,12 +60,12 @@ namespace MBM.BL
             }
             catch (Exception)
             {
-                throw new ArgumentException("Failed to initialise StockEntry with SqlDataReader parameter");
+                throw new Exception("Failed to initialise StockEntry with SqlDataReader parameter");
             }
         }
 
-        /// <summary>Initialises a new instance of the <see cref="StockEntry"/> class using a string with comma separated values</summary>
-        /// <exception cref="ArgumentException">Thrown when StockEntry failed to initialise</exception>
+        /// <summary>Initialises a new instance of  <see cref="StockEntry"/> using a string with comma separated values</summary>
+        /// <exception cref="Exception">Thrown when StockEntry failed to initialise</exception>
         public StockEntry(string line) : this()
         {
             try
@@ -88,7 +88,7 @@ namespace MBM.BL
             }
             catch (Exception)
             {
-                throw new ArgumentException("Failed to initialise StockEntry with string parameter");
+                throw new Exception("Failed to initialise StockEntry with string parameter");
             }
         }
 
@@ -96,9 +96,9 @@ namespace MBM.BL
         [DataMember]
         public uint ID { get; set; }
 
-        private string _exchange;
+        
         /// <summary>Gets or sets Exchange</summary>
-        /// <exception cref="ArgumentException">Thrown if setting a value with more than 5 character or using a value that is null or empty</exception>
+        /// <exception cref="Exception">Thrown if setting a value with more than 5 character or using a value that is null or empty</exception>
         [DataMember]
         public string Exchange {
             get
@@ -107,16 +107,17 @@ namespace MBM.BL
             }
             set
             {
-                if(value.Length > 4) throw new ArgumentException("Exchange must have less than 5 characters");
-                if(String.IsNullOrEmpty(value)) throw new ArgumentException("Exchange can't be null or empty");
+                if(value.Length > 4) throw new Exception("Exchange must have less than 5 characters");
+                if(String.IsNullOrEmpty(value)) throw new Exception("Exchange can't be null or empty");
                 _exchange = value;
                 NotifyPropertyChanged("Exchange");
             }
         }
+        private string _exchange;
 
-        private string _symbol;
+        
         /// <summary>Gets or sets Symbol</summary>
-        /// <exception cref="ArgumentException">Thrown if setting a value with more than 4 character or using a value that is null or empty</exception>
+        /// <exception cref="Exception">Thrown if setting a value with more than 4 character or using a value that is null or empty</exception>
         [DataMember]
         public string Symbol
         {
@@ -126,14 +127,15 @@ namespace MBM.BL
             }
             set
             {
-                if (value.Length > 3) throw new ArgumentException("Symbol must have less than 4 characters");
-                if (String.IsNullOrEmpty(value)) throw new ArgumentException("Symbol can't be null or empty");
+                if (value.Length > 3) throw new Exception("Symbol must have less than 4 characters");
+                if (String.IsNullOrEmpty(value)) throw new Exception("Symbol can't be null or empty");
                 _symbol = value;
                 NotifyPropertyChanged("Symbol");
             }
         }
+        private string _symbol;
 
-        private uint _volume;
+        
         /// <summary>Gets or sets Volume</summary>
         [DataMember]
         public uint Volume
@@ -148,8 +150,9 @@ namespace MBM.BL
                 NotifyPropertyChanged("Volume");
             }
         }
+        private uint _volume;
 
-        private DateTime _date;
+        
         /// <summary>Gets or sets Date</summary>
         [DataMember]
         public DateTime Date
@@ -164,6 +167,7 @@ namespace MBM.BL
                 NotifyPropertyChanged("Date");
             }
         }
+        private DateTime _date;
 
         /// <summary>Gets or sets PriceHigh</summary>
         [DataMember]
@@ -186,8 +190,8 @@ namespace MBM.BL
         public Price PriceCloseAdjusted { get; set; }
 
 
-        /// <summary> Returns the StockEntry as a string </summary>
-        /// <exception cref="ArgumentException">Thrown when date values have an invalid format or if values are outside of valid range.</exception>
+        /// <summary> Returns the StockEntry as a comma seperated string </summary>
+        /// <exception cref="Exception">Thrown when date values have an invalid format or if values are outside of valid range.</exception>
         public override string ToString()
         {
             try
@@ -209,7 +213,7 @@ namespace MBM.BL
             }
             catch (Exception)
             {
-                throw new ArgumentException("StockEntry ToString() Failed.");
+                throw new Exception("StockEntry ToString() Failed.");
             }
         }
 

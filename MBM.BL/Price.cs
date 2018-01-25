@@ -10,22 +10,21 @@ namespace MBM.BL
     [DataContract]
     public class Price : EntityBase
     {
-        /// <summary>Initialises a new instance of the <see cref="Price"/></summary>
+        /// <summary>Initialises a new instance of <see cref="Price"/></summary>
         public Price()
         {
 
         }
 
-        /// <summary>Initialises a new instance of the <see cref="Price"/> class with an amount</summary>
+        /// <summary>Initialises a new instance of <see cref="Price"/> with an amount</summary>
         public Price(decimal amount)
         {
             this.Amount = amount;
         }
 
-        private decimal _amount;
 
         /// <summary>Gets or sets the amount</summary>
-        /// <exception cref="ArgumentException">Thrown when setting a negative value</exception>
+        /// <exception cref="Exception">Thrown when setting a negative value</exception>
         [DataMember]
         public decimal Amount
         {
@@ -35,11 +34,12 @@ namespace MBM.BL
             }
             set
             {
-                if (value < 0) throw new ArgumentException("Price cannot be negative");
+                if (value < 0) throw new Exception("Price cannot be negative");
                 _amount = value;
                 NotifyPropertyChanged("Price");
             }
         }
+        private decimal _amount;
 
         /// <summary>Returns the price as a string</summary>
         public override string ToString()

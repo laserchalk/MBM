@@ -114,6 +114,9 @@ namespace MBM.WPF.ADMIN
             }
         }
 
+
+
+
         private void GetStockEntries()
         {
             try
@@ -140,25 +143,11 @@ namespace MBM.WPF.ADMIN
             {
                 FilterError.Text = ex.Message;
                 FilterError.Visibility = Visibility.Visible;
+                LoggingService.Log(ex, "Log.txt");
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
-        private void ApplyFilterButton_Click(object sender, RoutedEventArgs e)
-        {
-            GetStockEntries();
-        }
-
-        private void ResetButton_Click(object sender, RoutedEventArgs e)
-        {
-            ResetFilter();
-        }
-
-
-        private void ClearButton_Click(object sender, RoutedEventArgs e)
-        {
-            ClearGrid();
-        }
 
         private void ClearGrid()
         {
@@ -191,8 +180,25 @@ namespace MBM.WPF.ADMIN
             {
                 FilterError.Text = ex.Message;
                 FilterError.Visibility = Visibility.Visible;
+                LoggingService.Log(ex, "Log.txt");
             }
             Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void ApplyFilterButton_Click(object sender, RoutedEventArgs e)
+        {
+            GetStockEntries();
+        }
+
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            ResetFilter();
+        }
+
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            ClearGrid();
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)

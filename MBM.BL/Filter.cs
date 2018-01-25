@@ -54,7 +54,7 @@ namespace MBM.BL
             }
             catch (Exception)
             {
-                throw new ArgumentException("Failed to initialise Filter with SqlDataReader parameter");
+                throw new Exception("Failed to initialise Filter with SqlDataReader parameter");
             }
         }
 
@@ -124,22 +124,22 @@ namespace MBM.BL
 
 
         /// <summary>Validates the filter</summary>
-        /// <exception cref="ArgumentException">Thrown when filter values are outside valid range</exception>
+        /// <exception cref="Exception">Thrown when filter values are outside valid range</exception>
         public override bool Validate()
         {
-                if (DateStart > DateEnd) throw new ArgumentException("Invalid date range. First date can't be greater than second date.");
-                if (VolumeMin > VolumeMax) throw new ArgumentException("Invalid volume range. First volume can't be greater than second volume.");
-                if (OpenMin.Amount > OpenMax.Amount) throw new ArgumentException("Invalid open price range. First price can't be greater than second price.");
-                if (CloseMin.Amount > CloseMax.Amount) throw new ArgumentException("Invalid close price range. First price can't be greater than second price.");
-                if (CloseAdjustedMin.Amount > CloseAdjustedMax.Amount) throw new ArgumentException("Invalid close adjusted price range. First price can't be greater than second price.");
-                if (HighMin.Amount > HighMax.Amount) throw new ArgumentException("Invalid high price range. First price can't be greater than second price.");
-                if (LowMin.Amount > LowMax.Amount) throw new ArgumentException("Invalid low price range. First price can't be greater than second price.");
+                if (DateStart > DateEnd) throw new Exception("Invalid date range. First date can't be greater than second date.");
+                if (VolumeMin > VolumeMax) throw new Exception("Invalid volume range. First volume can't be greater than second volume.");
+                if (OpenMin.Amount > OpenMax.Amount) throw new Exception("Invalid open price range. First price can't be greater than second price.");
+                if (CloseMin.Amount > CloseMax.Amount) throw new Exception("Invalid close price range. First price can't be greater than second price.");
+                if (CloseAdjustedMin.Amount > CloseAdjustedMax.Amount) throw new Exception("Invalid close adjusted price range. First price can't be greater than second price.");
+                if (HighMin.Amount > HighMax.Amount) throw new Exception("Invalid high price range. First price can't be greater than second price.");
+                if (LowMin.Amount > LowMax.Amount) throw new Exception("Invalid low price range. First price can't be greater than second price.");
 
                 return true;
         }
 
         /// <summary>Returns the filter as a string with comma seperated values</summary>
-        /// <exception cref="ArgumentException">Thrown when date values have an invalid format or are out of range</exception>
+        /// <exception cref="Exception">Thrown when date values have an invalid format or are out of range</exception>
         public override string ToString()
         {
             try
@@ -166,7 +166,7 @@ namespace MBM.BL
             }
             catch (Exception)
             {
-                throw new ArgumentException("Filter ToString() failed.");
+                throw new Exception("Filter ToString() failed.");
             }
         }
     }

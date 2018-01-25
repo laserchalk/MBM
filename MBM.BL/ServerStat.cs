@@ -14,7 +14,7 @@ namespace MBM.BL
         }
 
         /// <summary>Initialises a new instance of <see cref="ServerStat"/> using an SqlDataReader</summary>
-        /// <exception cref="ArgumentException">Thrown if setting a value above 100</exception>
+        /// <exception cref="Exception">Thrown if setting a value above 100</exception>
         public ServerStat(SqlDataReader reader)
         {
             try
@@ -29,7 +29,7 @@ namespace MBM.BL
             }
             catch (Exception)
             {
-                throw new ArgumentException("Failed to initialise ServerStat using SqlDataReader");
+                throw new Exception("Failed to initialise ServerStat using SqlDataReader");
             }
         }
 
@@ -37,9 +37,9 @@ namespace MBM.BL
         /// <summary>Gets or sets Time</summary>
         DateTime Time { get; set; }
         
-        private uint _cpuIdle;
+        
         /// <summary>Gets or sets CpuIdle</summary>
-        /// <exception cref="ArgumentException">Thrown if setting a value above 100</exception>
+        /// <exception cref="Exception">Thrown if setting a value above 100</exception>
         public uint CpuIdle
         {
             get
@@ -49,14 +49,15 @@ namespace MBM.BL
 
             set
             {
-                if (value > 100) throw new ArgumentException("CpuIdle cannot be above 100");
+                if (value > 100) throw new Exception("CpuIdle cannot be above 100");
                 _cpuIdle = value;
             }
         }
+        private uint _cpuIdle;
 
-        private uint _cpuSql;
+
         /// <summary>Gets or sets CpuSql</summary>
-        /// <exception cref="ArgumentException">Thrown if setting a value above 100</exception>
+        /// <exception cref="Exception">Thrown if setting a value above 100</exception>
         public uint CpuSql
         {
             get
@@ -66,14 +67,15 @@ namespace MBM.BL
 
             set
             {
-                if (value > 100) throw new ArgumentException("CpuSql cannot be above 100");
+                if (value > 100) throw new Exception("CpuSql cannot be above 100");
                 _cpuSql = value;
             }
         }
+        private uint _cpuSql;
 
-        private uint _cpuOther;
+
         /// <summary>Gets or sets CpuOther</summary>
-        /// <exception cref="ArgumentException">Thrown if setting a value above 100</exception>
+        /// <exception cref="Exception">Thrown if setting a value above 100</exception>
         public uint CpuOther
         {
             get
@@ -83,14 +85,15 @@ namespace MBM.BL
 
             set
             {
-                if (value > 1000) throw new ArgumentException("CpuOther cannot be above 100");
+                if (value > 1000) throw new Exception("CpuOther cannot be above 100");
                 _cpuOther = value;
             }
         }
+        private uint _cpuOther;
 
-        private uint _memoryUtilization;
+
         /// <summary>Gets or sets MemoryUtilization</summary>
-        /// <exception cref="ArgumentException">Thrown if setting a value above 100</exception>
+        /// <exception cref="Exception">Thrown if setting a value above 100</exception>
         public uint MemoryUtilization
         {
             get
@@ -100,10 +103,12 @@ namespace MBM.BL
 
             set
             {
-                if (value > 1000) throw new ArgumentException("MemoryUtilization cannot be above 100");
+                if (value > 1000) throw new Exception("MemoryUtilization cannot be above 100");
                 _memoryUtilization = value;
             }
         }
+        private uint _memoryUtilization;
+
 
         /// <summary>Gets or sets TotalSpace</summary>
         public uint TotalSpace { get; set; }
@@ -111,7 +116,7 @@ namespace MBM.BL
         /// <summary>Gets or sets AvailableSpace</summary>
         public uint AvailableSpace { get; set; }
 
-        /// <summary>Returns the ServerStat as a string</summary>
+        /// <summary>Returns the ServerStat as a comma separated string</summary>
         public override string ToString()
         {
             string serverInformation;

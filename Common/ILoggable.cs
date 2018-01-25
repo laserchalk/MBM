@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-    ///<summary>Interface for ise in LoggingService</summary>
+    ///<summary>Interface for logging information</summary>
     public interface ILoggable
     {
         ///<summary>Returns a string representing the log information</summary>

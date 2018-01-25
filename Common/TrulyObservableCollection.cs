@@ -10,6 +10,7 @@ using System.Windows;
 
 namespace Common
 {
+    ///<summary>An ObservableCollection that has property changed events for each item</summary>
     public class TrulyObservableCollection<T> : ObservableCollection<T>
     where T : INotifyPropertyChanged
     {
