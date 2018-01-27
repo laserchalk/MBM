@@ -8,36 +8,73 @@ using MBM.DL.WCFFilterService;
 
 namespace MBM.DL
 {
+    /// <summary>Used for retrieving filter information from a web service</summary>
     public class WCFFilterRepository : IFilterRepository
     {
+        /// <summary>Initialises an instance of WCFFilterRepository</summary>
         public WCFFilterRepository()
         {
-            _client = new FilterServiceClient();
+            Client = new FilterServiceClient();
         }
 
-        private FilterServiceClient _client;
+        /// <summary>Connection to web service</summary>
+        private FilterServiceClient Client;
 
+
+        /// <summary>Gets filter values from a web service</summary>
+        /// <exception cref="Exception">Thrown when failed to retrieve filter values from a web service</exception>
+        public Filter GetFilter()
+        {
+            try
+            {
+                Filter filter = new Filter();
+
+                filter = GetMinMaxValues();
+                filter.Symbols = GetSymbols() as List<string>;
+
+                return filter;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to retrieve filter values from web service", ex);
+            }
+        }
+
+
+        /// <summary>Gets the min and max values from a web service</summary>
+        /// <exception cref="Exception">Thrown when failed to retrieve min & max values from a web service</exception>
         public Filter GetMinMaxValues()
         {
-            Filter response = new Filter();
+            try
+            {
+                Filter response = new Filter();
 
-            response = _client.GetMinMaxValues();
+                response = Client.GetMinMaxValues();
 
-            return response;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to retrieve min & max values from web service", ex);
+            }
         }
 
+        /// <summary>Gets the list of symbols from a web service</summary>
+        /// <exception cref="Exception">Thrown when failed to retrieve symbol values from a web service</exception>
         public IEnumerable<string> GetSymbols()
         {
-            List<string> response = new List<string>();
+            try
+            {
+                List<string> response = new List<string>();
 
-            response = _client.GetSymbols().ToList<string>();
+                response = Client.GetSymbols().ToList<string>();
 
-            return response;
-        }
-
-        public static implicit operator WCFFilterRepository(SQLFilterRepository v)
-        {
-            throw new NotImplementedException();
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to retrieve symbol values from web service", ex);
+            }
         }
     }
 }

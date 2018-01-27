@@ -28,9 +28,9 @@ namespace Common
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Failed to log data to file.");
+                throw new Exception("Failed to log data to file.", ex);
             }
         }
 
@@ -48,9 +48,9 @@ namespace Common
                         sw.WriteLine(logLine);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Failed to log data to file.");
+                throw new Exception("Failed to log data to file.", ex);
             }
         }
 
@@ -66,9 +66,9 @@ namespace Common
                     sw.WriteLine(logLine);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Failed to log data to file.");
+                throw new Exception("Failed to log data to file.", ex);
             }
         }
 
@@ -84,9 +84,9 @@ namespace Common
                     sw.WriteLine(logLine);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Failed to log data to file.");
+                throw new Exception("Failed to log data to file.", ex);
             }
         }
 

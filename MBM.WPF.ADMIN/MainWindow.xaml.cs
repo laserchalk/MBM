@@ -166,8 +166,7 @@ namespace MBM.WPF.ADMIN
 
                 Mouse.OverrideCursor = Cursors.Wait;
                 SQLFilterRepository filterRepo = new SQLFilterRepository();
-                FilterBound = filterRepo.GetMinMaxValues();
-                FilterBound.Symbols = filterRepo.GetSymbols() as List<string>;
+                FilterBound = filterRepo.GetFilter();
                 FilterPanel.DataContext = FilterBound;
 
                 FilterBound.Validate();

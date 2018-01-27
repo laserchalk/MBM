@@ -8,53 +8,105 @@ using MBM.DL.WCFStockService;
 
 namespace MBM.DL
 {
+    /// <summary>Used for retrieving stock information from a web service</summary>
     public class WCFStockRepository : IStockRepository
     {
+        /// <summary>Initialises an instance of WCFStockRepository</summary>
         public WCFStockRepository()
         {
-            _stockClient = new StockServiceClient();
+            Client = new StockServiceClient();
         }
 
-        private StockServiceClient _stockClient;
 
+
+        /// <summary>Connection to web service</summary>
+        private StockServiceClient Client;
+
+
+
+        /// <summary>Adds a stock entry through a web service</summary>
+        /// <exception cref="Exception">Thrown when failed to add stock entry though web service</exception>
         public string AddStockEntry(StockEntry stock)
         {
-            string response;
-            response = _stockClient.AddStockEntry(stock);
+            try
+            {
+                string response;
+                response = Client.AddStockEntry(stock);
 
-            return response;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to add stock entry though web service", ex);
+            }
         }
 
+        /// <summary>Deletes a stock entry through a web service</summary>
+        /// <exception cref="Exception">Thrown when failed to delete stock entry from a web service</exception>
         public string DeleteStock(uint id)
         {
-            string response;
-            response = _stockClient.DeleteStock(id);
+            try
+            {
+                string response;
+                response = Client.DeleteStock(id);
 
-            return response;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to delete stock entry through web service", ex);
+            }
         }
 
+        /// <summary>Gets a list of stock entries though a web service</summary>
+        /// <exception cref="Exception">Thrown when failed to get stock entries through web service</exception>
         public IEnumerable<StockEntry> GetStockEntries(Filter filter)
         {
-            List<StockEntry> response = new List<StockEntry>();
-            response = _stockClient.GetStockEntries(filter).ToList<StockEntry>();
+            try
+            {
+                List<StockEntry> response = new List<StockEntry>();
+                response = Client.GetStockEntries(filter).ToList<StockEntry>();
 
-            return response;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to get stock entries through web service", ex);
+            }
         }
 
+        /// <summary>Gets a stock entry through a web service</summary>
+        /// <exception cref="Exception">Thrown when failed to get stock entry through web service</exception>
         public StockEntry GetStockEntry(uint id)
         {
-            StockEntry response;
-            response = _stockClient.GetStockEntry(id);
+            try
+            {
+                StockEntry response;
+                response = Client.GetStockEntry(id);
 
-            return response;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to get stock entry through web service", ex);
+            }
         }
 
+        /// <summary>Updates values for a stock entry through a web service</summary>
+        /// <exception cref="Exception">Thrown when failed to update stock entry through web service</exception>
         public string UpdateStockEntry(StockEntry stock)
         {
-            string response;
-            response = _stockClient.UpdateStockEntry(stock);
+            try
+            {
+                string response;
+                response = Client.UpdateStockEntry(stock);
 
-            return response;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update stock entry through web service", ex);
+            }
         }
     }
 }

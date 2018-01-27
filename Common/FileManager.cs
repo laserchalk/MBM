@@ -21,9 +21,9 @@ namespace Common
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Failed to save file");
+                throw new Exception("Failed to save file", ex);
             }
         }
 
@@ -45,9 +45,9 @@ namespace Common
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Failed to load file");
+                throw new Exception("Failed to load file", ex);
             }
 
             return objects;

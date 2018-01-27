@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MBM.DL
 {
+    /// <summary>Used for retrieving filter repository types</summary> 
     public class FilterRepositoryFactory
     {
         /// <summary>Returns a filter repository. Values "WCF", "SQL", "CSV"</summary> 

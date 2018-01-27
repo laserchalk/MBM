@@ -33,9 +33,9 @@ namespace MBM.BL
                 PriceClose.PropertyChanged += Price_PropertyChanged;
                 PriceCloseAdjusted.PropertyChanged += Price_PropertyChanged;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Failed to initialise StockEntry");
+                throw new Exception("Failed to initialise StockEntry", ex);
             }
         }
 
@@ -58,9 +58,9 @@ namespace MBM.BL
                 this.PriceClose.Amount = decimal.Parse(reader["stock_price_close"].ToString());
                 this.PriceCloseAdjusted.Amount = decimal.Parse(reader["stock_price_adj_close"].ToString());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Failed to initialise StockEntry with SqlDataReader parameter");
+                throw new Exception("Failed to initialise StockEntry with SqlDataReader parameter", ex);
             }
         }
 
@@ -86,9 +86,9 @@ namespace MBM.BL
                 this.PriceClose.Amount = decimal.Parse(values[8]);
                 this.PriceCloseAdjusted.Amount = decimal.Parse(values[9]);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Failed to initialise StockEntry with string parameter");
+                throw new Exception("Failed to initialise StockEntry with string parameter", ex);
             }
         }
 
@@ -211,9 +211,9 @@ namespace MBM.BL
 
                 return stockInformation;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("StockEntry ToString() Failed.");
+                throw new Exception("StockEntry ToString() Failed.", ex);
             }
         }
 

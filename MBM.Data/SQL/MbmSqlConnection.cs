@@ -10,21 +10,27 @@ namespace MBM.DL
 {
     public class MbmSqlConnection
     {
+        /// <summary>Initialises a new instance of MbmSqlConnection with default values</summary>
+        /// <exception cref="Exception">Thrown when failed to instance of MbmSqlConnection</exception>
         public MbmSqlConnection()
         {
-            string configConnectionString = ConfigurationManager.ConnectionStrings["MBMconnection"].ConnectionString;
-            ConnectionStringBuilder = new SqlConnectionStringBuilder(configConnectionString);
+            try
+            {
+                string configConnectionString = ConfigurationManager.ConnectionStrings["MBMconnection"].ConnectionString;
+                SqlConnectionStringBuilder ConnectionStringBuilder = new SqlConnectionStringBuilder(configConnectionString);
 
-            _datasource = ConnectionStringBuilder.DataSource.ToString();
-            _initialCatalogue = ConnectionStringBuilder.InitialCatalog.ToString();
+                _datasource = ConnectionStringBuilder.DataSource.ToString();
+                _initialCatalogue = ConnectionStringBuilder.InitialCatalog.ToString();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to initialise MbmSqlConnection", ex);
+            }
         }
 
-        SqlConnectionStringBuilder ConnectionStringBuilder;
-        string _datasource;
-        string _initialCatalogue;
 
-
-
+        /// <summary>Gets or sets DataSource using connection string in config file</summary>
+        /// <exception cref="Exception">Thrown when failed to set DataSource</exception>
         public string DataSource
         {
             get
@@ -33,21 +39,30 @@ namespace MBM.DL
             }
             set
             {
-                _datasource = value;
+                try
+                {
+                    _datasource = value;
 
-                string configConnectionString = ConfigurationManager.ConnectionStrings["MBMconnection"].ConnectionString;
-                SqlConnectionStringBuilder connStringbuilder = new SqlConnectionStringBuilder(configConnectionString);
-                connStringbuilder.DataSource = _datasource;
-                
-
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                config.ConnectionStrings.ConnectionStrings["MBMconnection"].ConnectionString = connStringbuilder.ConnectionString;
-                config.Save(ConfigurationSaveMode.Modified);
-                ConfigurationManager.RefreshSection("connectionStrings");
+                    string configConnectionString = ConfigurationManager.ConnectionStrings["MBMconnection"].ConnectionString;
+                    SqlConnectionStringBuilder connStringbuilder = new SqlConnectionStringBuilder(configConnectionString);
+                    connStringbuilder.DataSource = _datasource;
 
 
+                    Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                    config.ConnectionStrings.ConnectionStrings["MBMconnection"].ConnectionString = connStringbuilder.ConnectionString;
+                    config.Save(ConfigurationSaveMode.Modified);
+                    ConfigurationManager.RefreshSection("connectionStrings");
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed to set DataSource", ex);
+                }
             }
         }
+        string _datasource;
+
+        /// <summary>Gets or sets InitialCatalog using connection string in config file</summary>
+        /// <exception cref="Exception">Thrown when failed to set InitialCatalog</exception>
         public string InitialCatalog
         {
             get
@@ -56,20 +71,30 @@ namespace MBM.DL
             }
             set
             {
-                _initialCatalogue = value;
+                try
+                {
+                    _initialCatalogue = value;
 
-                string configConnectionString = ConfigurationManager.ConnectionStrings["MBMconnection"].ConnectionString;
-                SqlConnectionStringBuilder connStringbuilder = new SqlConnectionStringBuilder(configConnectionString);
-                connStringbuilder.InitialCatalog = _initialCatalogue;
-                
+                    string configConnectionString = ConfigurationManager.ConnectionStrings["MBMconnection"].ConnectionString;
+                    SqlConnectionStringBuilder connStringbuilder = new SqlConnectionStringBuilder(configConnectionString);
+                    connStringbuilder.InitialCatalog = _initialCatalogue;
 
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                config.ConnectionStrings.ConnectionStrings["MBMconnection"].ConnectionString = connStringbuilder.ConnectionString;
-                config.Save(ConfigurationSaveMode.Modified);
-                ConfigurationManager.RefreshSection("connectionStrings");
+
+                    Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                    config.ConnectionStrings.ConnectionStrings["MBMconnection"].ConnectionString = connStringbuilder.ConnectionString;
+                    config.Save(ConfigurationSaveMode.Modified);
+                    ConfigurationManager.RefreshSection("connectionStrings");
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed to set InitialCatalog", ex);
+                }
             }
         }
+        string _initialCatalogue;
 
+        /// <summary>Gets filter values from a server</summary>
+        /// <exception cref="Exception">Thrown when failed to connect to database</exception>
         public static SqlConnection GetSqlConnection()
         {
             try
@@ -79,9 +104,9 @@ namespace MBM.DL
 
                 return sqlConnection;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ArgumentException("Failed to connect to database.");
+                throw new Exception("Failed to connect to database.", ex);
             }
         }
     }

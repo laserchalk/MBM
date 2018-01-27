@@ -11,57 +11,72 @@ namespace MBM.DL
 {
     public class ServerStatsRepository
     {
-        public ServerStatsRepository()
-        {
-            Connection = MbmSqlConnection.GetSqlConnection();
-        }
-
-        private SqlConnection Connection;
-
+        
+        /// <summary>Gets a list of server statistics from database</summary>
+        /// <exception cref="Exception">Thrown when failed to get server statistics</exception>
         public IEnumerable<ServerStat> GetServerStats()
         {
-            List<ServerStat> serverStats = new List<ServerStat>();
-
-            using (Connection)
+            try
             {
-                using (SqlCommand cmd = Connection.CreateCommand())
+                List<ServerStat> serverStats = new List<ServerStat>();
+                SqlConnection Connection = MbmSqlConnection.GetSqlConnection();
+
+                using (Connection)
                 {
-
-                    cmd.CommandText = @"spServerStats";
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
+                    using (SqlCommand cmd = Connection.CreateCommand())
                     {
-                        ServerStat serverStat = new ServerStat(reader);
-                        serverStats.Add(serverStat);
+
+                        cmd.CommandText = @"spServerStats";
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        SqlDataReader reader = cmd.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            ServerStat serverStat = new ServerStat(reader);
+                            serverStats.Add(serverStat);
+                        }
                     }
                 }
-            }
 
-            return serverStats;
+                return serverStats;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to get server statistics", ex);
+            }
         }
 
+
+        /// <summary>Gets most recent server statistics from database</summary>
+        /// <exception cref="Exception">Thrown when failed to get server statistics</exception>
         public ServerStat GetMostRecent()
         {
-            ServerStat serverStat = new ServerStat();
-
-            using (Connection)
+            try
             {
-                using (SqlCommand cmd = Connection.CreateCommand())
+                ServerStat serverStat = new ServerStat();
+                SqlConnection Connection = MbmSqlConnection.GetSqlConnection();
+
+                using (Connection)
                 {
-                    cmd.CommandText = @"spServerStats";
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlCommand cmd = Connection.CreateCommand())
+                    {
+                        cmd.CommandText = @"spServerStats";
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    SqlDataReader reader = cmd.ExecuteReader();
+                        SqlDataReader reader = cmd.ExecuteReader();
 
-                    reader.Read();
-                    serverStat = new ServerStat(reader);
+                        reader.Read();
+                        serverStat = new ServerStat(reader);
+                    }
                 }
-            }
 
-            return serverStat;
+                return serverStat;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to getmost recent server statistics", ex);
+            }
         }
     }
 }

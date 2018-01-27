@@ -27,9 +27,9 @@ namespace MBM.BL
                 this.TotalSpace = uint.Parse(reader["TotalSpaceGigabytes"].ToString());
                 this.AvailableSpace = uint.Parse(reader["AvailableSpaceGigabytes"].ToString());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Failed to initialise ServerStat using SqlDataReader");
+                throw new Exception("Failed to initialise ServerStat using SqlDataReader", ex);
             }
         }
 

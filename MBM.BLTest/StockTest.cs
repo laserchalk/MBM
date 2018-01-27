@@ -9,7 +9,7 @@ namespace MBM.BLTest
     {
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(Exception))]
         public void ExchangeTooLongTest()
         {
             //-- Arrange
@@ -29,7 +29,7 @@ namespace MBM.BLTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(Exception))]
         public void SymbolTooLongTest()
         {
             //-- Arrange

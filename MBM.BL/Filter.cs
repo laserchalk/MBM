@@ -52,9 +52,9 @@ namespace MBM.BL
                     this.LowMax.Amount = decimal.Parse(reader["MaxPriceLow"].ToString());
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Failed to initialise Filter with SqlDataReader parameter");
+                throw new Exception("Failed to initialise Filter with SqlDataReader parameter", ex);
             }
         }
 
@@ -164,9 +164,9 @@ namespace MBM.BL
 
                 return filterInformation;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Filter ToString() failed.");
+                throw new Exception("Filter ToString() failed.", ex);
             }
         }
     }

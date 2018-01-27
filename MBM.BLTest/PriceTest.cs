@@ -8,12 +8,13 @@ namespace MBM.BLTest
     public class PriceTest
     {
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(Exception))]
         public void PriceInvalidTest()
         {
             //-- Arrange
             Price price = new Price();
             decimal inputAmount = -1.99m;
+            string ExpectedResult = "Price cannot be negative";
 
             //-- Act
             try
@@ -22,7 +23,7 @@ namespace MBM.BLTest
             }
             catch (Exception ex)
             {
-                Assert.AreEqual("Price cannot be negative", ex.Message);
+                Assert.AreEqual(ExpectedResult, ex.Message.ToString());
                 throw;
             }
         }

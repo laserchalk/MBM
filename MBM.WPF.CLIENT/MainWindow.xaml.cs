@@ -77,6 +77,7 @@ namespace MBM.WPF.CLIENT
             {
                 FilterError.Text = ex.Message;
                 FilterError.Visibility = Visibility.Visible;
+                LoggingService.Log(ex, "Log.txt");
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
@@ -95,8 +96,8 @@ namespace MBM.WPF.CLIENT
 
                 Mouse.OverrideCursor = Cursors.Wait;
                 IFilterRepository filterRepo = FilterRepositoryFactory.GetRepository(repositoryType);
-                FilterBound = filterRepo.GetMinMaxValues();
-                FilterBound.Symbols = filterRepo.GetSymbols() as List<string>;
+                FilterBound = filterRepo.GetFilter();
+                //FilterBound.Symbols = filterRepo.GetSymbols() as List<string>;
                 FilterPanel.DataContext = FilterBound;
 
                 FilterBound.Validate();
@@ -109,6 +110,7 @@ namespace MBM.WPF.CLIENT
             {
                 FilterError.Text = ex.Message;
                 FilterError.Visibility = Visibility.Visible;
+                LoggingService.Log(ex, "Log.txt");
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
