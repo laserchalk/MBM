@@ -47,7 +47,10 @@
                     </WrapPanel>
                 </StackPanel>
             </GroupBox>
-            <Button Content="Run" Margin="0,10,0,0" Width="100" Click="Run_Button_Click" HorizontalAlignment="Left"></Button>
+            <WrapPanel>
+                <Button Content="Run" Margin="0,10,0,0" Width="100" Click="Run_Button_Click" HorizontalAlignment="Left"></Button>
+                <Label x:Name="ErrorMessage" ></Label>
+            </WrapPanel>
         </StackPanel>
         
     </Grid>

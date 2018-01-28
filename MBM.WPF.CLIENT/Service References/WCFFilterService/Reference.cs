@@ -15,6 +15,12 @@ namespace MBM.WPF.CLIENT.WCFFilterService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WCFFilterService.IFilterService")]
     public interface IFilterService {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFilterService/GetFilter", ReplyAction="http://tempuri.org/IFilterService/GetFilterResponse")]
+        MBM.BL.Filter GetFilter();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFilterService/GetFilter", ReplyAction="http://tempuri.org/IFilterService/GetFilterResponse")]
+        System.Threading.Tasks.Task<MBM.BL.Filter> GetFilterAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFilterService/GetMinMaxValues", ReplyAction="http://tempuri.org/IFilterService/GetMinMaxValuesResponse")]
         MBM.BL.Filter GetMinMaxValues();
         
@@ -53,6 +59,14 @@ namespace MBM.WPF.CLIENT.WCFFilterService {
         
         public FilterServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        public MBM.BL.Filter GetFilter() {
+            return base.Channel.GetFilter();
+        }
+        
+        public System.Threading.Tasks.Task<MBM.BL.Filter> GetFilterAsync() {
+            return base.Channel.GetFilterAsync();
         }
         
         public MBM.BL.Filter GetMinMaxValues() {

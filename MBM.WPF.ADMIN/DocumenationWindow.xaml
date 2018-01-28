@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="User Documentation" Height="782" Width="475">
     <Grid>
-        <RichTextBox IsReadOnly="True" TextChanged="RichTextBox_TextChanged" ScrollViewer.VerticalScrollBarVisibility="Auto" Padding="10,10,10,10">
+        <RichTextBox IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Padding="10,10,10,10">
             <FlowDocument>
                 <Paragraph FontWeight="Bold" FontSize="18">
                     <Run Text="1. Connecting to a Database"/>
@@ -30,7 +30,7 @@
                 <Paragraph>
                     <InlineUIContainer>
                         <Image
-        Width="361" Source="pack://application:,,,/MBM.WPF.ADMIN;component/Resources/mbm_settings_window.png" Margin="0,20,0,0" Height="198" HorizontalAlignment="Left"/>
+        Width="361" Source="pack://application:,,,/Resources/mbm_settings_window.png" Margin="0,20,0,0" Height="198" HorizontalAlignment="Left"/>
                     </InlineUIContainer>
                 </Paragraph>
                 <Paragraph FontWeight="Bold" FontSize="18">
@@ -50,7 +50,7 @@
                 <Paragraph>
                     <InlineUIContainer>
                         <Image
-        Width="392" Source="pack://application:,,,/MBM.WPF.ADMIN;component/Resources/mbm_filter_controls.png" Margin="0,20,0,0" Height="196" HorizontalAlignment="Left"/>
+        Width="392" Source="pack://application:,,,/Resources/mbm_filter_controls.png" Margin="0,20,0,0" Height="196" HorizontalAlignment="Left"/>
                     </InlineUIContainer>
                 </Paragraph>
                 <Paragraph FontWeight="Bold" FontSize="18">
@@ -77,7 +77,7 @@
                 <Paragraph>
                     <InlineUIContainer>
                         <Image
-        Width="392" Source="pack://application:,,,/MBM.WPF.ADMIN;component/Resources/mbm_table.png" Margin="0,20,0,0" Height="50" HorizontalAlignment="Left"/>
+        Width="392" Source="pack://application:,,,/Resources/mbm_table.png" Margin="0,20,0,0" Height="50" HorizontalAlignment="Left"/>
                     </InlineUIContainer>
                 </Paragraph>
                 <Paragraph FontWeight="Bold" FontSize="18">
@@ -89,7 +89,7 @@
                 </Paragraph>
                 <Paragraph>
                     <InlineUIContainer>
-                        <Image Source="pack://application:,,,/MBM.WPF.ADMIN;component/Resources/server_statistics.png" Margin="0,20,0,0" Width="395" Height="299"  HorizontalAlignment="Left"/>
+                        <Image Source="pack://application:,,,/Resources/server_statistics.png" Margin="0,20,0,0" Width="395" Height="299"  HorizontalAlignment="Left"/>
                     </InlineUIContainer>
                 </Paragraph>
             </FlowDocument>

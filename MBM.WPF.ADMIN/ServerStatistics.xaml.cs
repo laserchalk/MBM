@@ -1,4 +1,5 @@
-﻿using MBM.BL;
+﻿using Common;
+using MBM.BL;
 using MBM.DL;
 using System;
 using System.Collections.Generic;
@@ -29,13 +30,26 @@ namespace MBM.WPF.ADMIN
             StatsPanel.DataContext = WindowServerStats;
         }
 
-        ServerStat WindowServerStats = new ServerStat();
+        ServerStat BoundServerStats = new ServerStat();
 
         private void Run_Button_Click(object sender, RoutedEventArgs e)
         {
-            ServerStatsRepository ServerStatsRepo = new ServerStatsRepository();
-            WindowServerStats = ServerStatsRepo.GetMostRecent();
-            StatsPanel.DataContext = WindowServerStats;
+            try
+            {
+                Mouse.OverrideCursor = Cursors.Wait;
+
+                ServerStatsRepository ServerStatsRepo = new ServerStatsRepository();
+                BoundServerStats = ServerStatsRepo.GetMostRecent();
+                StatsPanel.DataContext = BoundServerStats;
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage.Content = ex.Message;
+                LoggingService.Log(ex, "Log.txt");
+                LoggingService.Log(BoundServerStats, "Log.txt");
+            }
+
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
     }
 }

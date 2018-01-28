@@ -75,7 +75,7 @@ namespace MBM.DL
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to getmost recent server statistics", ex);
+                throw new Exception("Failed to get most recent server statistics", ex);
             }
         }
     }

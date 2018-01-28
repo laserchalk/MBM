@@ -22,7 +22,7 @@
                 <Paragraph>
                     <InlineUIContainer>
                         <Image
-                            Width="249" Source="pack://application:,,,/MBM.WPF.CLIENT;component/Resources/offline_mode.png" Margin="0,20,0,0" Height="129" HorizontalAlignment="Left"/>
+                            Width="249" Source="pack://application:,,,/Resources/offline_mode.png" Margin="0,20,0,0" Height="129" HorizontalAlignment="Left"/>
                     </InlineUIContainer>
                 </Paragraph>
                 <Paragraph FontWeight="Bold" FontSize="18">
@@ -42,7 +42,7 @@
                 <Paragraph>
                     <InlineUIContainer>
                         <Image
-                            Width="392" Source="pack://application:,,,/MBM.WPF.CLIENT;component/Resources/mbm_filter_controls.png" Margin="0,20,0,0" Height="196" HorizontalAlignment="Left"/>
+                            Width="392" Source="pack://application:,,,/Resources/mbm_filter_controls.png" Margin="0,20,0,0" Height="196" HorizontalAlignment="Left"/>
                     </InlineUIContainer>
                 </Paragraph>
             </FlowDocument>

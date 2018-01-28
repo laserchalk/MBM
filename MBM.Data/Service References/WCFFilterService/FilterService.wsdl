@@ -8,6 +8,12 @@
       <xsd:import schemaLocation="http://localhost:64978/FilterService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IFilterService_GetFilter_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFilter" />
+  </wsdl:message>
+  <wsdl:message name="IFilterService_GetFilter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFilterResponse" />
+  </wsdl:message>
   <wsdl:message name="IFilterService_GetMinMaxValues_InputMessage">
     <wsdl:part name="parameters" element="tns:GetMinMaxValues" />
   </wsdl:message>
@@ -21,6 +27,10 @@
     <wsdl:part name="parameters" element="tns:GetSymbolsResponse" />
   </wsdl:message>
   <wsdl:portType name="IFilterService">
+    <wsdl:operation name="GetFilter">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFilterService/GetFilter" message="tns:IFilterService_GetFilter_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFilterService/GetFilterResponse" message="tns:IFilterService_GetFilter_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetMinMaxValues">
       <wsdl:input wsaw:Action="http://tempuri.org/IFilterService/GetMinMaxValues" message="tns:IFilterService_GetMinMaxValues_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFilterService/GetMinMaxValuesResponse" message="tns:IFilterService_GetMinMaxValues_OutputMessage" />
@@ -32,6 +42,15 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IFilterService" type="tns:IFilterService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetFilter">
+      <soap:operation soapAction="http://tempuri.org/IFilterService/GetFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetMinMaxValues">
       <soap:operation soapAction="http://tempuri.org/IFilterService/GetMinMaxValues" style="document" />
       <wsdl:input>

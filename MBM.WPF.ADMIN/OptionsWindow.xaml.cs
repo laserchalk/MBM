@@ -1,4 +1,5 @@
-﻿using MBM.DL;
+﻿using Common;
+using MBM.DL;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -56,6 +57,7 @@ namespace MBM.WPF.ADMIN
             catch (Exception ex)
             {
                 ConnectionLabel.Content = ex.Message.ToString();
+                LoggingService.Log(ex, "Log.txt");
             }
 
             Mouse.OverrideCursor = Cursors.Arrow;

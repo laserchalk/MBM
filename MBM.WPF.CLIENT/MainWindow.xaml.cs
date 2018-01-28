@@ -19,24 +19,60 @@ using System.Windows.Shapes;
 
 namespace MBM.WPF.CLIENT
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    /// <summary>Interaction logic for MainWindow.xaml</summary>
     public partial class MainWindow : Window
     {
+        /// <summary>Initialises a new instance of MainWindow</summary>
         public MainWindow()
         {
             InitializeComponent();
             Initialise();
         }
 
+
+
+
+        /// <summary>Determines whether or not the application is in online or offline mode</summary>
         bool OfflineMode;
+
+        /// <summary>The filter that is bound to the window</summary>
         Filter FilterBound = new Filter();
+
+        /// <summary>The stock entries that are bound to the grid</summary>
         ObservableCollection<StockEntry> StockEntriesBound = new ObservableCollection<StockEntry>();
 
+
+
+
+        /// <summary>Initialise settings by testing for a web service connection or setting it to offline mode.</summary>
+        /// <exception cref="Exception">Thrown when failed to initialise data</exception>
         private void Initialise()
         {
-            if (CanConnectToWFC())
+            try
+            {
+                LoggingService.Log("Initialise main window", "Log.txt");
+
+                if (CanConnectToWFC())
+                {
+                    ActivateOnlineMode();
+                }
+                else
+                {
+                    ActivateOfflineMode();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                LoggingService.Log(ex, "Log.txt");
+            }
+        }
+
+        /// <summary>Activates online mode</summary>
+        /// <exception cref="Exception">Thrown when failed to activate online mode</exception>
+        private void ActivateOnlineMode()
+        {
+            try
             {
                 OfflineMode = false;
                 ResetFilter("WCF");
@@ -45,20 +81,35 @@ namespace MBM.WPF.CLIENT
                 CSVStockRepository stockRepo = new CSVStockRepository();
                 stockRepo.AddStockEntries(StockEntriesBound);
             }
-            else
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to activate online mode", ex);
+            }
+        }
+
+        /// <summary>Activates offline mode</summary>
+        /// <exception cref="Exception">Thrown when failed to activate offline mode</exception>
+        private void ActivateOfflineMode()
+        {
+            try
             {
                 MessageBox.Show("Couldn't connect to service. Now running in offline mode.");
                 OfflineMode = true;
                 OfflineButton.IsChecked = true;
                 ResetFilter("CSV");
             }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to activate offline mode", ex);
+            }
         }
 
+        /// <summary>Gets stock entries from a web service or from a file using a the Filter</summary>
         private void GetStockEntries(string repositoryType)
         {
             try
             {
-                LoggingService.Log("Applying Filter", "Log.txt");
+                LoggingService.Log("Getting stock entries", "Log.txt");
 
                 Mouse.OverrideCursor = Cursors.Wait;
                 FilterBound.Validate();
@@ -70,24 +121,25 @@ namespace MBM.WPF.CLIENT
                 StockEntriesDataGrid.ItemsSource = StockEntriesBound;
 
                 Messages.Items.Insert(0, "Retrieved " + StockEntriesBound.Count.ToString() + " entries");
-
-                LoggingService.Log(StockEntriesBound, "Log.txt");
             }
             catch (Exception ex)
             {
-                FilterError.Text = ex.Message;
-                FilterError.Visibility = Visibility.Visible;
+                Messages.Items.Insert(0, ex.Message);
                 LoggingService.Log(ex, "Log.txt");
+                LoggingService.Log(FilterBound, "Log.txt");
+                LoggingService.Log(StockEntriesBound, "Log.txt");
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
+        /// <summary>Clears the grid</summary>
         private void ClearGrid()
         {
             StockEntriesBound = new ObservableCollection<StockEntry>();
             StockEntriesDataGrid.ItemsSource = StockEntriesBound;
         }
 
+        /// <summary>Retrieves filter values from a web service or file</summary>
         private void ResetFilter(string repositoryType)
         {
             try
@@ -97,24 +149,23 @@ namespace MBM.WPF.CLIENT
                 Mouse.OverrideCursor = Cursors.Wait;
                 IFilterRepository filterRepo = FilterRepositoryFactory.GetRepository(repositoryType);
                 FilterBound = filterRepo.GetFilter();
-                //FilterBound.Symbols = filterRepo.GetSymbols() as List<string>;
                 FilterPanel.DataContext = FilterBound;
 
                 FilterBound.Validate();
                 FilterError.Text = "";
                 FilterError.Visibility = Visibility.Collapsed;
-
-                LoggingService.Log(FilterBound, "Log.txt");
             }
             catch (Exception ex)
             {
                 FilterError.Text = ex.Message;
                 FilterError.Visibility = Visibility.Visible;
                 LoggingService.Log(ex, "Log.txt");
+                LoggingService.Log(FilterBound, "Log.txt");
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
+        /// <summary>Tests for a web service connection</summary>
         private bool CanConnectToWFC()
         {
             try
@@ -133,12 +184,14 @@ namespace MBM.WPF.CLIENT
 
         }
 
+        /// <summary>Occurs when the user documentation button is clicked</summary>
         private void Help_Click(object sender, RoutedEventArgs e)
         {
             DocumentationWindow documenationWindow = new DocumentationWindow();
             documenationWindow.Show();
         }
 
+        /// <summary>Occurs when the offline button is clicked</summary>
         private void Offline_Click(object sender, RoutedEventArgs e)
         {
             if (OfflineButton.IsChecked)
@@ -150,6 +203,7 @@ namespace MBM.WPF.CLIENT
             }
         }
 
+        /// <summary>Occurs when the apply filter button is clicked</summary>
         private void ApplyFilterButton_Click(object sender, RoutedEventArgs e)
         {
             if (OfflineMode)
@@ -162,6 +216,7 @@ namespace MBM.WPF.CLIENT
             } 
         }
 
+        /// <summary>Occurs when the reset filter button is clicked</summary>
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
             if (OfflineMode)
@@ -174,6 +229,7 @@ namespace MBM.WPF.CLIENT
             }
         }
 
+        /// <summary>Occurs when the clear button is clicked</summary>
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             ClearGrid();

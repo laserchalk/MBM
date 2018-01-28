@@ -2,45 +2,61 @@
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/MBM.BL" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/MBM.BL" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:64978/StockService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:complexType name="StockEntry">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Exchange" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ID" type="xs:unsignedInt" />
-      <xs:element minOccurs="0" name="PriceClose" nillable="true" type="tns:Price" />
-      <xs:element minOccurs="0" name="PriceCloseAdjusted" nillable="true" type="tns:Price" />
-      <xs:element minOccurs="0" name="PriceHigh" nillable="true" type="tns:Price" />
-      <xs:element minOccurs="0" name="PriceLow" nillable="true" type="tns:Price" />
-      <xs:element minOccurs="0" name="PriceOpen" nillable="true" type="tns:Price" />
-      <xs:element minOccurs="0" name="Symbol" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Volume" type="xs:unsignedInt" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EntityBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Exchange" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ID" type="xs:unsignedInt" />
+          <xs:element minOccurs="0" name="PriceClose" nillable="true" type="tns:Price" />
+          <xs:element minOccurs="0" name="PriceCloseAdjusted" nillable="true" type="tns:Price" />
+          <xs:element minOccurs="0" name="PriceHigh" nillable="true" type="tns:Price" />
+          <xs:element minOccurs="0" name="PriceLow" nillable="true" type="tns:Price" />
+          <xs:element minOccurs="0" name="PriceOpen" nillable="true" type="tns:Price" />
+          <xs:element minOccurs="0" name="Symbol" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Volume" type="xs:unsignedInt" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="StockEntry" nillable="true" type="tns:StockEntry" />
+  <xs:complexType name="EntityBase">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="EntityBase" nillable="true" type="tns:EntityBase" />
   <xs:complexType name="Price">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EntityBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="Price" nillable="true" type="tns:Price" />
   <xs:complexType name="Filter">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CloseAdjustedEnd" nillable="true" type="tns:Price" />
-      <xs:element minOccurs="0" name="CloseAdjustedStart" nillable="true" type="tns:Price" />
-      <xs:element minOccurs="0" name="CloseEnd" nillable="true" type="tns:Price" />
-      <xs:element minOccurs="0" name="CloseStart" nillable="true" type="tns:Price" />
-      <xs:element minOccurs="0" name="DateEnd" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="DateStart" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="HighEnd" nillable="true" type="tns:Price" />
-      <xs:element minOccurs="0" name="HighStart" nillable="true" type="tns:Price" />
-      <xs:element minOccurs="0" name="LowEnd" nillable="true" type="tns:Price" />
-      <xs:element minOccurs="0" name="LowStart" nillable="true" type="tns:Price" />
-      <xs:element minOccurs="0" name="OpenEnd" nillable="true" type="tns:Price" />
-      <xs:element minOccurs="0" name="OpenStart" nillable="true" type="tns:Price" />
-      <xs:element minOccurs="0" name="SelectedSymbol" nillable="true" type="xs:string" />
-      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Symbols" nillable="true" type="q1:ArrayOfstring" />
-      <xs:element minOccurs="0" name="VolumeEnd" type="xs:unsignedInt" />
-      <xs:element minOccurs="0" name="VolumeStart" type="xs:unsignedInt" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EntityBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CloseAdjustedMax" nillable="true" type="tns:Price" />
+          <xs:element minOccurs="0" name="CloseAdjustedMin" nillable="true" type="tns:Price" />
+          <xs:element minOccurs="0" name="CloseMax" nillable="true" type="tns:Price" />
+          <xs:element minOccurs="0" name="CloseMin" nillable="true" type="tns:Price" />
+          <xs:element minOccurs="0" name="DateEnd" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="DateStart" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="HighMax" nillable="true" type="tns:Price" />
+          <xs:element minOccurs="0" name="HighMin" nillable="true" type="tns:Price" />
+          <xs:element minOccurs="0" name="LowMax" nillable="true" type="tns:Price" />
+          <xs:element minOccurs="0" name="LowMin" nillable="true" type="tns:Price" />
+          <xs:element minOccurs="0" name="OpenMax" nillable="true" type="tns:Price" />
+          <xs:element minOccurs="0" name="OpenMin" nillable="true" type="tns:Price" />
+          <xs:element minOccurs="0" name="SelectedSymbol" nillable="true" type="xs:string" />
+          <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Symbols" nillable="true" type="q1:ArrayOfstring" />
+          <xs:element minOccurs="0" name="VolumeMax" type="xs:unsignedInt" />
+          <xs:element minOccurs="0" name="VolumeMin" type="xs:unsignedInt" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="Filter" nillable="true" type="tns:Filter" />
   <xs:complexType name="ArrayOfStockEntry">

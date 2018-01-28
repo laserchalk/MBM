@@ -29,8 +29,7 @@ namespace MBM.DL
             {
                 Filter filter = new Filter();
 
-                filter = GetMinMaxValues();
-                filter.Symbols = GetSymbols() as List<string>;
+                filter = Client.GetFilter();
 
                 return filter;
             }

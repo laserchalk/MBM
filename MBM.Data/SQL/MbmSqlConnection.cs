@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace MBM.DL
 {
+    /// <summary>Gets a connection to the MBM database</summary>
     public class MbmSqlConnection
     {
         /// <summary>Initialises a new instance of MbmSqlConnection with default values</summary>
