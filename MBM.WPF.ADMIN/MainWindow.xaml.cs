@@ -208,7 +208,7 @@ namespace MBM.WPF.ADMIN
             GetStockEntries();
         }
 
-        /// <summary>Occurs when the apply filter button is clicked</summary>
+        /// <summary>Occurs when the reset filter button is clicked</summary>
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
             ResetFilter();

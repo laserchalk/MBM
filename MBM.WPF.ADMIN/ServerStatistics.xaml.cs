@@ -22,6 +22,7 @@ namespace MBM.WPF.ADMIN
     /// </summary>
     public partial class ServerStatistics : Window
     {
+        /// <summary>Initialises an instance of ServerStatistics</summary>
         public ServerStatistics()
         {
             InitializeComponent();
@@ -30,9 +31,11 @@ namespace MBM.WPF.ADMIN
             StatsPanel.DataContext = WindowServerStats;
         }
 
+        /// <summary>The statistics that are bound to the window</summary>
         ServerStat BoundServerStats = new ServerStat();
 
-        private void Run_Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>Retrieves the server statistics</summary>
+        private void RetrieveStatistics()
         {
             try
             {
@@ -50,6 +53,12 @@ namespace MBM.WPF.ADMIN
             }
 
             Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        /// <summary>Occurs when the run button is clicked</summary>
+        private void Run_Button_Click(object sender, RoutedEventArgs e)
+        {
+            RetrieveStatistics();
         }
     }
 }

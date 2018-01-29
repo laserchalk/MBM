@@ -28,7 +28,7 @@ namespace MBM.BL
         }
 
         /// <summary>Initialises a new instance of <see cref="Filter"/> using an SqlDataReader</summary>
-        /// <exception cref="ArgumentException">Thrown when failed to initialising Filter with SqlDataReader</exception>
+        /// <exception cref="Exception">Thrown when failed to initialising Filter with SqlDataReader</exception>
         public Filter(SqlDataReader reader) : this()
         {
             try

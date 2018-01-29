@@ -26,14 +26,18 @@ namespace MBM.WPF.ADMIN
         public OptionsWindow()
         {
             InitializeComponent();
+            RetrieveConnectionString();
+        }
 
+        /// <summary>Retrieves connection string settings and binds it to the window</summary>
+        private void RetrieveConnectionString()
+        {
             MbmSqlConnection DatabaseConnection = new MbmSqlConnection();
             this.DataContext = DatabaseConnection;
         }
 
-        MbmSqlConnection DatabaseConnection = new MbmSqlConnection();
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>Tests the connection to the database</summary>
+        private void TestConnection()
         {
             try
             {
@@ -46,10 +50,11 @@ namespace MBM.WPF.ADMIN
                     connState = conn.State;
                 }
 
-                if(connState == ConnectionState.Open)
+                if (connState == ConnectionState.Open)
                 {
                     ConnectionLabel.Content = "Connection was successful";
-                }else
+                }
+                else
                 {
                     ConnectionLabel.Content = "Failed to connect to database";
                 }
@@ -61,7 +66,12 @@ namespace MBM.WPF.ADMIN
             }
 
             Mouse.OverrideCursor = Cursors.Arrow;
+        }
 
+        /// <summary>Occurs when the connect button is clicked</summary>
+        private void Connect_Click(object sender, RoutedEventArgs e)
+        {
+            TestConnection();
         }
     }
 }

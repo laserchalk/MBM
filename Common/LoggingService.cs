@@ -16,16 +16,19 @@ namespace Common
         {
             try
             {
-                string logLine;
-
-                using (StreamWriter sw = new StreamWriter(path, true))
+                if (objects != null)
                 {
+                    string logLine;
 
-                    foreach (ILoggable item in objects)
+                    using (StreamWriter sw = new StreamWriter(path, true))
                     {
-                        logLine = DateTime.Now.ToString() + ", " + item.GetType().ToString() + ", " + item.Log();
-                        sw.WriteLine(logLine);
-                    }
+
+                        foreach (ILoggable item in objects)
+                        {
+                            logLine = DateTime.Now.ToString() + ", " + item.GetType().ToString() + ", " + item.Log();
+                            sw.WriteLine(logLine);
+                        }
+                    } 
                 }
             }
             catch (Exception)
@@ -40,12 +43,15 @@ namespace Common
         {
             try
             {
-                string logLine;
-
-                using (StreamWriter sw = new StreamWriter(path, true))
+                if (item != null)
                 {
+                    string logLine;
+
+                    using (StreamWriter sw = new StreamWriter(path, true))
+                    {
                         logLine = DateTime.Now.ToString() + ", " + item.GetType().ToString() + ", " + item.Log();
                         sw.WriteLine(logLine);
+                    } 
                 }
             }
             catch (Exception)

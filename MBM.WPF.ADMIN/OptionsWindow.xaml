@@ -15,7 +15,7 @@
                 <TextBox Text="{Binding Path=InitialCatalog, Mode=TwoWay}"></TextBox>
             </GroupBox>
             <WrapPanel>
-                <Button Content="Connect" Width="100" Margin="0,20,0,0" HorizontalAlignment="Left" Click="Button_Click"></Button>
+                <Button Content="Connect" Width="100" Margin="0,20,0,0" HorizontalAlignment="Left" Click="Connect_Click"></Button>
                 <Label x:Name="ConnectionLabel" Content="" Margin="0,20,0,0" Width="232"></Label>
             </WrapPanel>
             
