@@ -23,7 +23,7 @@ namespace MBM.BLTest
             }
             catch (Exception ex)
             {
-                Assert.AreEqual(ExpectedResult, ex.Message.ToString());
+                Assert.AreEqual(ExpectedResult, ex.Message);
                 throw;
             }
         }

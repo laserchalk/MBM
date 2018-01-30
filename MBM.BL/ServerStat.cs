@@ -85,7 +85,7 @@ namespace MBM.BL
 
             set
             {
-                if (value > 1000) throw new Exception("CpuOther cannot be above 100");
+                if (value > 100) throw new Exception("CpuOther cannot be above 100");
                 _cpuOther = value;
             }
         }
@@ -103,7 +103,7 @@ namespace MBM.BL
 
             set
             {
-                if (value > 1000) throw new Exception("MemoryUtilization cannot be above 100");
+                if (value > 100) throw new Exception("MemoryUtilization cannot be above 100");
                 _memoryUtilization = value;
             }
         }

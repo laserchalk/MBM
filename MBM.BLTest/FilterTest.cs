@@ -210,26 +210,32 @@ namespace MBM.BLTest
         [TestMethod]
         public void ToStringTest()
         {
-            string expected = "01/01/2000,01/01/2001,ABC,99,100,99,100,99,100,99,100,99,100,99,100";
+            string expected = "01/01/2000,01/01/2001,ABC,1,2,3,4,5,6,7,8,9,10,11,12";
 
             Filter filter = new Filter();
             filter.DateStart = DateTime.Parse("1/1/2000");
             filter.DateEnd = DateTime.Parse("1/1/2001");
             filter.SelectedSymbol = "ABC";
-            filter.VolumeMin = 99;
-            filter.VolumeMax = 100;
-            filter.OpenMin.Amount = 99;
-            filter.OpenMax.Amount = 100;
-            filter.CloseMin.Amount = 99;
-            filter.CloseMax.Amount = 100;
-            filter.CloseAdjustedMin.Amount = 99;
-            filter.CloseAdjustedMax.Amount = 100;
-            filter.HighMin.Amount = 99;
-            filter.HighMax.Amount = 100;
-            filter.LowMin.Amount = 99;
-            filter.LowMax.Amount = 100;
+            filter.VolumeMin = 1;
+            filter.VolumeMax = 2;
+            filter.OpenMin.Amount = 3;
+            filter.OpenMax.Amount = 4;
+            filter.CloseMin.Amount = 5;
+            filter.CloseMax.Amount = 6;
+            filter.CloseAdjustedMin.Amount = 7;
+            filter.CloseAdjustedMax.Amount = 8;
+            filter.HighMin.Amount = 9;
+            filter.HighMax.Amount = 10;
+            filter.LowMin.Amount = 11;
+            filter.LowMax.Amount = 12;
 
             Assert.AreEqual(expected, filter.ToString());
+        }
+
+        [TestMethod]
+        public void Constructor()
+        {
+            
         }
     }
 }
