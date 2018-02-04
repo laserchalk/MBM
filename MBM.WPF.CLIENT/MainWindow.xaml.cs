@@ -4,6 +4,7 @@ using MBM.DL;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,6 +51,8 @@ namespace MBM.WPF.CLIENT
         {
             try
             {
+                File.Delete("Log.txt");
+
                 LoggingService.Log("Initialise main window", "Log.txt");
 
                 if (CanConnectToWFC())
@@ -126,8 +129,6 @@ namespace MBM.WPF.CLIENT
             {
                 Messages.Items.Insert(0, ex.Message);
                 LoggingService.Log(ex, "Log.txt");
-                LoggingService.Log(FilterBound, "Log.txt");
-                LoggingService.Log(StockEntriesBound, "Log.txt");
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
@@ -160,7 +161,6 @@ namespace MBM.WPF.CLIENT
                 FilterError.Text = ex.Message;
                 FilterError.Visibility = Visibility.Visible;
                 LoggingService.Log(ex, "Log.txt");
-                LoggingService.Log(FilterBound, "Log.txt");
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }

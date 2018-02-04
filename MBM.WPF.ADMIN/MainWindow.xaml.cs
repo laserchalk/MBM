@@ -85,7 +85,6 @@ namespace MBM.WPF.ADMIN
             {
                 Messages.Items.Insert(0, ex.Message);
                 LoggingService.Log(ex, "Log.txt");
-                LoggingService.Log(StockEntriesBound, "Log.txt");
             }
 
         }
@@ -128,7 +127,6 @@ namespace MBM.WPF.ADMIN
             {
                 Messages.Items.Insert(0, ex.Message);
                 LoggingService.Log(ex, "Log.txt");
-                LoggingService.Log(StockEntriesBound, "Log.txt");
             }
         }
 
@@ -160,8 +158,6 @@ namespace MBM.WPF.ADMIN
             {
                 Messages.Items.Insert(0, ex.Message);
                 LoggingService.Log(ex, "Log.txt");
-                LoggingService.Log(FilterBound, "Log.txt");
-                LoggingService.Log(StockEntriesBound, "Log.txt");
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
@@ -197,7 +193,6 @@ namespace MBM.WPF.ADMIN
                 FilterError.Text = ex.Message;
                 FilterError.Visibility = Visibility.Visible;
                 LoggingService.Log(ex, "Log.txt");
-                LoggingService.Log(FilterBound, "Log.txt");
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
